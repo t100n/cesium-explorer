@@ -679,12 +679,6 @@ vehicle.Vehicle = function (world, vertices, spec, x, y, heading, automatic, dat
 
         var brakeForce = this.brake * 5e3 * this.brakeRatio;
 
-        /*var bumpDragForce = Math.abs(this.dTilt * window.bumpDragForceFactor);
-         if(typeof this.vehicleData.traction == "undefined") this.vehicleData.traction = 1;
-         var accelerationForce = this.throttle * ((this.vehicleData.maxspeed*this.vehicleData.traction*10) / (this.handbrake*1000+1)) * this.gearBox.getGearRatio();
-         //var accelerationForce = this.throttle * ((this.vehicleData.maxspeed * this.vehicleData.traction) / (this.handbrake*1000+1)) * this.gearBox.getGearRatio();
-         var brakeForce = this.brake * (this.vehicleData.maxrevspeed*100);*/
-
         if(this.wheels.length > 2 && !this.vehicleData.fourWheelDrive && !this.konamiCodeFourWheels) {
             if(this.vehicleData.mainCategory != "air" && !this.konamiCodeFly) {
                 for(var i= 2, n = this.wheels.length; i<n; i++) {
@@ -806,75 +800,6 @@ vehicle.Vehicle = function (world, vertices, spec, x, y, heading, automatic, dat
         if(this.wasAirborne && !this.airborne) this.squealLevel = 0.5;
         else if(((this.handbrake && this.vehicleData.mainCategory != "air") || this.crashed) && this.squealLevel < 0.5 && this.speed > 0.1 && !this.airborne) this.squealLevel = 0.5;
         //}//if
-
-        if(this.crashedWithLimits) {
-
-            //var speedForward = box2D.common.math.B2Math.dot(this.body.getLinearVelocity(), this.body.getWorldVector(new box2D.common.math.B2Vec2(0, -1)));
-
-            //log("info", intersection);
-
-            //intersection.angle *= this.vehicle.speed;
-            //intersection.angle = intersection.angle * Math.PI / 180
-
-            //if(intersection.place == "back" && this.speedForward < 0 || intersection.place == "front" && this.speedForward > 0 || intersection.place == "side") {
-
-            //var crashForce = (Math.abs(accelerationForce) + Math.min(5e3, Math.abs(this.speedKmh*this.speedKmh*.4861111111111111)));
-            var crashForce = 15e3 + accelerationForce + this.speedForward;
-            var crashForceVector = this.body.getLinearVelocity().copy();
-            crashForceVector.negativeSelf();
-            //crashForceVector.normalize();
-            crashForceVector.multiply(crashForce);
-            this.body.applyForce(crashForceVector, this.body.getWorldCenter());
-
-            var center = this.body.getWorldCenter();
-            var frontVector = vehicle.Box2DUtils.getFrontVector(this.body);
-            var driveV = box2D.common.math.B2Math.mulFV(this.crashedWithLimitsData.angle*crashForce, frontVector);
-            this.body.applyForce(driveV, center)
-
-            var factor = accelerationForce ? Math.min(accelerationForce/this.vehicleData.massI,1) : 1;
-            var angularVelocityIncrement = (this.crashedWithLimitsData.angle*factor)*Math.PI/180;
-            //log("info", angularVelocityIncrement);
-
-            this.body.m_angularVelocity-=angularVelocityIncrement;
-
-            //log("info", crashForce);
-
-            /*this.vehiclePosition = this.vehiclePosition.createOffset(heading, Math.max(0, length-Math.abs(this.speedForward*intersection.angle)));
-
-             var x = this.vehicle.body.getLinearVelocity();
-             //x.setV({x: 0,y: 0})
-             x.crossVF(intersection.angle*deltaTime);*/
-
-            //var bodyAngleImpulse = Math.max(0.01, Math.abs(this.vehicle.getSteeringAngle()))*Math.abs(intersection.angle)*deltaTime;
-            //this.vehicle.body.setAngle((this.vehicle.body.getAngle()-bodyAngleImpulse));
-
-            /*}//if
-             else {
-             this.vehiclePosition = this.vehiclePosition.createOffset(heading, length);
-             }//else*/
-        }//if
-
-        else if(this.crashedWithUser) {
-
-            var crashForce = 15e3 + accelerationForce + this.speedForward;
-            var crashForceVector = this.body.getLinearVelocity().copy();
-            crashForceVector.negativeSelf();
-            //crashForceVector.normalize();
-            crashForceVector.multiply(crashForce);
-            this.body.applyForce(crashForceVector, this.body.getWorldCenter());
-
-            var center = this.body.getWorldCenter();
-            var frontVector = vehicle.Box2DUtils.getFrontVector(this.body);
-            var driveV = box2D.common.math.B2Math.mulFV(this.crashedWithUserData.angle*crashForce, frontVector);
-            this.body.applyForce(driveV, center)
-
-            var factor = accelerationForce ? Math.min(accelerationForce/this.vehicleData.massI,1) : 1;
-            var angularVelocityIncrement = (this.crashedWithUserData.angle*factor)*Math.PI/180;
-            //log("info", angularVelocityIncrement);
-
-            this.body.m_angularVelocity-=angularVelocityIncrement;
-
-        }//if
 
         // Aerodynamic drag
         /*

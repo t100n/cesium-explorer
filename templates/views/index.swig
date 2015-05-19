@@ -3,13 +3,83 @@
 	<head>
 		<title>Hello World!</title>
 		<style>
+			@import url(/css/main.css);
 			@import url(/js/Cesium/Widgets/widgets.css);
+			
+			* {
+				padding: 0px;
+				margin: 0px;
+			}
+			
+			#explorer-container {
+				width: 100%;
+				height: 100%;
+				position: relative;
+			}
+			
+			#controls {
+				position: absolute;
+				left: 5px;
+				bottom: 50px;
+			}
+			
+			#controls button {
+				background-color: #fff;
+				padding: 6px 12px;
+				border: 0px;
+				width: 108px;
+				border-radius: 6px;
+			}
+			
+			#controls button.active {
+				background-color: rgba(0,159,238,1);
+				color: #fff;
+				border: 0px;
+			}
+			
+			#controls .row {
+				text-align: center;
+				padding: 6px;
+			}
+			
+			#controls .space {
+				background-color: transparent;
+				border: 0px;
+			}
+			
+			.sprite-number-container {
+				  color: #fff;
+			}
+			
+			.sprite-number-value {
+			}
+			
+			.sprite-number-unit {
+				margin-left: 6px;
+			}
 		</style>
 	</head>
 	<body>
+		<header class="topo">
+		</header>
+		
 		<div id="explorer-container">
 			<div id="map3d-container">
 				<div id="map3d"></div>
+			</div>
+			
+			<div id="controls">
+				<div class="row">
+					<button id="up">Cima</button>
+				</div>
+				<div class="row">
+					<button id="left">Esquerda</button>
+					<button id="camera">Camera</button>
+					<button id="right">Direita</button>
+				</div>
+				<div class="row">
+					<button id="down">Baixo</button>
+				</div>
 			</div>
 		</div>
 		
@@ -26,6 +96,38 @@
 		<script type="text/javascript" src="/js/physicsCesium.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/Cesium/Cesium.js"></script>
 		<script>
+			$('#camera').click(function(e) {
+				cesiumExplorer.physics.changeViewPoint();
+			});
+			
+			$('#left').on('mousedown', function(e) {
+				cesiumExplorer.physics.keyState[37] = true;
+			});
+			$('#left').on('mouseup', function(e) {
+				cesiumExplorer.physics.keyState[37] = false;
+			});
+			
+			$('#right').on('mousedown', function(e) {
+				cesiumExplorer.physics.keyState[39] = true;
+			});
+			$('#right').on('mouseup', function(e) {
+				cesiumExplorer.physics.keyState[39] = false;
+			});
+			
+			$('#up').on('mousedown', function(e) {
+				cesiumExplorer.physics.keyState[38] = true;
+			});
+			$('#up').on('mouseup', function(e) {
+				cesiumExplorer.physics.keyState[38] = false;
+			});
+			
+			$('#down').on('mousedown', function(e) {
+				cesiumExplorer.physics.keyState[40] = true;
+			});
+			$('#down').on('mouseup', function(e) {
+				cesiumExplorer.physics.keyState[40] = false;
+			});
+			
 			window.SITE_URL = 'http://localhost:3000';
 			
 			window.userId = "ojogador";
@@ -51,9 +153,10 @@
 			
 			// Physics initial data
 			window.unit = 'Km';
-			window.lat = 29.973065675334418;
-			window.lon = 31.129818814751268;
-			window.alt = 72.47900209695428;
+			window.lat = -22.758453448852343;
+			window.lon = -43.1103515625;
+			window.alt = 2000;
+			window.speed = 100;
 			window.heading = -0.5235985725678303;
 			window.tilt = -0.0014993722426054328;
 			window.roll = 0;
@@ -290,6 +393,8 @@
         }//else
 
     } catch(err) {}
+			
+			cesiumExplorer.goto(window.lat, window.lon, window.alt, window.speed, window.heading);
 		</script>
 	</body>
 </html>

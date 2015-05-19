@@ -1757,15 +1757,6 @@ DrivingSimulator = function () {
             else if (this.isDown(cca(this.keybindings.keyboard.down, 0))) this.down = true;
             else {
                 if(this.cruiseControl) {
-                    /*if(this.vehicleAltitude.position < this.lastAltitude) {
-                        this.up = true;
-                        this.down = false;
-                    }//if
-                    else if(this.vehicleAltitude.position > this.lastAltitude) {
-                        this.up = false;
-                        this.down = true;
-                    }//if
-                    else {*/
                         if(this.vehicleData.category != "helicopter") {
                             if(this.vehicle.tiltOffset > this.lastTiltOffset) {
                                 this.vehicle.tiltOffset -= 0.2*this.vehicle.speedForward*deltaTime;
@@ -1781,7 +1772,6 @@ DrivingSimulator = function () {
                             this.up = this.lastUp;
                             this.down = this.lastDown;
                         }//else if
-                    //}//else
                 }//if
                 else {
                     this.up = false;
@@ -1798,9 +1788,48 @@ DrivingSimulator = function () {
         else if (this.isDown(cca(this.keybindings.keyboard.handbrake, 0))) this.handbrake = 1;
         else this.handbrake = 0;
 
+	if(this.vehicle.tiltOffset < 185) {
+		this.throttle = 1;
+	}//if
+	else if(this.vehicle.tiltOffset > 190) {
+		this.throttle = -0.1;
+	}//if
+	else {
+		this.throttle = 0.3;
+	}//else
+	
+	if(this.up) {
+		$('#up').addClass('active');
+	}//if
+	else {
+		$('#up').removeClass('active');
+	}//else
+	if(this.down) {
+		$('#down').addClass('active');
+	}//if
+	else {
+		$('#down').removeClass('active');
+	}//else
+	if(this.steeringDelta < 0) {
+		$('#left').addClass('active');
+	}//if
+	else {
+		$('#left').removeClass('active');
+	}//else
+	if(this.steeringDelta > 0) {
+		$('#right').addClass('active');
+	}//if
+	else {
+		$('#right').removeClass('active');
+	}//else
+	if(this.changeViewPointCount > 0) {
+		$('#camera').addClass('active');
+	}//if
+	else {
+		$('#camera').removeClass('active');
+	}//else
+	
         if(this.cruiseControl) {
-            //this.vehicle.rollOffset = this.lastRollOffset;
-            //this.vehicle.steering = this.lastSteering;
         }//if
         else {
             try {
@@ -1810,16 +1839,8 @@ DrivingSimulator = function () {
                 this.lastSteeringDelta = this.steeringDelta;
                 this.lastSteeringAngle = this.vehicle.steering.angle;
                 this.lastAltitude = this.vehicleAltitude.position;
-                //this.lastSteering = this.vehicle.steering;
-                //this.lastThrottle = this.throttle;
-                //this.lastBrake = this.brake;
-                //this.lastViewX = this.viewX;
-                //this.lastViewY = this.viewY;
                 this.lastUp = this.up;
                 this.lastDown = this.down;
-                //this.lastLeft = this.left;
-                //this.lastRight = this.right;
-                //this.lastHandbrake = this.handbrake;
             } catch (err) {}
         }//else
     };
@@ -2667,8 +2688,6 @@ DrivingSimulator = function () {
                 this.terrainRoll = (this.vehicle.getSteeringAngle()*(this.vehicle.body.getLinearVelocity().length()/20)*this.vehicleData.steerroll)*deltaTime;
 
                 this.terrainRoll = Math3D.MyMath.clamp(this.terrainRoll, -this.vehicleData.rollclamp/180*Math.PI, this.vehicleData.rollclamp/180*Math.PI);
-
-                //this.terrainTilt += ((this.terrainTilt*deltaTime*this.vehicle.body.getLinearVelocity().length()*this.vehicleData.steertilt)*(this.vehicleData.tiltspring*-this.terrainTilt+this.vehicleData.tiltdamp))*deltaTime;
             }//if
             else if(this.vehicleData.category == "jetpack" || this.vehicleData.category == "helicopter") {
                 if(!this.vehicle.airborne) {
@@ -2684,7 +2703,6 @@ DrivingSimulator = function () {
 
                 if(!this.vehicle.airborne) {
                     this.terrainRoll += rollImpulse;
-                    //this.terrainRoll = (this.vehicle.getSteeringAngle()*(this.vehicle.body.getLinearVelocity().length()/20)*-0.1)*deltaTime;
                 }//if
                 else {
                     this.terrainRoll = (this.vehicle.getSteeringAngle()*(this.vehicle.body.getLinearVelocity().length()/20)*-this.vehicleData.steerroll)*deltaTime;
@@ -2730,17 +2748,9 @@ DrivingSimulator = function () {
                         this.vehicleRoll.targetPosition = -3.1396936244990847;
                     }//if
 
-                    /*this.terrainRoll += this.vehicle.getSteeringAngle()*
-                     Math3D.MyMath.linearMap(this.vehicle.speed, 0, vehicle.Box2DUtils.toMps(this.vehicleData.maxspeed), 0, 15)*
-                     Math3D.MyMath.linearMap(this.vehicle.getSquealLevel(), 0, 1, 0, 0.5)*
-                     this.vehicleData.suspensionrestlength*
-                     deltaTime;*/
                     this.terrainTilt += ((speedForward/70)*this.vehicleData.steertilt)*deltaTime;
                 }//else
             }//else
-
-            //this.terrainRoll = Math3D.MyMath.clamp(this.terrainRoll, -this.vehicleData.rollclamp/180*Math.PI, this.vehicleData.rollclamp/180*Math.PI);
-            //this.terrainTilt = Math3D.MyMath.clamp(this.terrainTilt, -this.vehicleData.tiltclamp/180*Math.PI, this.vehicleData.tiltclamp/180*Math.PI);
 
         //log("info", "applyHorizontalForces end");
     };
@@ -2776,7 +2786,6 @@ DrivingSimulator = function () {
             var wingArea = (this.vehicleData.bodyWidth * averageChord);// * 10.764; // square feet
 
             var angleOfAttack = -this.vehicleTilt.position; //(this.vehicle.tiltOffset-185).toRad();
-            //if(!this.vehicle.airborne) angleOfAttack -= this.terrainTilt;
 
             var weight = this.vehicle.getMass() * 9.8;
             var weightForce = !this.vehicle.airborne ? (weight / 2e3)*deltaTime : 0;
@@ -2784,54 +2793,25 @@ DrivingSimulator = function () {
 
             if(this.vehicle.tiltOffset != 185) {
                 // L = (1/2) d v2 s CL
-                //this.lift = 0.5*(this.getAirDensity(this.vehicleAltitude.position)*(feetPerSecond*feetPerSecond)*wingArea*Cl)-(weight / 2e3)*deltaTime;
                 this.lift = 0.5*(this.getAirDensity(this.vehicleAltitude.position)*(feetPerSecond*2)*wingArea*Cl)-(weight / 2e3)*deltaTime;
 
-                //console.log("lift", "lift per time: "+(this.lift*deltaTime), "v2: "+(feetPerSecond*feetPerSecond), "Cl: "+Cl, "angleOfAttack: "+angleOfAttack);
-
-                //this.vehicleAltitude.targetPosition+=this.lift*deltaTime;
-
                 var x = this.vehicle.getMass() / (this.getAirDensity(this.vehicleAltitude.position)*wingArea*(feetPerSecond*feetPerSecond));
-
-                //console.log(this.lift, x);
             }//if
-
-            /*if(this.vehicle.tiltOffset > 185 || (this.vehicle.tiltOffset > 275 && this.vehicle.speedKmh < this.vehicle.liftOffMinSpeed*0.7)) {
-                this.vehicleAltitude.targetPosition+=-((185-this.vehicle.tiltOffset)*Math.PI/180*Math.max(this.vehicle.speedKmh, 50)*Math.abs(Math.max(this.vehicle.speedKmh, 50)*this.getAirDensity(this.vehicleAltitude.position)*wingArea*Cl)*deltaTime*deltaTime);
-            }//if
-            else if(this.vehicle.tiltOffset < 185) {
-                this.vehicleAltitude.targetPosition-=((185-this.vehicle.tiltOffset)*Math.PI/180*Math.max(this.vehicle.speedKmh, 50)*Math.abs(Math.max(this.vehicle.speedKmh, 50)*this.getAirDensity(this.vehicleAltitude.position)*wingArea*Cl)*deltaTime*deltaTime);
-            }//else if
-            else if(this.vehicle.speedKmh < this.vehicle.liftOffMinSpeed*0.7) {
-                this.vehicleAltitude.targetPosition-=((185-this.vehicle.tiltOffset)*Math.PI/180*Math.max(this.vehicle.speedKmh, 50)*Math.abs(Math.max(this.vehicle.speedKmh, 50)*this.getAirDensity(this.vehicleAltitude.position)*wingArea*Cl)*deltaTime*deltaTime);
-            }//else if*/
-
-            /*if(this.vehicle.tiltOffset > 185 || (this.vehicle.tiltOffset > 275 && this.vehicle.speedKmh < this.vehicle.liftOffMinSpeed*0.7)) {
-                this.vehicleAltitude.targetPosition+=-((185-this.vehicle.tiltOffset)*deltaTime*Math.max(this.vehicle.speedKmh, 50)*deltaTime*deltaTime);
-            }//if
-            else if(this.vehicle.tiltOffset < 185) {
-                this.vehicleAltitude.targetPosition-=((185-this.vehicle.tiltOffset)*deltaTime*Math.max(this.vehicle.speedKmh, 50)*deltaTime*deltaTime);
-            }//else if
-            else if(this.vehicle.speedKmh < this.vehicle.liftOffMinSpeed*0.7) {
-                this.vehicleAltitude.targetPosition-=((185-this.vehicle.tiltOffset)*deltaTime*Math.max(this.vehicle.speedKmh, 50)*deltaTime*deltaTime);
-            }//else if*/
 
             var tilt = Math.abs(185-this.vehicle.tiltOffset);
             var tiltDirection = (185-this.vehicle.tiltOffset) > 0 ? -1 : 1;
+            var speedMass = this.vehicle.speedKmh/this.vehicleData.mass;
+            if(speedMass < 0) speedMass = this.vehicle.speedKmh;
 
             if(this.vehicle.speedKmh < this.vehicle.liftOffMinSpeed) {
-                //if(tiltDirection > 0) {
-                    var value = Math.abs(Math.max(this.vehicle.speedKmh, 100)*deltaTime*((weight / 2e3)*deltaTime));
-                    this.vehicleAltitude.targetPosition-=(value-(tilt*tiltDirection*0.05))*(1-(this.vehicle.speedKmh / this.vehicle.liftOffMinSpeed));
-
-                    //console.log(value, (tilt*tiltDirection*0.05));
-                //}//if
+                    var value = Math.abs(Math.max(speedMass, 100)*deltaTime*((weight / 2e3)));
+                    this.vehicleAltitude.targetPosition-=(value-(tilt*tiltDirection*0.05))*deltaTime;
             }//if
             else if(this.vehicle.tiltOffset > 185 || (this.vehicle.tiltOffset > 275 && this.vehicle.speedKmh < this.vehicle.liftOffMinSpeed*0.7)) {
-                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(this.vehicle.speedKmh, 50)*deltaTime*deltaTime);
+                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*deltaTime);
             }//if
             else if(this.vehicle.tiltOffset < 185) {
-                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(this.vehicle.speedKmh, 50)*deltaTime*deltaTime);
+                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*deltaTime);
             }//else if
 
             var wasAirborne = this.vehicle.wasAirborne = this.vehicle.airborne;
@@ -3315,18 +3295,15 @@ DrivingSimulator = function () {
     this.applyVehicleAttitude = function(tilt, roll) {
         //log("info", "applyVehicleAttitude start");
 
+        return this.vehicle.setAttitude(0, 0);
+
         if((this.vehicleData.mainCategory != "air" && this.vehicleData.type != "person" && !this.vehicle.konamiCodeFly) || this.vehicle.dropping) {
             this.vehicle.setAttitude(-tilt, roll);
         }//if
         else {
-            //this.vehicle.setAttitude(-0.01, roll);
             if(this.vehicleData.type == "person" && !this.vehicle.konamiCodeFly) {
                 this.vehicle.setAttitude(0, 0.01);
             }//if
-            /*else if(this.vehicle.throttle > 0) {
-             //this.vehicle.setAttitude(-tilt, 0.01);
-             this.vehicle.setAttitude(-tilt, roll);
-             }//else if*/
             else {
                 //this.vehicle.setAttitude(-0.01, roll);
                 this.vehicle.setAttitude(-tilt, roll);
@@ -3792,13 +3769,6 @@ DrivingSimulator = function () {
                             if(!currentGroundAltitude) return;
 
                             var altDiff = (latLngAlt.altitude()+c.altitudeOffset) - currentGroundAltitude;
-
-                            /*c.componentAltitude.targetPosition = latLngAlt.altitude();
-                             c.componentAltitude.update(deltaTime);
-                             c.componentTilt.targetPosition = _g.vehicleTilt.position;
-                             c.componentTilt.update(deltaTime);
-                             c.componentRoll.targetPosition = _g.vehicleRoll.position;
-                             c.componentRoll.update(deltaTime);*/
 
                             var speedForward = box2D.common.math.B2Math.dot(_g.vehicle.body.getLinearVelocity(), vehicle.Box2DUtils.getFrontVector(_g.vehicle.body))*0.1;
 
@@ -4554,8 +4524,6 @@ DrivingSimulator = function () {
             )
             *Math3D.MyMath.linearMap(this.vehicle.getSquealLevel(), 0, 1, 0, 0.3)*deltaTime;
 
-        //rollImpulse = Math3D.MyMath.clamp(rollImpulse, -this.vehicleData.rollclamp/180*Math.PI, this.vehicleData.rollclamp/180*Math.PI);
-
         var speedForward = box2D.common.math.B2Math.dot(this.vehicle.body.getLinearVelocity(), vehicle.Box2DUtils.getFrontVector(this.vehicle.body));
 
         if(!this.isSpawning) this.applyHorizontalForces(rollImpulse, speedForward, lastTerrainRoll, deltaTime, other);
@@ -4588,24 +4556,9 @@ DrivingSimulator = function () {
             this.vehicleData.minGroundAlt = newAlt;
         }//if
 
-        /*if(this.teleported && this.getLoadingPercentage() >= 99) {
-            this.vehicleData.minGroundAlt = newAlt;
-            this.vehicleAltitude.targetPosition = newAlt;
-            this.vehicleAltitude.position = newAlt;
-            this.teleported = false;
-        }//if*/
-
         if(!this.isSpawning) this.applyVerticalForces(speedForward, newAlt, rightWingHeight, leftWingHeight, deltaTime, other);
 
-        //this.vehicle.tiltOffset -= Math.abs(this.vehicleRoll.position.toDeg()*this.vehicle.getSteeringAngle()*deltaTime);
-
-        //log("info", this.vehicle.tiltOffset, this.terrainTilt);
-
         if (this.isSpawning) {
-            /*this.vehicleTilt.position = this.terrainTilt;
-            this.vehicleRoll.position = this.terrainRoll;
-            this.vehicleAltitude.targetPosition = newAlt;
-            this.vehicleAltitude.position = newAlt;*/
         } else {
             //this.overlay.setVisibility(false);
             if(this.vehicleData.category != "plane" && !this.vehicle.konamiCodeFly) {
@@ -4619,24 +4572,7 @@ DrivingSimulator = function () {
                 if(!isNaN(angularVelocityIncrement)) this.vehicle.body.m_angularVelocity+=angularVelocityIncrement;
             }//if
 
-            /*if(this.vehicleData.category == "plane" || this.vehicle.konamiCodeFly) {
-                this.vehicleRoll.targetPosition = this.vehicleRoll.targetPosition+this.terrainRoll*deltaTime;
-
-                // Make the loop transition fluid
-                if(this.vehicleRoll.position.toDeg() < -179) {
-                    this.terrainRoll = 3.1396936244990847+this.terrainRoll;
-                    this.vehicleRoll.position = 3.1396936244990847;
-                    this.vehicleRoll.targetPosition = 3.1396936244990847;
-                }//if
-                else if(this.vehicleRoll.position.toDeg() > 179) {
-                    this.terrainRoll = -3.1396936244990847+this.terrainRoll;
-                    this.vehicleRoll.position = -3.1396936244990847;
-                    this.vehicleRoll.targetPosition = -3.1396936244990847;
-                }//if
-            }//if
-            else {*/
-                this.vehicleRoll.targetPosition = this.terrainRoll;
-            //}//else
+            this.vehicleRoll.targetPosition = this.terrainRoll;
 
             this.vehicleRoll.update(deltaTime)
         }//else
@@ -4688,13 +4624,10 @@ DrivingSimulator = function () {
         target.cameraHeadingBase += Math3D.Angle.wrap(headingDist - target.cameraHeadingBase) * easingFactor;
         target.cameraHeadingBase = Math3D.Angle.wrap(target.cameraHeadingBase);
 
-        //log("info", "updateVehicle 1");
-
         var viewY = target.getViewY();
         var viewX = target.getViewX();
         var lookBehind = viewY < -.5;
 
-        //console.log(target.viewPointIndex+"%"+target.viewPoints.length);
         target.viewPointIndex = target.viewPointIndex%target.viewPoints.length;
 
         var viewPoint = target.viewPoints[target.viewPointIndex];
@@ -4705,12 +4638,8 @@ DrivingSimulator = function () {
 
         lookHeading = .872664625997165 * viewX + (viewPoint.heading ? viewPoint.heading*Math.PI/180 : 0);
 
-        var cameraTiltBase = -target.vehicleTilt.position; //target.viewPointIndex == 1 ? -target.vehicleTilt.position*deltaTime : -target.vehicleTilt.position;
-        //if(cameraTiltBase > 1.570796) lookTilt = 1.570796;
-        //else if(cameraTiltBase < -1.570796) lookTilt = -1.570796;
+        var cameraTiltBase = -target.vehicleTilt.position;
         var cameraRollBase = viewPoint.type == "normal" && target.vehicleData.type != "plane" ? target.vehicleRoll.position*deltaTime : target.vehicleRoll.position;
-
-        //log("info", "updateVehicle 2");
 
         if (lookBehind) {
             lookHeading = 3.141592653589794;
@@ -4729,8 +4658,6 @@ DrivingSimulator = function () {
         var cameraAltitude;
 
         var _g = target.viewPointIndex;
-
-        //log("info", "updateVehicle 3");
 
         switch (viewPoint.type) {
             case "fps":
@@ -4751,8 +4678,6 @@ DrivingSimulator = function () {
 
                     cameraTilt -= .17453292519943298
                 }//else
-
-                //log("info", viewPoint, trailDistanceOffset);
 
                 lat = camera.lat();
                 lng = camera.lng();
@@ -4829,7 +4754,6 @@ DrivingSimulator = function () {
                 var value = target.vehicle.getSpeedKmh();
                 n = value * value;
                 viewPoint.altitude = Math3D.MyMath.linearMap(n, 0, 1e4, 50, 60);
-                //viewPoint.offset = Math3D.MyMath.linearMap(n, 0, 1e4, 5, 8);
                 var camera = target.vehiclePosition.createOffset(target.cameraHeading, -(viewPoint.offset+trailDistanceOffset));
                 lat = camera.lat();
                 lng = camera.lng();
@@ -4902,16 +4826,15 @@ DrivingSimulator = function () {
             
             this.camera.lookAt(
                position,
-               new Cesium.HeadingPitchRange(target.cameraHeading, 0/*-(((Math.PI/2)-cameraTilt) - this.camera.tilt)*/, 10)
+               new Cesium.HeadingPitchRange(target.cameraHeading, -(((Math.PI/2)-cameraTilt) - this.camera.tilt), 10)
             );
             
             var transform = this.camera.transform;
             this.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
             this.camera.heading = target.cameraHeading;
-            //this.camera.tilt = (Math.PI/2)-cameraTilt;
 
             var angle = ((Math.PI/2)-cameraTilt) - this.camera.tilt;
-            this.camera.look(this.camera.right, angle);
+            //this.camera.look(this.camera.right, angle);
 
             this.camera.lookAtTransform(transform);
 
@@ -4922,7 +4845,7 @@ DrivingSimulator = function () {
     this.updateSpeedMeter = function (speedKmh, speedMph) {
         try {
             if(this.speedOverlay) {
-                if(window.unit == "km") this.speedOverlay.setValue(parseInt(speedKmh));
+                if(window.unit.toLowerCase() == "km") this.speedOverlay.setValue(parseInt(speedKmh));
                 else this.speedOverlay.setValue(parseInt(speedMph));
             }//if
         } catch (err) {
@@ -5204,24 +5127,7 @@ cesiumExplorer.goto = window.cesiumExplorer.goto = function (lat, lng, altOffset
 
     alt = cAlt;
 
-    //cesiumExplorer.physics.setupVehicle(lat, lng, heading);
     cesiumExplorer.physics.teleported = true;
-    /*cesiumExplorer.physics.flyTo = Date.now();
-
-    var destination = Cesium.Cartesian3.fromDegrees(parseFloat(lng),parseFloat(lat),alt,cesiumExplorer.physics.ellipsoid,new Cesium.Cartesian3);
-    var direction = new Cesium.Cartesian3();
-    var n = new Cesium.Cartesian3();
-    Cesium.Cartesian3.negate(destination, n);
-    Cesium.Cartesian3.normalize(n, direction);
-    var right = new Cesium.Cartesian3();
-    var c = new Cesium.Cartesian3();
-    Cesium.Cartesian3.cross(direction, Cesium.Cartesian3.UNIT_Z, c);
-    Cesium.Cartesian3.normalize(c, right);
-    var up = new Cesium.Cartesian3();
-    var c2 = new Cesium.Cartesian3();
-    Cesium.Cartesian3.cross(right, direction, c2);
-    Cesium.Cartesian3.normalize(c2, up);*/
-
     cesiumExplorer.physics.bodyModel.initialModelMatrix = false;
 
     cesiumExplorer.physics.vehicle.body.setLinearVelocity(new box2D.common.math.B2Vec2(0, 0));
@@ -5229,11 +5135,8 @@ cesiumExplorer.goto = window.cesiumExplorer.goto = function (lat, lng, altOffset
     cesiumExplorer.physics.vehicle.tiltOffset = 180;
     cesiumExplorer.physics.vehicle.altitudeOffset = 0;
 
-    //cesiumExplorer.physics.vehicle.body.setAngle(heading*Math.PI/180);
     cesiumExplorer.physics.vehiclePosition = new LatLng(parseFloat(lat), parseFloat(lng));
-
     cesiumExplorer.physics.vehicleAltitude = new vehicle.Suspension(parseFloat(alt), parseFloat(alt), cesiumExplorer.physics.vehicleData.suspensionMass, cesiumExplorer.physics.vehicleData.suspensionSpring, cesiumExplorer.physics.vehicleData.suspensionDamper);
-
     cesiumExplorer.physics.vehicleTilt = new vehicle.Suspension(0, 0, cesiumExplorer.physics.vehicleData.tiltMass, cesiumExplorer.physics.vehicleData.tiltSpring, cesiumExplorer.physics.vehicleData.tiltDamper);
     cesiumExplorer.physics.vehicleRoll = new vehicle.Suspension(0, 0, cesiumExplorer.physics.vehicleData.rollMass, cesiumExplorer.physics.vehicleData.rollSpring, cesiumExplorer.physics.vehicleData.rollDamper);
 
@@ -5287,21 +5190,6 @@ cesiumExplorer.goto = window.cesiumExplorer.goto = function (lat, lng, altOffset
     gotoData.callback = $bind(gotoData, gotoListener);
 
     cesiumExplorer.physics.ee.addListener('postUpdate', gotoData.callback);
-
-    /*
-    setTimeout(function() {
-        return (function(alt, speed) {
-            cesiumExplorer.physics.vehicleAltitude.targetPosition = cesiumExplorer.physics.vehicleAltitude.position = alt;
-
-            var frontVector = vehicle.Box2DUtils.getFrontVector(cesiumExplorer.physics.vehicle.body);
-            frontVector.multiply(speed/3.6);
-            cesiumExplorer.physics.vehicle.body.m_linearVelocity.add(frontVector);
-        })(alt, speed);
-    }, 0);
-    */
-
-    // Set the URL with the current teleported location
-    window.history.pushState(null, window.lastTitle, window.SITE_URL+"/explorer/"+lat+"/"+lng);
 };
 cesiumExplorer.activate = window.cesiumExplorer.activate = function () {
     cesiumExplorer.physics.setActive(true)
