@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Hello World!</title>
+		<title>Cesium Explorer!</title>
 		<style>
 			@import url(/css/main.css);
 			@import url(/js/Cesium/Widgets/widgets.css);
@@ -129,17 +129,13 @@
 				cesiumExplorer.physics.keyState[40] = false;
 			});
 			
-			var mySound = new buzz.sound( "/uploads/glider_sound", {
-				formats: [ "ogg", "mp3", "aac" ]
+			var mySound = new buzz.sound( "/uploads/glider_sound_shorter", {
+				formats: [ "ogg", "mp3" ]
 			});
 			
-			mySound.play()
-				.fadeIn()
-				.loop()
-				.bind( "timeupdate", function() {
-				});
+			mySound.play().loop();
 			
-			window.SITE_URL = 'http://localhost:3000';
+			window.SITE_URL = 'http://andresantos.cloudapp.net';
 			
 			window.userId = "ojogador";
 			window.isExploring = true;

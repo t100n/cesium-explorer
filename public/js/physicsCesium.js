@@ -2446,6 +2446,7 @@ DrivingSimulator = function () {
 
         //console.log("handleSounds", 7);
 
+/*
         try {
             window.audioMonkey.play("forward", speedKmh/this.vehicleData.maxspeed, 0, rate, true, this.vehicleData.soundLoopStart, this.vehicleData.soundLoopEnd, forwardVolume);
             window.audioMonkey.volume("forward", forwardVolume);
@@ -2453,6 +2454,7 @@ DrivingSimulator = function () {
         } catch(err) {
             log("error", err);
         }
+*/
 
         //console.log("handleSounds", 8);
 
