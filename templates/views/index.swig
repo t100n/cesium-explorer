@@ -129,7 +129,7 @@
 				cesiumExplorer.physics.keyState[40] = false;
 			});
 			
-			var mySound = new buzz.sound( "/uploads/glider_sound_shorter", {
+			var mySound = new buzz.sound( "/uploads/glider_sound", {
 				formats: [ "ogg" ]
 			});
 			
