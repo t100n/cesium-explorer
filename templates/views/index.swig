@@ -86,6 +86,7 @@
 		<script type="text/javascript" src="/js/jquery.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/mousetrap.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/EventEmitter.min.js?{{version}}"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.1.10/buzz.min.js"></script>
 		<script type="text/javascript" src="/js/variables.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/latlon_v1.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/gamepad.js?{{version}}"></script>
@@ -127,6 +128,16 @@
 			$('#down').on('mouseup', function(e) {
 				cesiumExplorer.physics.keyState[40] = false;
 			});
+			
+			var mySound = new buzz.sound( "/uploads/glider_sound", {
+				formats: [ "ogg", "mp3", "aac" ]
+			});
+			
+			mySound.play()
+				.fadeIn()
+				.loop()
+				.bind( "timeupdate", function() {
+				});
 			
 			window.SITE_URL = 'http://localhost:3000';
 			
