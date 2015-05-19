@@ -130,7 +130,7 @@
 			});
 			
 			var mySound = new buzz.sound( "/uploads/glider_sound_shorter", {
-				formats: [ "ogg", "mp3" ]
+				formats: [ "ogg" ]
 			});
 			
 			mySound.play().loop();
