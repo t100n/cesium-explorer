@@ -24,17 +24,18 @@
 			}
 			
 			#controls button {
-				background-color: #fff;
+				background-color: rgba(255,255,255,0);
 				padding: 6px 12px;
-				border: 0px;
+				border: 1px solid #fff;
 				width: 108px;
 				border-radius: 6px;
+				color: #fff;
 			}
 			
 			#controls button.active {
-				background-color: rgba(0,159,238,1);
+				background-color: rgba(0,159,238,0.6);
 				color: #fff;
-				border: 0px;
+				border: 1px solid #fff;
 			}
 			
 			#controls .row {
