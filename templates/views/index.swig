@@ -129,11 +129,13 @@
 				cesiumExplorer.physics.keyState[40] = false;
 			});
 			
+			/*
 			var mySound = new buzz.sound( "/uploads/glider_sound", {
 				formats: [ "ogg" ]
 			});
 			
 			mySound.play().loop();
+			*/
 			
 			window.SITE_URL = 'http://andresantos.cloudapp.net';
 			
