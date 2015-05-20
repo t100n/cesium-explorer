@@ -5,6 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 		<meta charset="UTF-8">
 			
+			<link type="text/css" rel="stylesheet" href="/css/font-awesome.min.css">
 			<link type="text/css" rel="stylesheet" href="/css/main.css" />
 			<link type="text/css" rel="stylesheet" href="/js/Cesium/Widgets/widgets.css" />
 	</head>
@@ -52,22 +53,22 @@
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">up</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key"><i class="fa fa-chevron-up"></i></b></div>
 			                                <div>Subir</div>
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">down</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key"><i class="fa fa-chevron-down"></i></b></div>
 			                                <div>Descer</div>
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">left</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key"><i class="fa fa-chevron-left"></i></b></div>
 			                                <div>Virar à esquerda</div>
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">right</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key"><i class="fa fa-chevron-right"></i></b></div>
 			                                <div>Virar à direita</div>
 			                            </div>
 										
