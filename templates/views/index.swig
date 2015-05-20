@@ -252,7 +252,7 @@
 			window.defaultLon = window.lon = -43.17069974208982;
 			window.defaultAlt = window.alt = 200;
 			window.defaultSpeed = window.speed = 100;
-			window.defaultHeading = window.heading = -0.5235985725678303;
+			window.defaultHeading = window.heading = 180;
 			window.defaultTilt = window.tilt = -0.0014993722426054328;
 			window.defaultRoll = window.roll = 0;
 			
