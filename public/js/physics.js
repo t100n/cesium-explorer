@@ -2125,7 +2125,7 @@ DrivingSimulator = function () {
         this.vehicle.crashedWithLimits = false;
         this.vehicle.crashedWithUser = false;
         
-        this.vehiclePosition = this.vehiclePosition.createOffset(heading, length-(this.vehicle.airborne ? length*Math3D.MyMath.clamp(Math.abs(this.vehicle.tilt)*0.8, 0, 2) : 0));
+        this.vehiclePosition = this.vehiclePosition.createOffset(heading, length-(this.vehicle.airborne ? length*Math3D.MyMath.clamp(Math.abs(this.vehicle.tilt)*1, 0, 2) : 0));
         
         this.updateVehicle(deltaTimeLimited, false);
         this.updateCamera(deltaTimeLimited);
