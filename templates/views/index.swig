@@ -11,7 +11,7 @@
 	<body>
 		<div id="explorer-container">
 			<div id="map3d-container">
-				<a id="restart" href="#">restart</a>
+				<div id="map3d"></div>
 				
 				<div id="paused" style="display: none;">
 		            <div class="paused-content">
@@ -19,7 +19,7 @@
 		            </div>
 		        </div>
 				
-				<div id="map3d"></div>
+				<a id="restart" href="#">restart</a>
 			</div>
 			
 			<div id="controls">
