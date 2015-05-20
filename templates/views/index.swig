@@ -2,7 +2,7 @@
 <html lang="pt_BR">
 	<head>
 		<title>Cesium Explorer!</title>
-		<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 		<meta charset="UTF-8">
 		<style>
 			@import url(/css/main.css);
