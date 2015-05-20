@@ -61,7 +61,7 @@
 				margin-left: 6px;
 			}
 			
-			#paused {
+			.paused-content {
 			  position: absolute;
 			  z-index: 1045;
 			  top: 0;
@@ -70,6 +70,17 @@
 			  bottom: 0;
 			  text-align: center;
 			  background-color: rgba(0,0,0,.2);
+			}
+			
+			.paused-content h2 {
+			  color: #fff;
+			  font-weight: 600;
+			  position: absolute;
+			  top: 50%;
+			  left: 50%;
+			  -webkit-transform: translateX(-50%)translateY(-50%);
+			  -ms-transform: translateX(-50%)translateY(-50%);
+			  transform: translateX(-50%)translateY(-50%);
 			}
 		</style>
 	</head>
