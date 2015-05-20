@@ -82,6 +82,7 @@
 			  -ms-transform: translateX(-50%)translateY(-50%);
 			  transform: translateX(-50%)translateY(-50%);
 			}
+			
 		</style>
 	</head>
 	<body>
