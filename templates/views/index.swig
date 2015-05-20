@@ -115,6 +115,7 @@
 		<script type="text/javascript" src="/js/jquery.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/mousetrap.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/EventEmitter.min.js?{{version}}"></script>
+		<script type="text/javascript" src="/js/attitude_indicator.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/variables.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/latlon_v1.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/gamepad.min.js?{{version}}"></script>
