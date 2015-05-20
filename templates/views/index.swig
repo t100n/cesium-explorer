@@ -121,12 +121,6 @@
 			                <h4 class="modal-title">Controlos</h4>
 			            </div>
 			            <div class="modal-body clearfix">
-			                <ul id="controls-tabs" class="nav nav-tabs">
-			                    <li class="active">
-			                        <a href="#keyboard" data-toggle="tab">Teclado</a>
-			                    </li>
-			                </ul>
-							
 			                <div class="tab-content">
 			                    <div id="keyboard" class="tab-pane active">
 			                        <div class="dl-horizontal">
