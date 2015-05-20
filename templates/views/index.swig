@@ -49,7 +49,9 @@
 			}
 			
 			.sprite-number-container {
-				  color: #fff;
+				color: #fff;
+				font-weight: normal;
+				font-size: 13px;
 			}
 			
 			.sprite-number-value {
@@ -61,9 +63,6 @@
 		</style>
 	</head>
 	<body>
-		<header class="topo">
-		</header>
-		
 		<div id="explorer-container">
 			<div id="map3d-container">
 				<div id="map3d"></div>
