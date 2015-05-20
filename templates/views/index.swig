@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt_BR">
 	<head>
 		<title>Cesium Explorer!</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+		<meta charset="UTF-8">
 		<style>
 			@import url(/css/main.css);
 			@import url(/js/Cesium/Widgets/widgets.css);
@@ -127,7 +129,7 @@
 			
 			                <div class="tab-content">
 			                    <div id="keyboard" class="tab-pane active">
-			                        <div class="dl-horizontal col-md-6 col-lg-6 col-xs-6">
+			                        <div class="dl-horizontal">
 			                            <div>
 			                                <h4>Movimento</h4>
 			                            </div>
@@ -151,9 +153,28 @@
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">right</b></div>
 			                                <div>Virar à direita</div>
 			                            </div>
+										
+			                            <div>
+			                                <h4>Outros</h4>
+			                            </div>
+										
+			                            <div style="min-height: 35px">
+			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">o</b></div>
+			                                <div>Instrumentos de orientação</div>
+			                            </div>
+										
+			                            <div style="min-height: 35px">
+			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">p</b></div>
+			                                <div>Pausa</div>
+			                            </div>
+										
+			                            <div style="min-height: 35px">
+			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">u</b></div>
+			                                <div>FPS</div>
+			                            </div>
 			                        </div>
 									
-			                        <div class="dl-horizontal col-md-6 col-lg-6 col-xs-6">
+			                        <div class="dl-horizontal">
 			                            <div>
 			                                <h4>Câmera</h4>
 			                            </div>
@@ -181,25 +202,6 @@
 			                            <div style="min-height: 35px">
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">c</b></div>
 			                                <div>Mudar a Câmera</div>
-			                            </div>
-										
-			                            <div>
-			                                <h4>Outros</h4>
-			                            </div>
-										
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">o</b></div>
-			                                <div>Instrumentos de orientação</div>
-			                            </div>
-										
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">p</b></div>
-			                                <div>Pausa</div>
-			                            </div>
-										
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">u</b></div>
-			                                <div>FPS</div>
 			                            </div>
 										
 			                        </div>
