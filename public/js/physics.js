@@ -2122,20 +2122,20 @@ DrivingSimulator = function () {
         // This makes it fluid but messes with the real distance traveled
         deltaTime = deltaTimeLimited = 0.03;
 
-            this.vehicle.crashedWithLimits = false;
-            this.vehicle.crashedWithUser = false;
-
-            this.vehiclePosition = this.vehiclePosition.createOffset(heading, length-(this.vehicle.airborne && this.vehicleData.category != "helicopter" ? length*Math3D.MyMath.clamp(Math.abs(this.vehicle.tilt)*0.8, 0, 2) : 0));
-
+        this.vehicle.crashedWithLimits = false;
+        this.vehicle.crashedWithUser = false;
+        
+        this.vehiclePosition = this.vehiclePosition.createOffset(heading, length-(this.vehicle.airborne ? length*Math3D.MyMath.clamp(Math.abs(this.vehicle.tilt)*0.8, 0, 2) : 0));
+        
         this.updateVehicle(deltaTimeLimited, false);
         this.updateCamera(deltaTimeLimited);
 
-            this.updateSpeedMeter(Math.round(this.vehicle.getSpeedKmh()), Math.round(this.vehicle.getSpeedMph()));
-            this.updateAltitudeMeter(this.vehicleAltitude.position);
-            this.updateRPMMeter(this.vehicle.getRPM());
-            this.updateCompass(this.bodyModel.heading*180/Math.PI);
-            this.updateAttitude(this.vehicleTilt.position.toDeg(), this.vehicleRoll.position.toDeg());
-
+        this.updateSpeedMeter(Math.round(this.vehicle.getSpeedKmh()), Math.round(this.vehicle.getSpeedMph()));
+        this.updateAltitudeMeter(this.vehicleAltitude.position);
+        this.updateRPMMeter(this.vehicle.getRPM());
+        this.updateCompass(this.bodyModel.heading*180/Math.PI);
+        this.updateAttitude(this.vehicleTilt.position.toDeg(), this.vehicleRoll.position.toDeg());
+        
         if(!window.physics) return;
         var speedKmh = window.physics.absSpeed = this.vehicle.getSpeedKmh();
 
@@ -2328,13 +2328,13 @@ DrivingSimulator = function () {
 
             if(this.vehicle.speedKmh < this.vehicle.liftOffMinSpeed) {
                     var value = Math.abs(Math.max(speedMass, 100)*deltaTime*((weight / 2e3)));
-                    this.vehicleAltitude.targetPosition-=(value-(tilt*tiltDirection*0.05))*deltaTime;
+                    this.vehicleAltitude.targetPosition-=(value-(tilt*tiltDirection*0.05))*deltaTime*deltaTime;
             }//if
             else if(this.vehicle.tiltOffset > 185 || (this.vehicle.tiltOffset > 275 && this.vehicle.speedKmh < this.vehicle.liftOffMinSpeed*0.7)) {
-                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*deltaTime);
+                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*deltaTime)*deltaTime;
             }//if
             else if(this.vehicle.tiltOffset < 185) {
-                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*deltaTime);
+                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*deltaTime)*deltaTime;
             }//else if
 
             var wasAirborne = this.vehicle.wasAirborne = this.vehicle.airborne;
@@ -2531,8 +2531,6 @@ DrivingSimulator = function () {
 
     this.applyVehicleAttitude = function(tilt, roll) {
         //log("info", "applyVehicleAttitude start");
-
-        return this.vehicle.setAttitude(0, 0);
 
         if((this.vehicleData.mainCategory != "air" && this.vehicleData.type != "person" && !this.vehicle.konamiCodeFly) || this.vehicle.dropping) {
             this.vehicle.setAttitude(-tilt, roll);
