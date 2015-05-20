@@ -229,6 +229,7 @@
 		<script>
 			$('#options').click(function(e) {
 				$('#controls-modal').show();
+				$(this).blur();
 				
 				$('#options').addClass('active');
 			});
@@ -240,46 +241,57 @@
 			
 			$('.explorer-modal-dialog').click(function(e) {
 				$('#controls-modal').hide();
+				$(this).blur();
 				
 				$('#options').removeClass('active');
 			});
 			
 			$('[data-dismiss=modal]').click(function(e) {
 				$('#controls-modal').hide();
+				$(this).blur();
 				
 				$('#options').removeClass('active');
 			});
 			
 			$('#camera').click(function(e) {
 				cesiumExplorer.physics.changeViewPoint();
+				$(this).blur();
 			});
 			
 			$('#left').on('mousedown', function(e) {
 				cesiumExplorer.physics.keyState[37] = true;
+				$(this).blur();
 			});
 			$('#left').on('mouseup', function(e) {
 				cesiumExplorer.physics.keyState[37] = false;
+				$(this).blur();
 			});
 			
 			$('#right').on('mousedown', function(e) {
 				cesiumExplorer.physics.keyState[39] = true;
+				$(this).blur();
 			});
 			$('#right').on('mouseup', function(e) {
 				cesiumExplorer.physics.keyState[39] = false;
+				$(this).blur();
 			});
 			
 			$('#up').on('mousedown', function(e) {
 				cesiumExplorer.physics.keyState[38] = true;
+				$(this).blur();
 			});
 			$('#up').on('mouseup', function(e) {
 				cesiumExplorer.physics.keyState[38] = false;
+				$(this).blur();
 			});
 			
 			$('#down').on('mousedown', function(e) {
 				cesiumExplorer.physics.keyState[40] = true;
+				$(this).blur();
 			});
 			$('#down').on('mouseup', function(e) {
 				cesiumExplorer.physics.keyState[40] = false;
+				$(this).blur();
 			});
 			
 			window.SITE_URL = 'http://andresantos.cloudapp.net';
