@@ -1503,46 +1503,50 @@ DrivingSimulator = function () {
         
         this.handbrake = 0;
 
-	if(this.vehicle.tiltOffset < 185) {
-		this.throttle = 1;
-	}//if
-	else if(this.vehicle.tiltOffset > 190) {
-		this.throttle = -0.1;
-	}//if
-	else {
-		this.throttle = 0.3;
-	}//else
-	
-	if(this.up) {
-		$('#up').addClass('active');
-	}//if
-	else {
-		$('#up').removeClass('active');
-	}//else
-	if(this.down) {
-		$('#down').addClass('active');
-	}//if
-	else {
-		$('#down').removeClass('active');
-	}//else
-	if(this.steeringDelta < 0) {
-		$('#left').addClass('active');
-	}//if
-	else {
-		$('#left').removeClass('active');
-	}//else
-	if(this.steeringDelta > 0) {
-		$('#right').addClass('active');
-	}//if
-	else {
-		$('#right').removeClass('active');
-	}//else
-	if(this.changeViewPointCount > 0) {
-		$('#camera').addClass('active');
-	}//if
-	else {
-		$('#camera').removeClass('active');
-	}//else
+    	if(this.vehicle.tiltOffset < 185) {
+    		this.throttle = 1;
+    	}//if
+    	else if(this.vehicle.tiltOffset > 190) {
+    		this.throttle = -0.1;
+    	}//if
+    	else {
+    		this.throttle = 0.3;
+    	}//else
+    	
+        if(!this.vehicle.airborne) {
+            this.throttle = 0;
+        }//if
+        
+    	if(this.up) {
+    		$('#up').addClass('active');
+    	}//if
+    	else {
+    		$('#up').removeClass('active');
+    	}//else
+    	if(this.down) {
+    		$('#down').addClass('active');
+    	}//if
+    	else {
+    		$('#down').removeClass('active');
+    	}//else
+    	if(this.steeringDelta < 0) {
+    		$('#left').addClass('active');
+    	}//if
+    	else {
+    		$('#left').removeClass('active');
+    	}//else
+    	if(this.steeringDelta > 0) {
+    		$('#right').addClass('active');
+    	}//if
+    	else {
+    		$('#right').removeClass('active');
+    	}//else
+    	if(this.changeViewPointCount > 0) {
+    		$('#camera').addClass('active');
+    	}//if
+    	else {
+    		$('#camera').removeClass('active');
+    	}//else
         
     };
     this.getSteeringDelta = function () {
@@ -2125,7 +2129,7 @@ DrivingSimulator = function () {
         this.vehicle.crashedWithLimits = false;
         this.vehicle.crashedWithUser = false;
         
-        this.vehiclePosition = this.vehiclePosition.createOffset(heading, length-(this.vehicle.airborne ? length*Math3D.MyMath.clamp(Math.abs(this.vehicle.tilt)*1, 0, 2) : 0));
+        this.vehiclePosition = this.vehiclePosition.createOffset(heading, length-(this.vehicle.airborne ? length*Math3D.MyMath.clamp(Math.abs(this.vehicle.tilt)*0.8, 0, 2) : 0));
         
         this.updateVehicle(deltaTimeLimited, false);
         this.updateCamera(deltaTimeLimited);
