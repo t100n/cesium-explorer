@@ -2893,8 +2893,8 @@ DrivingSimulator = function () {
     this.updateSpeedMeter = function (speedKmh, speedMph) {
         try {
             if(this.speedOverlay) {
-                if(window.unit.toLowerCase() == "km") this.speedOverlay.setValue(Math.max(parseInt(speedKmh), parseInt(this.altitudeSpeed)));
-                else this.speedOverlay.setValue(Math.max(parseInt(speedMph), parseInt(this.altitudeSpeed)));
+                if(window.unit.toLowerCase() == "km") this.speedOverlay.setValue(Math.max(parseInt(speedKmh), parseInt(this.altitudeSpeed / 1000)));
+                else this.speedOverlay.setValue(Math.max(parseInt(speedMph), parseInt(this.altitudeSpeed / 1000)));
             }//if
         } catch (err) {
             log("error", "updateSpeedMeter", err);
