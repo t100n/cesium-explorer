@@ -248,8 +248,8 @@
 			
 			// Physics initial data
 			window.unit = 'Km';
-			window.defaultLat = window.lat = -22.758453448852343;
-			window.defaultLon = window.lon = -43.1103515625;
+			window.defaultLat = window.lat = -22.888286010415;
+			window.defaultLon = window.lon = -43.17069974208982;
 			window.defaultAlt = window.alt = 200;
 			window.defaultSpeed = window.speed = 100;
 			window.defaultHeading = window.heading = -0.5235985725678303;
