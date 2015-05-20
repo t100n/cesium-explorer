@@ -533,11 +533,31 @@ window.vehicles = {};
 window.vehicles[window.myVehicle._id] = window.myVehicle;
 
 window.keybindings = {
-	"gamepad":{"pause":{"key":9,"type":"button"},"gearDown":{"key":12,"type":"button"},"gearUp":{"key":11,"type":"button"},"automatic":{"key":10,"type":"button"},"fps":{"key":16,"type":"button"},"compass":{"key":15,"type":"button"},"cruiseControl":{"key":8,"type":"button"},"camera":{"key":0,"type":"button"},"lookBack":{"key":2,"type":"button"},"lookFront":{"key":3,"type":"button"},"lookRight":{"key":5,"type":"button"},"lookLeft":{"key":4,"type":"button"},"handbrake":{"key":1,"type":"button"},"down":{"key":1,"type":"axis"},"up":{"key":1,"type":"axis"},"right":{"key":0,"type":"axis"},"left":{"key":0,"type":"axis"},
+	"gamepad":{
+        "pause":{"key":9,"type":"button"},
+        "fps":{"key":16,"type":"button"},
+        "compass":{"key":15,"type":"button"},
+        "camera":{"key":0,"type":"button"},
+        "lookBack":{"key":2,"type":"button"},
+        "lookFront":{"key":3,"type":"button"},
+        "lookRight":{"key":5,"type":"button"},
+        "lookLeft":{"key":4,"type":"button"},
+        "down":{"key":1,"type":"axis"},
+        "up":{"key":1,"type":"axis"},
+        "right":{"key":0,"type":"axis"},
+        "left":{"key":0,"type":"axis"},
 		"brake":{"key":6,"type":"button"},
 		"throttle":{"key":7,"type":"button"}
 	},
-	"keyboard":{"pause":"p","gearDown":"s","gearUp":"w","automatic":"t","fps":"u","compass":"o","cruiseControl":"v","camera":"c","lookBack":"e","lookFront":"q","lookRight":"d","lookLeft":"a",
+	"keyboard":{
+        "pause":"p",
+        "fps":"u",
+        "compass":"o",
+        "camera":"c",
+        "lookBack":"e",
+        "lookFront":"q",
+        "lookRight":"d",
+        "lookLeft":"a",
 		"handbrake":"space",
 		"down":"down",
 		"up":"up",
