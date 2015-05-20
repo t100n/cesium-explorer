@@ -19,7 +19,7 @@
 		            </div>
 		        </div>
 				
-				<a id="restart" href="#">restart</a>
+				<a id="restart" href="#">Recomeçar</a>
 			</div>
 			
 			<div id="controls">
