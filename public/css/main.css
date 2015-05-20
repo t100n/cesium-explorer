@@ -375,13 +375,13 @@ header {
   font-size: 24px;
 }
 
-.fade {
+.explorer-fade {
   opacity: 0;
   -webkit-transition: opacity .15s linear;
   transition: opacity .15s linear;
 }
 
-.modal {
+.explorer-modal {
   display: none;
   overflow: auto;
   overflow-y: scroll;
@@ -397,23 +397,23 @@ header {
   margin: auto;
 }
 
-.fade.in {
+.explorer-fade.explorer-in {
   opacity: 1;
 }
 
-.btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+.explorer-clearfix:after, .explorer-clearfix:before, .explorer-modal-footer:after, .explorer-modal-footer:before {
   content: " ";
   display: table;
 }
 
-.modal-dialog {
+.explorer-modal-dialog {
   position: relative;
   width: auto;
   margin: 0;
   min-height: 100%;
 }
 
-.modal.fade .modal-dialog {
+.explorer-modal.fade .explorer-modal-dialog {
   -webkit-transform: translate(0,-25%);
   -ms-transform: translate(0,-25%);
   transform: translate(0,-25%);
@@ -423,17 +423,17 @@ header {
   transition: transform .3s ease-out;
 }
 
-.modal.in .modal-dialog {
+.explorer-modal.in .explorer-modal-dialog {
   -webkit-transform: translate(0,0);
   -ms-transform: translate(0,0);
   transform: translate(0,0);
 }
 
-.modal-content {
+.explorer-modal-content {
   background-clip: padding-box;
 }
 
-.modal-content {
+.explorer-modal-content {
   position: relative;
   background-color: #fff;
   border: 1px solid #999;
@@ -452,30 +452,30 @@ header {
 }
 
 @media (min-width: 768px) {
-  .modal-content {
+  .explorer-modal-content {
     -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
     box-shadow: 0 5px 15px rgba(0,0,0,.5);
   }
 }
 
-.modal-header {
+.explorer-modal-header {
   padding: 15px;
   min-height: 16.43px;
 }
 
-.modal-header {
+.explorer-modal-header {
   border-bottom: 0;
 }
 
-.close {
+.explorer-close {
   font-weight: 700;
 }
 
-.close, .list-group-item>.badge {
+.explorer-close {
   float: right;
 }
 
-.close {
+.explorer-close {
   font-size: 21px;
   line-height: 1;
   color: #000;
@@ -484,7 +484,7 @@ header {
   filter: alpha(opacity=20);
 }
 
-button.close {
+button.explorer-close {
   padding: 0;
   cursor: pointer;
   background: 0 0;
@@ -492,32 +492,32 @@ button.close {
   -webkit-appearance: none;
 }
 
-.modal-header .close {
+.explorer-modal-header .explorer-close {
   margin-top: -2px;
 }
 
-.modal-title {
+.explorer-modal-title {
   margin: 0;
   line-height: 1.42857143;
 }
 
-.modal-body {
+.explorer-modal-body {
   position: relative;
   padding: 20px;
   height: 310px;
 }
 
-.modal-footer {
+.explorer-modal-footer {
   margin-top: 15px;
   padding: 19px 20px 20px;
   text-align: right;
 }
 
-.modal-footer {
+.explorer-modal-footer {
   border-top: 0;
 }
 
-.btn {
+.explorer-btn {
   display: inline-block;
   margin-bottom: 0;
   font-weight: 400;
@@ -533,139 +533,60 @@ button.close {
   user-select: none;
 }
 
-.btn-default {
+.explorer-btn-default {
   color: #333;
   background-color: #fff;
   border-color: #ccc;
 }
 
-.modal-footer .btn+.btn {
+.explorer-modal-footer .explorer-btn+.explorer-btn {
   margin-left: 5px;
   margin-bottom: 0;
 }
 
-.nav {
+.explorer-nav {
   margin-bottom: 0;
   padding-left: 0;
 }
 
-.nav-tabs {
+.explorer-nav-tabs {
   border-bottom: 1px solid #ddd;
-}
-
-#controls-tabs, #controls-tabs li, #controls-tabs li a, #controls-tabs li.active {
-  background-color: transparent;
-}
-
-#controls-tabs {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.btn-group, .btn-group-vertical, .input-group, .input-group .form-control, .input-group-btn, .input-group-btn>.btn, .nav>li, .nav>li>a, .navbar {
-  position: relative;
-}
-
-.nav>li {
-  display: block;
-}
-
-.nav-tabs>li {
-  float: left;
-  margin-bottom: -1px;
 }
 
 li.active {
   background-color: #e7e7e7;
 }
 
-#controls-tabs li, #navigation-tabs li {
-  display: inline-block;
-  float: none;
-}
-
-#controls-tabs, #controls-tabs li, #controls-tabs li a, #controls-tabs li.active {
-  background-color: transparent;
-}
-
-#controls-tabs, #controls-tabs li, #controls-tabs li a, #controls-tabs li.active {
-  background-color: transparent;
-}
-
-#controls-tabs li.active, #passport-tabs li.active {
-  border-bottom: 1px solid #4285f4;
-}
-
-.btn-group, .btn-group-vertical, .input-group, .input-group .form-control, .input-group-btn, .input-group-btn>.btn, .nav>li, .nav>li>a, .navbar {
-  position: relative;
-}
-
-.nav>li>a {
-  display: block;
-  padding: 10px 15px;
-}
-
-.nav-tabs>li>a {
-  margin-right: 2px;
-  line-height: 1.42857143;
-  border: 1px solid transparent;
-  border-radius: 4px 4px 0 0;
-}
-
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-  color: #555;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-bottom-color: transparent;
-  cursor: default;
-}
-
-#controls-tabs, #controls-tabs li, #controls-tabs li a, #controls-tabs li.active {
-  background-color: transparent;
-}
-
-#controls-tabs li a {
-  color: #31353e;
-  border: 0;
-}
-
-#controls-tabs li a:hover, #controls-tabs li.active a, #controls-tabs li.active a:hover {
-  color: #4285f4;
-}
-
-.tab-content>.tab-pane {
+.explorer-tab-content>.explorer-tab-pane {
   display: none;
 }
 
-.tab-content>.active {
+.explorer-tab-content>.explorer-active {
   display: block;
 }
 
-.dl-horizontal {
+.explorer-dl-horizontal {
   float: left;
-}
-
-.dl-horizontal {
   width: 50%;
 }
 
-.dl-horizontal h4 {
+.explorer-dl-horizontal h4 {
   padding: 8px 0px;
 }
 
-.pull-left {
+.explorer-pull-left {
   float: left;
 }
 
-.pull-right {
+.explorer-pull-right {
   float: right;
 }
 
-b, optgroup, strong {
+b {
   font-weight: 700;
 }
 
-.sc-key {
+.explorer-sc-key {
   display: inline-block;
   min-width: 24px;
   height: 24px;

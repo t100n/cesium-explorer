@@ -17,6 +17,7 @@
 				width: 100%;
 				height: 100%;
 				position: relative;
+				overflow: hidden;
 			}
 			
 			#controls {
@@ -113,38 +114,38 @@
 				</div>
 			</div>
 			
-			<div id="controls-modal" class="modal fade in" aria-hidden="false" style="display: none;">
-			    <div class="modal-dialog">
-			        <div class="modal-content">
-			            <div class="modal-header">
-			                <button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
-			                <h4 class="modal-title">Controlos</h4>
+			<div id="controls-modal" class="explorer-modal explorer-fade explorer-in" aria-hidden="false" style="display: none;">
+			    <div class="explorer-modal-dialog">
+			        <div class="explorer-modal-content">
+			            <div class="explorer-modal-header">
+			                <button class="explorer-close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
+			                <h4 class="explorer-modal-title">Controlos</h4>
 			            </div>
-			            <div class="modal-body clearfix">
-			                <div class="tab-content">
-			                    <div id="keyboard" class="tab-pane active">
-			                        <div class="dl-horizontal">
+			            <div class="explorer-modal-body clearfix">
+			                <div class="explorer-tab-content">
+			                    <div id="explorer-keyboard" class="explorer-tab-pane explorer-active">
+			                        <div class="explorer-dl-horizontal">
 			                            <div>
 			                                <h4>Movimento</h4>
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">up</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">up</b></div>
 			                                <div>Subir</div>
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">down</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">down</b></div>
 			                                <div>Descer</div>
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">left</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">left</b></div>
 			                                <div>Virar à esquerda</div>
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">right</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">right</b></div>
 			                                <div>Virar à direita</div>
 			                            </div>
 										
@@ -153,48 +154,48 @@
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">o</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">o</b></div>
 			                                <div>Instrumentos de orientação</div>
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">p</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">p</b></div>
 			                                <div>Pausa</div>
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">u</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">u</b></div>
 			                                <div>FPS</div>
 			                            </div>
 			                        </div>
 									
-			                        <div class="dl-horizontal">
+			                        <div class="explorer-dl-horizontal">
 			                            <div>
 			                                <h4>Câmera</h4>
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">a</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">a</b></div>
 			                                <div>Olhar para a esquerda</div>
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">d</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">d</b></div>
 			                                <div>Olhar para a direita</div>
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">q</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">q</b></div>
 			                                <div>Olhar para a frente</div>
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">e</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">e</b></div>
 			                                <div>Olhar para trás</div>
 			                            </div>
 										
 			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">c</b></div>
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">c</b></div>
 			                                <div>Mudar a Câmera</div>
 			                            </div>
 										
@@ -203,8 +204,8 @@
 			                </div>
 			            </div>
 			
-			            <div class="modal-footer">
-			                <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+			            <div class="explorer-modal-footer">
+			                <button class="explorer-btn explorer-btn-default" type="button" data-dismiss="modal">Close</button>
 			            </div>
 			        </div>
 			    </div>
