@@ -1077,7 +1077,9 @@ DrivingSimulator = function () {
     this.down = false;
     this.left = false;
     this.right = false;
-
+    
+    this.altitudeSpeed = 0;
+    
     this.lastSpeedKmh = 0;
     this.lastTiltOffset =
     this.removeBodies = [];
@@ -2301,6 +2303,8 @@ DrivingSimulator = function () {
             var speedMass = this.vehicle.speedKmh/this.vehicleData.mass;
             if(speedMass < 0) speedMass = this.vehicle.speedKmh;
 
+            var initialAltitude = this.vehicleAltitude.targetPosition;
+            
             if(this.vehicle.speedKmh < this.vehicle.liftOffMinSpeed) {
                     var value = Math.abs(Math.max(speedMass, 100)*deltaTime*((weight / 2e3)));
                     this.vehicleAltitude.targetPosition-=(value-(tilt*tiltDirection*0.05))*deltaTime;
@@ -2311,7 +2315,14 @@ DrivingSimulator = function () {
             else if(this.vehicle.tiltOffset < 185) {
                 this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*deltaTime);
             }//else if
-
+            
+            var finalAltitude = this.vehicleAltitude.targetPosition;
+            var altitudeDiff = Math.abs(initialAltitude - finalAltitude);
+            
+            //altitudeDiff - deltaTime
+            //x - 3600;
+            this.altitudeSpeed = altitudeDiff*3600 / deltaTime;
+            
             var wasAirborne = this.vehicle.wasAirborne = this.vehicle.airborne;
             var aboveGroundValue = this.vehicleAltitude.position - newAlt;
             var rightWingLatLngAlt = this.getLatLngAlt(this.vehicleData.bodyWidth*2, 0, this.vehicleData.vehiclealt);
@@ -2882,8 +2893,8 @@ DrivingSimulator = function () {
     this.updateSpeedMeter = function (speedKmh, speedMph) {
         try {
             if(this.speedOverlay) {
-                if(window.unit.toLowerCase() == "km") this.speedOverlay.setValue(parseInt(speedKmh));
-                else this.speedOverlay.setValue(parseInt(speedMph));
+                if(window.unit.toLowerCase() == "km") this.speedOverlay.setValue(Math.max(parseInt(speedKmh), parseInt(this.altitudeSpeed)));
+                else this.speedOverlay.setValue(Math.max(parseInt(speedMph), parseInt(this.altitudeSpeed)));
             }//if
         } catch (err) {
             log("error", "updateSpeedMeter", err);
