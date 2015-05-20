@@ -11,6 +11,8 @@
 	<body>
 		<div id="explorer-container">
 			<div id="map3d-container">
+				<a id="restart" href="#">restart</a>
+				
 				<div id="paused" style="display: none;">
 		            <div class="paused-content">
 		                <h2>Pausado</h2>
@@ -212,6 +214,12 @@
 			$('#down').on('mouseup', function(e) {
 				cesiumExplorer.physics.keyState[40] = false;
 				$(this).blur();
+			});
+			
+			$('#restart').click(function(e) {
+				e.preventDefault();
+				
+				cesiumExplorer.goto(window.lat, window.lon, window.alt, window.speed, window.heading);
 			});
 			
 			window.SITE_URL = 'http://andresantos.cloudapp.net';
