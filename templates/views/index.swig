@@ -118,12 +118,12 @@
 			        <div class="modal-content">
 			            <div class="modal-header">
 			                <button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
-			                <h4 class="modal-title">Controls</h4>
+			                <h4 class="modal-title">Controlos</h4>
 			            </div>
 			            <div class="modal-body clearfix">
 			                <ul id="controls-tabs" class="nav nav-tabs">
 			                    <li class="active">
-			                        <a href="#keyboard" data-toggle="tab">Keyboard</a>
+			                        <a href="#keyboard" data-toggle="tab">Teclado</a>
 			                    </li>
 			                </ul>
 			
