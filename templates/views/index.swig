@@ -106,7 +106,7 @@
 				</div>
 				<div class="row">
 					<button id="left">Esquerda</button>
-					<button id="camera">Camera</button>
+					<button id="options">Opções</button>
 					<button id="right">Direita</button>
 				</div>
 				<div class="row">
@@ -119,7 +119,7 @@
 			        <div class="explorer-modal-content">
 			            <div class="explorer-modal-header">
 			                <button class="explorer-close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
-			                <h4 class="explorer-modal-title">Controlos</h4>
+			                <h4 class="explorer-modal-title">Opções</h4>
 			            </div>
 			            <div class="explorer-modal-body clearfix">
 			                <div class="explorer-tab-content">
@@ -227,6 +227,18 @@
 		<script type="text/javascript" src="/js/physics.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/Cesium/Cesium.js"></script>
 		<script>
+			$('#options').click(function(e) {
+				$('#controls-modal').show();
+			});
+			
+			$('.explorer-modal-dialog').click(function(e) {
+				$('#controls-modal').hide();
+			});
+			
+			$('[data-dismiss=modal]').click(function(e) {
+				$('#controls-modal').hide();
+			});
+			
 			$('#camera').click(function(e) {
 				cesiumExplorer.physics.changeViewPoint();
 			});

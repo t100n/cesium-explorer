@@ -449,6 +449,8 @@ header {
   -webkit-transform: translateX(-50%)translateY(-50%);
   -ms-transform: translateX(-50%)translateY(-50%);
   transform: translateX(-50%)translateY(-50%);
+  
+  width: 500px;
 }
 
 @media (min-width: 768px) {
@@ -508,7 +510,7 @@ button.explorer-close {
 }
 
 .explorer-modal-footer {
-  margin-top: 15px;
+  margin-top: 0px;
   padding: 19px 20px 20px;
   text-align: right;
 }
