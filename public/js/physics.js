@@ -2257,7 +2257,9 @@ DrivingSimulator = function () {
 
     this.applyVerticalForces = function(speedForward, newAlt, rightWingHeight, leftWingHeight, deltaTime, other) {
         //log("info", "applyVerticalForces start");
-
+        
+        var initialAltitude = this.vehicleAltitude.targetPosition;
+        
         if(this.vehicleData.category == "plane" || this.vehicle.konamiCodeFly) {
             // Make the loop transition fluid
             if(this.vehicle.tiltOffset > 360) {
@@ -2303,8 +2305,6 @@ DrivingSimulator = function () {
             var speedMass = this.vehicle.speedKmh/this.vehicleData.mass;
             if(speedMass < 0) speedMass = this.vehicle.speedKmh;
 
-            var initialAltitude = this.vehicleAltitude.targetPosition;
-            
             if(this.vehicle.speedKmh < this.vehicle.liftOffMinSpeed) {
                     var value = Math.abs(Math.max(speedMass, 100)*deltaTime*((weight / 2e3)));
                     this.vehicleAltitude.targetPosition-=(value-(tilt*tiltDirection*0.05))*deltaTime;
@@ -2315,13 +2315,6 @@ DrivingSimulator = function () {
             else if(this.vehicle.tiltOffset < 185) {
                 this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*deltaTime);
             }//else if
-            
-            var finalAltitude = this.vehicleAltitude.targetPosition;
-            var altitudeDiff = Math.abs(initialAltitude - finalAltitude);
-            
-            //altitudeDiff - deltaTime
-            //x - 3600;
-            this.altitudeSpeed = altitudeDiff*3600 / deltaTime;
             
             var wasAirborne = this.vehicle.wasAirborne = this.vehicle.airborne;
             var aboveGroundValue = this.vehicleAltitude.position - newAlt;
@@ -2503,7 +2496,14 @@ DrivingSimulator = function () {
         }//else
 
         if(this.vehicleAltitude.position < 0) this.vehicleAltitude.position = 0;
-
+        
+        var finalAltitude = this.vehicleAltitude.targetPosition;
+        var altitudeDiff = Math.abs(initialAltitude - finalAltitude);
+        
+        //altitudeDiff - deltaTime
+        //x - 3600;
+        this.altitudeSpeed = altitudeDiff*3600 / deltaTime;
+        
         //log("info", "applyVerticalForces end");
     };
 
