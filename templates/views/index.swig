@@ -20,7 +20,7 @@
 		            </div>
 		        </div>
 				
-				<a id="restart" href="#">Recomeçar</a>
+				<a id="restart" href="#"><i class="fa fa-repeat"></i></a>
 			</div>
 			
 			<div id="controls">
