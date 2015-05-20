@@ -126,7 +126,7 @@
 			                        <a href="#keyboard" data-toggle="tab">Teclado</a>
 			                    </li>
 			                </ul>
-			
+							
 			                <div class="tab-content">
 			                    <div id="keyboard" class="tab-pane active">
 			                        <div class="dl-horizontal">
@@ -138,7 +138,7 @@
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">up</b></div>
 			                                <div>Subir</div>
 			                            </div>
-			
+										
 			                            <div style="min-height: 35px">
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">down</b></div>
 			                                <div>Descer</div>
