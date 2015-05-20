@@ -1298,7 +1298,7 @@ DrivingSimulator = function () {
                 if(!this.fpsOverlay || (resetRight && resetLeft)) {
                     if(this.fpsOverlay) this.fpsOverlay.remove();
 
-                    this.fpsOverlay = new SpriteNumber(this.scene, false, 25, 30, false, "fps");
+                    this.fpsOverlay = new SpriteNumber(this.scene, false, 25, false, 104, "fps");
                 }//if
             }//if
             else {
