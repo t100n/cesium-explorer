@@ -115,7 +115,7 @@
 			    <div class="modal-dialog">
 			        <div class="modal-content">
 			            <div class="modal-header">
-			                <button class="close" type="button" data-dismiss="modal" aria-hidden="true">×</button>
+			                <button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
 			                <h4 class="modal-title">Controls</h4>
 			            </div>
 			            <div class="modal-body clearfix">
@@ -129,114 +129,79 @@
 			                    <div id="keyboard" class="tab-pane active">
 			                        <div class="dl-horizontal col-md-6 col-lg-6 col-xs-6">
 			                            <div>
-			                                <h4>Movement</h4>
+			                                <h4>Movimento</h4>
 			                            </div>
-			
+										
 			                            <div style="min-height: 35px">
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">up</b></div>
-			                                <div>Accelerate</div>
+			                                <div>Subir</div>
 			                            </div>
 			
 			                            <div style="min-height: 35px">
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">down</b></div>
-			                                <div>Brake / Reverse</div>
+			                                <div>Descer</div>
 			                            </div>
-			
+										
 			                            <div style="min-height: 35px">
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">left</b></div>
-			                                <div>Steer Left</div>
+			                                <div>Virar à esquerda</div>
 			                            </div>
-			
+										
 			                            <div style="min-height: 35px">
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">right</b></div>
-			                                <div>Steer Right</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">w</b></div>
-			                                <div>Increase Altitude / Rotate Left</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">s</b></div>
-			                                <div>Decrease Altitude / Rotate Right</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">space</b></div>
-			                                <div>Handbrake</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">v</b></div>
-			                                <div>Cruise control / Autopilot</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">t</b></div>
-			                                <div>Automatic / Manual transmission</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">w</b></div>
-			                                <div>Gear up</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">s</b></div>
-			                                <div>Gear down</div>
+			                                <div>Virar à direita</div>
 			                            </div>
 			                        </div>
-			
+									
 			                        <div class="dl-horizontal col-md-6 col-lg-6 col-xs-6">
 			                            <div>
-			                                <h4>Camera</h4>
+			                                <h4>Câmera</h4>
 			                            </div>
-			
+										
 			                            <div style="min-height: 35px">
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">a</b></div>
-			                                <div>Look Left</div>
+			                                <div>Olhar para a esquerda</div>
 			                            </div>
-			
+										
 			                            <div style="min-height: 35px">
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">d</b></div>
-			                                <div>Look Right</div>
+			                                <div>Olhar para a direita</div>
 			                            </div>
-			
+										
 			                            <div style="min-height: 35px">
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">q</b></div>
-			                                <div>Look Up</div>
+			                                <div>Olhar para a frente</div>
 			                            </div>
-			
+										
 			                            <div style="min-height: 35px">
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">e</b></div>
-			                                <div>Look Back</div>
+			                                <div>Olhar para trás</div>
 			                            </div>
-			
+										
 			                            <div style="min-height: 35px">
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">c</b></div>
-			                                <div>Change Camera</div>
+			                                <div>Mudar a Câmera</div>
 			                            </div>
-			
+										
 			                            <div>
-			                                <h4>Others</h4>
+			                                <h4>Outros</h4>
 			                            </div>
-			
+										
 			                            <div style="min-height: 35px">
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">o</b></div>
-			                                <div>Orientation Instruments</div>
+			                                <div>Instrumentos de orientação</div>
 			                            </div>
-			
+										
 			                            <div style="min-height: 35px">
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">p</b></div>
-			                                <div>Pause</div>
+			                                <div>Pausa</div>
 			                            </div>
-			
+										
 			                            <div style="min-height: 35px">
 			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">u</b></div>
-			                                <div>fps</div>
+			                                <div>FPS</div>
 			                            </div>
-			
+										
 			                        </div>
 			                    </div>
 			                </div>
