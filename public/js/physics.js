@@ -2050,35 +2050,6 @@ DrivingSimulator = function () {
             log("error", err);
         }
 
-        //console.log("handleSounds", 8);
-
-        if(this.vehicle.squealLevel > 0.35 && !this.vehicle.airborne) {
-            var rate = Math3D.MyMath.clamp(this.vehicle.squealLevel+this.vehicleData.slipMinimumRate, this.vehicleData.slipMinimumRate, 1);
-
-            try {
-                window.audioMonkey.play("slip", speedKmh/this.vehicleData.maxspeed, 0, rate, true, this.vehicleData.slipLoopStart, this.vehicleData.slipLoopEnd, slipVolume);
-                window.audioMonkey.volume("slip", slipVolume);
-                window.audioMonkey.rate("slip", rate);
-            } catch(err) {
-                log("error", err);
-            }
-
-            try {
-                if(this.gamepad) this.gamepad.startVibrate();
-            } catch(err) {
-                log("error", err);
-            }
-
-        }//if
-        else {
-            try {
-                window.audioMonkey.stop("slip");
-            } catch(err) {
-                log("error", err);
-            }
-        }//else
-
-        //console.log("handleSounds", 9);
     };
 
     this.batchedUpdate = function () {
