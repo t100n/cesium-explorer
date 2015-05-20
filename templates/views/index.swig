@@ -123,9 +123,6 @@
 			                    <li class="active">
 			                        <a href="#keyboard" data-toggle="tab">Keyboard</a>
 			                    </li>
-			                    <li class="">
-			                        <a href="#gamepad" data-toggle="tab">Gamepad</a>
-			                    </li>
 			                </ul>
 			
 			                <div class="tab-content">
@@ -240,119 +237,6 @@
 			                                <div>fps</div>
 			                            </div>
 			
-			                        </div>
-			                    </div>
-			
-			                    <div id="gamepad" class="tab-pane">
-			                        <div class="dl-horizontal col-md-6 col-lg-6 col-xs-6">
-			                            <div>
-			                                <h4>Movement</h4>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 7</b></div>
-			                                <div>Accelerate</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 6</b></div>
-			                                <div>Brake / Reverse</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">axis 0</b></div>
-			                                <div>Steer Left</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">axis 0</b></div>
-			                                <div>Steer Right</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">axis 1</b></div>
-			                                <div>Increase Altitude / Rotate Left</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">axis 1</b></div>
-			                                <div>Decrease Altitude / Rotate Right</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 1</b></div>
-			                                <div>Handbrake</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 8</b></div>
-			                                <div>Cruise control / Autopilot</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 10</b></div>
-			                                <div>Automatic / Manual transmission</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 11</b></div>
-			                                <div>Gear up</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 12</b></div>
-			                                <div>Gear down</div>
-			                            </div>
-			                        </div>
-			
-			                        <div class="dl-horizontal col-md-6 col-lg-6 col-xs-6">
-			                            <div>
-			                                <h4>Camera</h4>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 4</b></div>
-			                                <div>Look Left</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 5</b></div>
-			                                <div>Look Right</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 3</b></div>
-			                                <div>Look Up</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 2</b></div>
-			                                <div>Look Back</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 0</b></div>
-			                                <div>Change Camera</div>
-			                            </div>
-			
-			                            <div>
-			                                <h4>Others</h4>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 15</b></div>
-			                                <div>Orientation Instruments</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 9</b></div>
-			                                <div>Pause</div>
-			                            </div>
-			
-			                            <div style="min-height: 35px">
-			                                <div class="pull-left" style="min-width: 60px;"><b class="sc-key">button 16</b></div>
-			                                <div>fps</div>
-			                            </div>
 			                        </div>
 			                    </div>
 			                </div>
