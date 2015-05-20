@@ -1255,7 +1255,7 @@ DrivingSimulator = function () {
                     this.compassOverlay.load();
 
                     //this.compassOverlay.setSize(120, 120);
-                    this.compassOverlay.setPosition($('#map3d').width()/2-50, $('#map3d').height()-125, 0, 0);
+                    this.compassOverlay.setPosition($('#map3d').width()/2-50, $('#map3d').height()-135, 0, 0);
                     this.compassOverlay.setOpacity(0.6);
                     this.compassOverlay.setDrawOrder(100);
 
@@ -1263,7 +1263,7 @@ DrivingSimulator = function () {
                     this.compassNeedleOverlay.load();
 
                     //this.compassNeedleOverlay.setSize(120, 120);
-                    this.compassNeedleOverlay.setPosition($('#map3d').width()/2-50, $('#map3d').height()-125, 0, 0);
+                    this.compassNeedleOverlay.setPosition($('#map3d').width()/2-50, $('#map3d').height()-135, 0, 0);
                     this.compassNeedleOverlay.image.css('-webkit-filter', 'invert(100%)');
                     this.compassNeedleOverlay.image.css('filter', 'invert(100%)');
                     this.compassNeedleOverlay.setOpacity(1);
