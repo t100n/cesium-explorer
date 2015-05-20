@@ -244,7 +244,7 @@ header {
 				overflow: hidden;
 			}
       
-      #map3d-container {
+      #map3d-container, #map3d {
         width: 100%;
         height: 100%;
       }
