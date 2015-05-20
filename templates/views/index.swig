@@ -156,7 +156,7 @@
 			window.unit = 'Km';
 			window.lat = -22.758453448852343;
 			window.lon = -43.1103515625;
-			window.alt = 2000;
+			window.alt = 200;
 			window.speed = 100;
 			window.heading = -0.5235985725678303;
 			window.tilt = -0.0014993722426054328;
