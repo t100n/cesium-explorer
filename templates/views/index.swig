@@ -4,89 +4,9 @@
 		<title>Cesium Explorer!</title>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 		<meta charset="UTF-8">
-		<style>
-			@import url(/css/main.css);
-			@import url(/js/Cesium/Widgets/widgets.css);
 			
-			* {
-				padding: 0px;
-				margin: 0px;
-			}
-			
-			#explorer-container {
-				width: 100%;
-				height: 100%;
-				position: relative;
-				overflow: hidden;
-			}
-			
-			#controls {
-				position: absolute;
-				left: 5px;
-				bottom: 50px;
-			}
-			
-			#controls button {
-				background-color: rgba(255,255,255,0);
-				padding: 6px 12px;
-				border: 1px solid #fff;
-				width: 108px;
-				border-radius: 6px;
-				color: #fff;
-			}
-			
-			#controls button.active {
-				background-color: rgba(0,159,238,0.6);
-				color: #fff;
-				border: 1px solid #fff;
-			}
-			
-			#controls .row {
-				text-align: center;
-				padding: 6px;
-			}
-			
-			#controls .space {
-				background-color: transparent;
-				border: 0px;
-			}
-			
-			.sprite-number-container {
-				color: #fff;
-				font-weight: normal;
-				font-size: 13px;
-			}
-			
-			.sprite-number-value {
-			}
-			
-			.sprite-number-unit {
-				margin-left: 6px;
-			}
-			
-			.paused-content {
-			  position: absolute;
-			  z-index: 1045;
-			  top: 0;
-			  left: 0;
-			  right: 0;
-			  bottom: 0;
-			  text-align: center;
-			  background-color: rgba(0,0,0,.2);
-			}
-			
-			.paused-content h2 {
-			  color: #fff;
-			  font-weight: 600;
-			  position: absolute;
-			  top: 50%;
-			  left: 50%;
-			  -webkit-transform: translateX(-50%)translateY(-50%);
-			  -ms-transform: translateX(-50%)translateY(-50%);
-			  transform: translateX(-50%)translateY(-50%);
-			}
-			
-		</style>
+			<link type="text/css" rel="stylesheet" href="/css/main.css" />
+			<link type="text/css" rel="stylesheet" href="/js/Cesium/Widgets/widgets.css" />
 	</head>
 	<body>
 		<div id="explorer-container">
