@@ -2325,20 +2325,20 @@ DrivingSimulator = function () {
                 var x = this.vehicle.getMass() / (this.getAirDensity(this.vehicleAltitude.position)*wingArea*(feetPerSecond*feetPerSecond));
             }//if
 
-            var tilt = Math.abs(185-this.vehicle.tiltOffset);
+            var tilt = Math.abs(185-this.vehicle.tiltOffset)*0.1;
             var tiltDirection = (185-this.vehicle.tiltOffset) > 0 ? -1 : 1;
             var speedMass = this.vehicle.speedKmh/this.vehicleData.mass;
             if(speedMass < 0) speedMass = this.vehicle.speedKmh;
 
             if(this.vehicle.speedKmh < this.vehicle.liftOffMinSpeed) {
                     var value = Math.abs(Math.max(speedMass, 100)*deltaTime*((weight / 2e3)));
-                    this.vehicleAltitude.targetPosition-=(value-(tilt*tiltDirection*0.05))*deltaTime*deltaTime;
+                    this.vehicleAltitude.targetPosition-=(value-(tilt*tiltDirection*0.05))*deltaTime;
             }//if
             else if(this.vehicle.tiltOffset > 185 || (this.vehicle.tiltOffset > 275 && this.vehicle.speedKmh < this.vehicle.liftOffMinSpeed*0.7)) {
-                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*deltaTime)*deltaTime;
+                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*deltaTime);
             }//if
             else if(this.vehicle.tiltOffset < 185) {
-                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*deltaTime)*deltaTime;
+                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*deltaTime);
             }//else if
 
             var wasAirborne = this.vehicle.wasAirborne = this.vehicle.airborne;

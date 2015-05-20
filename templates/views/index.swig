@@ -219,7 +219,7 @@
 			$('#restart').click(function(e) {
 				e.preventDefault();
 				
-				cesiumExplorer.goto(window.lat, window.lon, window.alt, window.speed, window.heading);
+				cesiumExplorer.goto(window.defaultLat, window.defaultLon, window.defaultAlt, window.defaultSpeed, window.defaultHeading);
 			});
 			
 			window.SITE_URL = 'http://andresantos.cloudapp.net';
@@ -247,13 +247,13 @@
 			
 			// Physics initial data
 			window.unit = 'Km';
-			window.lat = -22.758453448852343;
-			window.lon = -43.1103515625;
-			window.alt = 200;
-			window.speed = 100;
-			window.heading = -0.5235985725678303;
-			window.tilt = -0.0014993722426054328;
-			window.roll = 0;
+			window.defaultLat = window.lat = -22.758453448852343;
+			window.defaultLon = window.lon = -43.1103515625;
+			window.defaultAlt = window.alt = 200;
+			window.defaultSpeed = window.speed = 100;
+			window.defaultHeading = window.heading = -0.5235985725678303;
+			window.defaultTilt = window.tilt = -0.0014993722426054328;
+			window.defaultRoll = window.roll = 0;
 			
 			window.pacejkaWheelLoad = .1;
 			window.pacejkaSlipAngle = 1.4;
@@ -488,7 +488,7 @@
 
     } catch(err) {}
 			
-			cesiumExplorer.goto(window.lat, window.lon, window.alt, window.speed, window.heading);
+			cesiumExplorer.goto(window.defaultLat, window.defaultLon, window.defaultAlt, window.defaultSpeed, window.defaultHeading);
 		</script>
 	</body>
 </html>
