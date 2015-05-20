@@ -409,15 +409,8 @@ header {
 .modal-dialog {
   position: relative;
   width: auto;
-  margin: 10px;
-}
-
-.modal-dialog {
-  min-height: -webkit-calc(100% - 60px);
-  min-height: -moz-calc(100% - 60px);
-  min-height: -o-calc(100% - 60px);
-  min-height: -ms-calc(100% - 60px);
-  min-height: calc(100% - 60px);
+  margin: 0;
+  min-height: 100%;
 }
 
 .modal.fade .modal-dialog {
