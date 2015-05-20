@@ -229,6 +229,8 @@
 		<script>
 			$('#options').click(function(e) {
 				$('#controls-modal').show();
+				
+				$('#options').addClass('active');
 			});
 			
 			$('.explorer-modal-content').click(function(e) {
@@ -238,10 +240,14 @@
 			
 			$('.explorer-modal-dialog').click(function(e) {
 				$('#controls-modal').hide();
+				
+				$('#options').removeClass('active');
 			});
 			
 			$('[data-dismiss=modal]').click(function(e) {
 				$('#controls-modal').hide();
+				
+				$('#options').removeClass('active');
 			});
 			
 			$('#camera').click(function(e) {
