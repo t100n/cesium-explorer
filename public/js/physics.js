@@ -2286,7 +2286,7 @@ DrivingSimulator = function () {
                     this.vehicle.tiltOffset+=0.1*speedForward*deltaTime;
                 }
                 else {
-                    this.vehicle.tiltOffset=185;
+                    this.vehicle.tiltOffset=183;
                 }
             }//else
 
