@@ -231,6 +231,11 @@
 				$('#controls-modal').show();
 			});
 			
+			$('.explorer-modal-content').click(function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+			});
+			
 			$('.explorer-modal-dialog').click(function(e) {
 				$('#controls-modal').hide();
 			});
