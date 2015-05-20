@@ -67,6 +67,8 @@ window.checkGamepadInterval = null;
 
 window.buildings = {};
 
+window.defaultTiltOffset = 182;
+
 var peer = false;
 var peerPing = false;
 

@@ -2279,14 +2279,14 @@ DrivingSimulator = function () {
                 this.vehicle.tiltOffset-=0.1*speedForward*deltaTime;
             }//else if
             else {
-                if(this.vehicle.tiltOffset>185+0.1*speedForward*deltaTime) {
+                if(this.vehicle.tiltOffset>window.defaultTiltOffset+0.1*speedForward*deltaTime) {
                     this.vehicle.tiltOffset-=0.1*speedForward*deltaTime;
                 }
-                else if(this.vehicle.tiltOffset<185-0.1*speedForward*deltaTime) {
+                else if(this.vehicle.tiltOffset<window.defaultTiltOffset-0.1*speedForward*deltaTime) {
                     this.vehicle.tiltOffset+=0.1*speedForward*deltaTime;
                 }
                 else {
-                    this.vehicle.tiltOffset=183;
+                    this.vehicle.tiltOffset=window.defaultTiltOffset;
                 }
             }//else
 
