@@ -138,6 +138,8 @@ var dateStr = function (date) {
     return date.getFullYear() + "-" + (m < 10 ? "0" + m : "" + m) + "-" + (d < 10 ? "0" + d : "" + d) + " " + (h < 10 ? "0" + h : "" + h) + ":" + (mi < 10 ? "0" + mi : "" + mi) + ":" + (s < 10 ? "0" + s : "" + s)
 };
 var cca = function (s, index) {
+    if(!s) return undefined;
+    
     function displayKeyCode(value) {
         if (value == "backspace") return 8; //  backspace
         if (value == "tab") return 9; //  tab
