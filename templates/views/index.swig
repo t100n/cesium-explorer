@@ -87,7 +87,6 @@
 		<script type="text/javascript" src="/js/jquery.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/mousetrap.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/EventEmitter.min.js?{{version}}"></script>
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.1.10/buzz.min.js"></script>
 		<script type="text/javascript" src="/js/variables.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/latlon_v1.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/gamepad.js?{{version}}"></script>
@@ -95,7 +94,7 @@
 		<script type="text/javascript" src="/js/box2d.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/math3d.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/vehicle.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/physicsCesium.js?{{version}}"></script>
+		<script type="text/javascript" src="/js/physics.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/Cesium/Cesium.js"></script>
 		<script>
 			$('#camera').click(function(e) {
@@ -130,14 +129,6 @@
 				cesiumExplorer.physics.keyState[40] = false;
 			});
 			
-			/*
-			var mySound = new buzz.sound( "/uploads/glider_sound", {
-				formats: [ "ogg" ]
-			});
-			
-			mySound.play().loop();
-			*/
-			
 			window.SITE_URL = 'http://andresantos.cloudapp.net';
 			
 			window.userId = "ojogador";
@@ -145,8 +136,8 @@
 			window.masterVolume = 1;
 			window.globalVolume = 1;
 			window.lastGlobalVolume = 1;
-			window.minVolume = 0;
-			window.defaultMinVolume = 0;
+			window.minVolume = 20;
+			window.defaultMinVolume = 20;
 			window.maxVolume = 80;
 			window.defaultMaxVolume = 80;
 			
