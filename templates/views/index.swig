@@ -60,11 +60,28 @@
 			.sprite-number-unit {
 				margin-left: 6px;
 			}
+			
+			#paused {
+			  position: absolute;
+			  z-index: 1045;
+			  top: 0;
+			  left: 0;
+			  right: 0;
+			  bottom: 0;
+			  text-align: center;
+			  background-color: rgba(0,0,0,.2);
+			}
 		</style>
 	</head>
 	<body>
 		<div id="explorer-container">
 			<div id="map3d-container">
+				<div id="paused" style="display: none;">
+		            <div class="paused-content">
+		                <h2>Pausado</h2>
+		            </div>
+		        </div>
+				
 				<div id="map3d"></div>
 			</div>
 			
