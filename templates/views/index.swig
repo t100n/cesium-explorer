@@ -87,14 +87,14 @@
 		<script type="text/javascript" src="/js/jquery.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/mousetrap.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/EventEmitter.min.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/variables.js?{{version}}"></script>
+		<script type="text/javascript" src="/js/variables.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/latlon_v1.min.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/gamepad.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/audioMonkey.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/box2d.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/math3d.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/vehicle.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/physics.js?{{version}}"></script>
+		<script type="text/javascript" src="/js/gamepad.min.js?{{version}}"></script>
+		<script type="text/javascript" src="/js/audioMonkey.min.js?{{version}}"></script>
+		<script type="text/javascript" src="/js/box2d.min.js?{{version}}"></script>
+		<script type="text/javascript" src="/js/math3d.min.js?{{version}}"></script>
+		<script type="text/javascript" src="/js/vehicle.min.js?{{version}}"></script>
+		<script type="text/javascript" src="/js/physics.min.js?{{version}}"></script>
 		<script type="text/javascript" src="/js/Cesium/Cesium.js"></script>
 		<script>
 			$('#camera').click(function(e) {
