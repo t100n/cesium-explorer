@@ -133,12 +133,14 @@ function AudioMonkey() {
                 that.sounds[id].loaded = true;
             }//if
         }, function(e) {
-            /*if(that.syncStream(request) && request.retry < 10) {
+            /*
+            if(that.syncStream(request) && request.retry < 10) {
                 that.decode(id, request);
-            }//if*/
+            }//if
             
-            that.sounds[id].buffer = request.response; //that.context.createBuffer(request.response, true);
+            that.sounds[id].buffer = that.context.createBuffer(request.response, true);
             that.sounds[id].loaded = true;
+            */
         });
     };
 
