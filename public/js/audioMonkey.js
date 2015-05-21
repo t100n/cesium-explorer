@@ -115,10 +115,8 @@ function AudioMonkey() {
         var that = this;
 
         var onError = function(err) {
-            if(that.syncStream(request)) {
-                //that.decode(id, request);
-                that.sounds[id].buffer = that.context.createBuffer(request.response, false);
-                that.sounds[id].loaded = true;
+            if(that.syncStream(request) && request.retry < 10) {
+                that.decode(id, request);
             } else {
                 //log("error", that.class, "audio load error", err);
 
