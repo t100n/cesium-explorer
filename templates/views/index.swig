@@ -223,6 +223,8 @@
 				cesiumExplorer.goto(window.defaultLat, window.defaultLon, window.defaultAlt, window.defaultSpeed, window.defaultHeading);
 			});
 			
+			var format = (new Audio().canPlayType('audio/ogg') !== '' ? 'ogg' : 'mp3');
+			
 			window.SITE_URL = 'http://andresantos.cloudapp.net';
 			
 			window.userId = "ojogador";
@@ -383,8 +385,6 @@
 
                     window.defaultMinVolume = window.minVolume = v.minVolume ? v.minVolume : 0;
                     window.defaultMaxVolume = window.maxVolume = v.maxVolume ? v.maxVolume : 80;
-					
-					var format = (new Audio().canPlayType('audio/ogg') !== '' ? 'ogg' : 'mp3');
 					
                     if(window.audioMonkey) {
                         if(v.sound && v.sound.ogg && v.sound.ogg!="" && (!Platform.isIE() && format == 'ogg')) {
