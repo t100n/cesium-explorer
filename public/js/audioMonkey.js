@@ -45,7 +45,7 @@ function AudioMonkey() {
 
     this.syncStream = function(node){ // should be done by api itself. and hopefully will.
         try {
-            var buf8 = new Uint8Array(node.buf);
+            var buf8 = new Uint8Array(node.response);
             buf8.indexOf = Array.prototype.indexOf;
             var i=node.sync, b=buf8;
 
@@ -56,9 +56,9 @@ function AudioMonkey() {
             }
 
             if(i!=-1) {
-                var tmp=node.buf.slice(i); //careful there it returns copy
-                delete(node.buf); node.buf=null;
-                node.buf=tmp;
+                var tmp=node.response.slice(i); //careful there it returns copy
+                delete(node.response); node.response=null;
+                node.response=tmp;
                 node.sync=i;
 
                 return true;
