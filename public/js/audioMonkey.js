@@ -132,10 +132,12 @@ function AudioMonkey() {
                 that.sounds[id].buffer = buffer;
                 that.sounds[id].loaded = true;
             }//if
-        }, function() {
+        }, function(e) {
             /*if(that.syncStream(request) && request.retry < 10) {
                 that.decode(id, request);
             }//if*/
+            
+            console.log(e);
             
             that.sounds[id].buffer = that.context.createBuffer(request.response, true);
             that.sounds[id].loaded = true;
