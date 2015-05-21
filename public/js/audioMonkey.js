@@ -137,9 +137,7 @@ function AudioMonkey() {
                 that.decode(id, request);
             }//if*/
             
-            console.log(e);
-            
-            that.sounds[id].buffer = that.context.createBuffer(request.response, true);
+            that.sounds[id].buffer = request.response; //that.context.createBuffer(request.response, true);
             that.sounds[id].loaded = true;
         });
     };
