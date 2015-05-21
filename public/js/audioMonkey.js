@@ -60,7 +60,7 @@ function AudioMonkey() {
                 delete(node.response); node.response=null;
                 node.response=tmp;
                 node.sync=i;
-
+                
                 return true;
             }
         } catch(err) {
@@ -115,8 +115,11 @@ function AudioMonkey() {
         var that = this;
 
         var onError = function(err) {
-            if(that.syncStream(request)) that.decode(id, request);
-            else {
+            if(that.syncStream(request)) {
+                //that.decode(id, request);
+                that.sounds[id].buffer = that.context.createBuffer(request.response, false);
+                that.sounds[id].loaded = true;
+            } else {
                 //log("error", that.class, "audio load error", err);
 
                 that.sounds[id].buffer = that.context.createBuffer(request.response, false);
