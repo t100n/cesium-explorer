@@ -114,6 +114,7 @@ function AudioMonkey() {
     this.decode = function(id, request) {
         var that = this;
 
+        /*
         var onError = function(err) {
             if(that.syncStream(request) && request.retry < 10) {
                 that.decode(id, request);
@@ -124,13 +125,21 @@ function AudioMonkey() {
                 that.sounds[id].loaded = true;
             }//else
         };
-
+        */
+        
         that.context.decodeAudioData(request.response, function(buffer) {
             if(typeof that.sounds[id] != "undefined") {
                 that.sounds[id].buffer = buffer;
                 that.sounds[id].loaded = true;
             }//if
-        }, onError);
+        }, function() {
+            /*if(that.syncStream(request) && request.retry < 10) {
+                that.decode(id, request);
+            }//if*/
+            
+            that.sounds[id].buffer = that.context.createBuffer(request.response, true);
+            that.sounds[id].loaded = true;
+        });
     };
 
     this.stopAll = function() {
