@@ -240,13 +240,6 @@
 			window.audioMonkey = new AudioMonkey();
 			
 			window.audioMonkey.init();
-			window.audioMonkey.add("chat-notify", window.SITE_URL+"/sounds/chat_v2.ogg");
-			window.audioMonkey.add("ringtone", window.SITE_URL+"/sounds/ringtone.ogg");
-			window.audioMonkey.add("ringback", window.SITE_URL+"/sounds/ringback.ogg");
-			window.audioMonkey.add("checkpoint-cleared", window.SITE_URL+"/sounds/smw_coin.ogg");
-			window.audioMonkey.add("gameover", window.SITE_URL+"/sounds/fail-trombone-03.ogg");
-			window.audioMonkey.add("gamewon", window.SITE_URL+"/sounds/Ta_Da.ogg");
-			window.audioMonkey.add("warning", window.SITE_URL+"/sounds/warning_sound.ogg");
 			
 			// Physics initial data
 			window.unit = 'Km';
