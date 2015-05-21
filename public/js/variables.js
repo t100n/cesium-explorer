@@ -529,12 +529,12 @@ window.myVehicle = {"__v":10,"_id":"533d9853bcf8e598037b601d","crashsoundtime":1
 	"sixthGearRatio":0.1,"fifthGearRatio":0.1,"fourthGearRatio":0.1,"thirdGearRatio":0.1,"secondGearRatio":0.1,"firstGearRatio":0.1,"reverseGearRatio":-0.275,"brakeRatio":0.01,
 	"liftOffMinSpeed":20,"slipFactor":0,"slipMinimumRate":0.8,"slipLoopEnd":0.6,"slipLoopStart":0.2,
     "slip":{
-        "ogg":{"filename":"Tires Squealing-SoundBible.com-1814115127.ogg","path":"public/uploads","size":12185,"filetype":"audio/ogg","url":"/uploads/Tires Squealing-SoundBible.com-1814115127.ogg"},
-        "mp3":{"filename":"Tires Squealing-SoundBible.com-1814115127.mp3","path":"public/uploads","size":12185,"filetype":"audio/mp3","url":"/uploads/Tires Squealing-SoundBible.com-1814115127.mp3"}
+        "mp3":{"filename":"Tires Squealing-SoundBible.com-1814115127.mp3","path":"public/uploads","size":12185,"filetype":"audio/mp3","url":"/uploads/Tires Squealing-SoundBible.com-1814115127.mp3"},
+        "ogg":{"filename":"Tires Squealing-SoundBible.com-1814115127.ogg","path":"public/uploads","size":12185,"filetype":"audio/ogg","url":"/uploads/Tires Squealing-SoundBible.com-1814115127.ogg"}
     },"soundMinimumRate":0.1,"soundLoopEnd":2,"soundLoopStart":0,
     "sound":{
         "duration":5,
-        "ogg":{"filename":"glider_sound.mp3","path":"public/uploads","size":20000,"filetype":"audio/mp3","url":"/uploads/glider_sound.mp3"},
+        "mp3":{"filename":"glider_sound.mp3","path":"public/uploads","size":20000,"filetype":"audio/mp3","url":"/uploads/glider_sound.mp3"},
         "ogg":{"filename":"glider_sound.ogg","path":"public/uploads","size":20000,"filetype":"audio/ogg","url":"/uploads/glider_sound.ogg"}
     },"tireMarkDelay":1000,"tireMarkSizeY":0.5,"tireMarkSizeX":0.5,"tireMarkPosOffset":0,"tireMarkDirOffset":0,"shadowY":7,"shadowX":7,"shadowPosOffset":0,"shadowDirOffset":0,"shadow":{"body":{"filename":"4seat Aircraft shadow.png","path":"public/uploads","size":22287,"filetype":"image/png","url":"/uploads/4seat Aircraft shadow.png"}},"wheelsoffset":-0.2,"wheelsheight":1.5,"wheelsdistance":2,"axisdistance":1.5,"minGroundAlt":69.52291361316318,"minVolume":20,"maxVolume":50,"tiltFactor":0.35,"traction":5,"vehicleagility":0.00005,"massI":31000,"mass":1200,"traildistance":15,"camtilt":0,"camheight":3.5,"gravity":2.8,"decel":50,"maxrevspeed":50,"minaccelstep":5,"accelstep":50,"accel":5,"maxspeed":280,"rudderAngleScale":5,"maxSteeringAngle":3,"suspensionDamper":8000,"suspensionSpring":10000,"suspensionMass":5000,"suspensionrestlength":1,"rollDamper":500,"rollSpring":500,"rollMass":375,"rollclamp":68,"steerroll":1,"tiltDamper":8000,"tiltSpring":10000,"tiltMass":375,"tiltclamp":360,"steertilt":-5,"bodyWidth":2.8,"bodyLength":4.14,"rearY":1,"wheelBase":0.65,"tread":1.4,"wheelRadius":0.35,"upOffset":0,"vehiclealt":2.72,"modelzscale":1,"modelyscale":1,"modelxscale":1,
 	//"chassi":{"filename":"4seat.gltf","path":"public/uploads","size":2610509,"filetype":"application/octet-stream","url":"/uploads/4seat.gltf"},
