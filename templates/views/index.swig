@@ -387,7 +387,7 @@
 					var format = (new Audio().canPlayType('audio/ogg') !== '' ? 'ogg' : 'mp3');
 					
                     if(window.audioMonkey) {
-                        if(v.sound && v.sound.ogg && v.sound.ogg!="" && (!Platform.isIE() || format == 'ogg')) {
+                        if(v.sound && v.sound.ogg && v.sound.ogg!="" && (!Platform.isIE() && format == 'ogg')) {
                             window.audioMonkey.add("forward", v.sound.ogg.url);
                         }//if
                         else if(v.sound && v.sound.mp3 && v.sound.mp3!="") {
@@ -397,7 +397,7 @@
                             window.audioMonkey.remove("forward");
                         }//else
 
-                        if(v.slip && v.slip.ogg && v.slip.ogg!="" && (!Platform.isIE() || format == 'ogg')) {
+                        if(v.slip && v.slip.ogg && v.slip.ogg!="" && (!Platform.isIE() && format == 'ogg')) {
                             window.audioMonkey.add("slip", v.slip.ogg.url);
                         }//if
                         else if(v.slip && v.slip.mp3 && v.slip.mp3!="") {
@@ -407,7 +407,7 @@
                             window.audioMonkey.remove("slip");
                         }//else
 
-                        if(v.crashSound && v.crashSound.ogg!="" && (!Platform.isIE() || format == 'ogg')) {
+                        if(v.crashSound && v.crashSound.ogg!="" && (!Platform.isIE() && format == 'ogg')) {
                             var sound = v.crashSound;
 
                             window.audioMonkey.add("vehicleCrash", sound.ogg.url);
@@ -419,7 +419,7 @@
                         }//if
                         else {
                             //window.audioMonkey.remove("vehicleCrash");
-                            if((!Platform.isIE() || format == 'ogg')) window.audioMonkey.add("vehicleCrash", window.SITE_URL+"/sounds/crashSound3.ogg");
+                            if((!Platform.isIE() && format == 'ogg')) window.audioMonkey.add("vehicleCrash", window.SITE_URL+"/sounds/crashSound3.ogg");
                             else window.audioMonkey.add("vehicleCrash", window.SITE_URL+"/sounds/crashSound3.mp3");
                         }//else
 
@@ -445,7 +445,7 @@
 			window.defaultMaxVolume = window.maxVolume = v.maxVolume ? v.maxVolume : 80;
 			
 			try {
-        if(v.sound && v.sound.ogg!="" && (!Platform.isIE() || format == 'ogg')) {
+        if(v.sound && v.sound.ogg!="" && (!Platform.isIE() && format == 'ogg')) {
             var sound = v.sound;
 
             window.audioMonkey.add("forward", sound.ogg.url);
@@ -459,7 +459,7 @@
             window.audioMonkey.remove("forward");
         }//else
 
-        if(v.slip && v.slip.ogg!="" && (!Platform.isIE() || format == 'ogg')) {
+        if(v.slip && v.slip.ogg!="" && (!Platform.isIE() && format == 'ogg')) {
             var sound = v.slip;
 
             window.audioMonkey.add("slip", sound.ogg.url);
@@ -473,7 +473,7 @@
             window.audioMonkey.remove("slip");
         }//else
 
-        if(v.crashSound && v.crashSound.ogg!="" && (!Platform.isIE() || format == 'ogg')) {
+        if(v.crashSound && v.crashSound.ogg!="" && (!Platform.isIE() && format == 'ogg')) {
             var sound = v.crashSound;
 
             window.audioMonkey.add("vehicleCrash", sound.ogg.url);
@@ -485,7 +485,7 @@
         }//if
         else {
             //window.audioMonkey.remove("vehicleCrash");
-            if((!Platform.isIE() || format == 'ogg')) window.audioMonkey.add("vehicleCrash", window.SITE_URL+"/sounds/crashSound3.ogg");
+            if((!Platform.isIE() && format == 'ogg')) window.audioMonkey.add("vehicleCrash", window.SITE_URL+"/sounds/crashSound3.ogg");
             else window.audioMonkey.add("vehicleCrash", window.SITE_URL+"/sounds/crashSound3.mp3");
         }//else
 
