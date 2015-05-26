@@ -108,7 +108,7 @@ function Placemark(scene, lat, lng, name, url) {
 
         for(var i= 0, n=this.labels.length;i<n;i++) {
             var x = this.labels.get(i);
-            x.position = Cesium.Cartesian3.fromDegrees(lng, lat, 0);
+            x.position = Cesium.Cartesian3.fromDegrees(lng, lat, 5);
         }//for
 
         this.lat = lat;
@@ -127,7 +127,7 @@ function Placemark(scene, lat, lng, name, url) {
 
         for(var i= 0, n=this.labels.length;i<n;i++) {
             var x = this.labels.get(i);
-            x.position = Cesium.Cartesian3.fromDegrees(lng, lat, alt);
+            x.position = Cesium.Cartesian3.fromDegrees(lng, lat, alt+5);
         }//for
 
         this.lat = lat;
@@ -1160,11 +1160,17 @@ DrivingSimulator = function () {
         log("info", "drawOverlays", this.username);
 
         try {
+            if(!this.timeOverlay || resetRight) {
+                if(this.timeOverlay) this.timeOverlay.remove();
+                
+                this.timeOverlay = new SpriteNumber(this.scene, false, 25, false, 103, "");
+            }//if
+            
             if(this.vehicleData.showSpeed) {
                 if(!this.speedOverlay || resetRight) {
                     if(this.speedOverlay) this.speedOverlay.remove();
 
-                    var temp = this.vehicleData.maxspeed*4;
+                    var temp = (this.vehicleData.maxspeed)*4;
                     var counter = 1;
                     while((temp = parseInt(temp/10)) > 0) {
                         counter++;
@@ -1315,6 +1321,9 @@ DrivingSimulator = function () {
 
     this.removeOverlays = function() {
         try {
+            if(this.timeOverlay) this.timeOverlay.remove();
+            this.timeOverlay = null;
+            
             if(this.speedOverlay) this.speedOverlay.remove();
             this.speedOverlay = null;
 
@@ -1359,12 +1368,78 @@ DrivingSimulator = function () {
         //log("info", "Setup Frameend Handler");
 
         this.drawOverlays(true, true);
+        
+        this.loadPlacemarks();
 
         var that = this;
 
         this.viewer.clock.onTick.addEventListener($bind(this, this.update));
 
         //log("info", "onLoad end");
+    };
+    
+    this.loadPlacemarks = function () {
+        
+        var availableWidth = $('#placemarks').width();
+        this.widthPerPoi = 100 / window.POIS.length;
+        
+        this.minimapPlacemark = new Placemark(this.minimap.scene, window.lat, window.lon, false, window.SITE_URL+"/img/handglider.png");
+        this.minimapPlacemark.setVisibility(true);
+        
+        for(var i=0, n=window.POIS.length; i<n; i++) {
+            
+            var POI = window.POIS[i];
+            POI.latLng = new LatLng(POI.lat, POI.lon);
+            POI.startLatLng = POI.latLng.createOffset(-180, 500);
+            POI.placemark = new Placemark(this.scene, POI.lat, POI.lon, POI.label, window.SITE_URL+"/img/placemark.png");
+            POI.placemark.setVisibility(true);
+            POI.heading = POI.startLatLng.heading(POI.latLng)*180/Math.PI;
+            
+            POI.placemarkMinimap = new Placemark(this.minimap.scene, POI.lat, POI.lon, POI.label, window.SITE_URL+"/img/placemark.png");
+            POI.placemarkMinimap.setVisibility(true);
+            
+            $('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto('+POI.startLatLng.lat()+', '+POI.startLatLng.lng()+', '+POI.alt+', cesiumExplorer.physics.vehicle.speedKmh, '+POI.heading+');" id="'+POI.id+'" class="poi" style="width: '+this.widthPerPoi+'%"><p>'+POI.label+'</p><div><img class="not-visited" src="'+window.SITE_URL+"/img/placemark_outline.png"+'"/></div></a>');
+            
+        }//for
+        
+    };
+    
+    this.updateProgress = function () {
+        
+        var myLatLng = new LatLng(window.lat, window.lon);
+        
+        var progress = 0, updateProgress = false;
+        
+        for(var i=0, n=window.POIS.length; i<n; i++) {
+            
+            var POI = window.POIS[i];
+            
+            var height = this.getAltitude(POI.latLng, POI.id) + 10;
+            
+            POI.placemark.setLatLngAlt(POI.lat, POI.lon, height);
+            
+            var distance = POI.latLng.distance(myLatLng);
+            
+            //console.log('distance', distance, 'height', height);
+            
+            if(distance < 25) {
+                $('#'+POI.id).addClass('visited');
+                $('#'+POI.id).html('<p>'+POI.label+'</p><div><img class="visited" src="'+window.SITE_URL+"/img/placemark.png"+'"/></div>');
+                //progress += this.widthPerPoi;
+                updateProgress = true;
+            }//if
+            
+        }//for
+        
+        if(updateProgress) $('#progress').css('width', ($('.poi.visited').length*this.widthPerPoi)+'%');
+        
+        this.flightTime = (new Date()-this.gameStart) / 1000;
+        this.flightTimeSeconds = this.flightTime % 60;
+        this.flightTimeMinutes = (this.flightTime / 60) % 60;
+        this.flightTimeHours = this.flightTime / 60 / 60;
+        
+        this.minimapPlacemark.setLatLng(window.lat, window.lon);
+        
     };
 
     this.onReLoad = function () {
@@ -1506,13 +1581,13 @@ DrivingSimulator = function () {
         this.handbrake = 0;
 
     	if(this.vehicle.tiltOffset < 185) {
-    		this.throttle = 1;
+    		this.throttle = 1*window.speedMultiplier;
     	}//if
     	else if(this.vehicle.tiltOffset > 190) {
-    		this.throttle = -0.1;
+    		this.throttle = -0.1*window.speedMultiplier;
     	}//if
     	else {
-    		this.throttle = 0.3;
+    		this.throttle = 0.3*window.speedMultiplier;
     	}//else
     	
         if(!this.vehicle.airborne) {
@@ -1987,6 +2062,7 @@ DrivingSimulator = function () {
                     this.isSpawningDiv = false;
 
                     this.teleported = false;
+                    if(!this.gameStart) this.gameStart = new Date();
                 }//if
 
             this.isSpawning = false;
@@ -2025,7 +2101,7 @@ DrivingSimulator = function () {
     };
 
     this.handleSounds = function (deltaTime, speedKmh) {
-        var rate = speedKmh/this.vehicleData.maxspeed+this.vehicleData.soundMinimumRate;
+        var rate = speedKmh/(this.vehicleData.maxspeed)+this.vehicleData.soundMinimumRate;
 
         //log("info", rate);
         var distanceFactor = 0;
@@ -2036,21 +2112,34 @@ DrivingSimulator = function () {
 
         //console.log("handleSounds", 6);
 
-        var forwardVolume = Math3D.MyMath.clamp(speedKmh/this.vehicleData.maxspeed, window.defaultMinVolume/100, window.defaultMaxVolume/100)-distanceFactor;
+        var forwardVolume = Math3D.MyMath.clamp(speedKmh/(this.vehicleData.maxspeed), window.defaultMinVolume/100, window.defaultMaxVolume/100)-distanceFactor;
         if(forwardVolume < 0) forwardVolume = 0;
 
-        var slipVolume = Math3D.MyMath.clamp(speedKmh/this.vehicleData.maxspeed, window.defaultMinVolume/100, window.defaultMaxVolume/100)-distanceFactor;
+        var slipVolume = Math3D.MyMath.clamp(speedKmh/(this.vehicleData.maxspeed), window.defaultMinVolume/100, window.defaultMaxVolume/100)-distanceFactor;
         if(slipVolume < 0) slipVolume = 0;
 
         //console.log("handleSounds", 7);
 
         try {
-            window.audioMonkey.play("forward", speedKmh/this.vehicleData.maxspeed, 0, rate, true, this.vehicleData.soundLoopStart, this.vehicleData.soundLoopEnd, forwardVolume);
-            window.audioMonkey.volume("forward", forwardVolume);
+            window.audioMonkey.play("forward", speedKmh/(this.vehicleData.maxspeed), 0, rate, true, this.vehicleData.soundLoopStart, this.vehicleData.soundLoopEnd, forwardVolume);
+            window.audioMonkey.volume("forward", forwardVolume*0.5);
             window.audioMonkey.rate("forward", rate);
         } catch(err) {
             log("error", err);
         }
+
+        if(this.vehicle.tiltOffset != window.defaultTiltOffset || Math.abs(this.vehicleRoll.position) > 0.05) {
+            try {
+                window.audioMonkey.play("up", speedKmh/(this.vehicleData.maxspeed), 0, rate, true);
+                window.audioMonkey.volume("up", forwardVolume*1.5);
+                //window.audioMonkey.rate("up", rate);
+            } catch(err) {
+                log("error", err);
+            }
+        }//if
+        else {
+            window.audioMonkey.stop("up");
+        }//else
 
     };
 
@@ -2112,6 +2201,7 @@ DrivingSimulator = function () {
         this.updateRPMMeter(this.vehicle.getRPM());
         this.updateCompass(this.bodyModel.heading*180/Math.PI);
         this.updateAttitude(this.vehicleTilt.position.toDeg(), this.vehicleRoll.position.toDeg());
+        this.updateTimeMeter();
         
         if(!window.physics) return;
         var speedKmh = window.physics.absSpeed = this.vehicle.getSpeedKmh();
@@ -2120,6 +2210,8 @@ DrivingSimulator = function () {
 
         this.handleOverlays(deltaTimeLimited);
 
+        this.updateProgress();
+        
         //log("info", "batchedUpdate end");
     };
 
@@ -2347,8 +2439,8 @@ DrivingSimulator = function () {
                 if(window.audioMonkey) {
                     try {
                         window.audioMonkey.play("vehicleCrash", 0, 0, 1, false);
-                        window.audioMonkey.volume("vehicleCrash", 0.01+(this.vehicle.speedKmh/this.vehicleData.maxspeed));
-                        window.audioMonkey.rate("vehicleCrash", Math.min(0.5+(this.vehicle.speedKmh/this.vehicleData.maxspeed),1));
+                        window.audioMonkey.volume("vehicleCrash", 0.01+(this.vehicle.speedKmh/(this.vehicleData.maxspeed)));
+                        window.audioMonkey.rate("vehicleCrash", Math.min(0.5+(this.vehicle.speedKmh/(this.vehicleData.maxspeed)),1));
                     } catch(err) {
                         log("error", err);
                     }
@@ -2572,7 +2664,7 @@ DrivingSimulator = function () {
         var rollImpulse = (
                 (
                     this.vehicle.getSteeringAngle()*
-                    Math3D.MyMath.linearMap(this.vehicle.speed, 0, vehicle.Box2DUtils.toMps(this.vehicleData.maxspeed), 0, 10)*
+                    Math3D.MyMath.linearMap(this.vehicle.speed, 0, vehicle.Box2DUtils.toMps((this.vehicleData.maxspeed)), 0, 10)*
                     deltaTime*
                     this.vehicleData.steerroll
                 )*
@@ -2877,6 +2969,11 @@ DrivingSimulator = function () {
                new Cesium.HeadingPitchRange(target.cameraHeading, -(((Math.PI/2)-cameraTilt) - this.camera.tilt), 10)
             );
             
+            this.minimap.camera.lookAt(
+               position,
+               new Cesium.HeadingPitchRange(target.cameraHeading, -(((Math.PI/2)-cameraTilt) - this.camera.tilt), 5000)
+            );
+            
             var transform = this.camera.transform;
             this.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
             this.camera.heading = target.cameraHeading;
@@ -2888,6 +2985,26 @@ DrivingSimulator = function () {
 
             this.camera.twistLeft(cameraRoll);
         }//if
+    };
+    
+    this.updateTimeMeter = function () {
+        
+        try {
+            
+            var timeStr = '';
+            
+            if(parseInt(this.flightTimeHours)) timeStr += parseInt(this.flightTimeHours) + ' h ';
+            if(parseInt(this.flightTimeMinutes)) timeStr += parseInt(this.flightTimeMinutes) + ' m ';
+            if(parseInt(this.flightTimeSeconds)) timeStr += parseInt(this.flightTimeSeconds) + ' s';
+            
+            this.timeOverlay.setValue(timeStr);
+            
+        } catch (err) {
+            
+        }
+        
+        return;
+        
     };
 
     this.updateSpeedMeter = function (speedKmh, speedMph) {
@@ -2912,7 +3029,7 @@ DrivingSimulator = function () {
     this.updateAltitudeMeter = function (altitude) {
         try {
             if(this.altitudeOverlay) {
-                if(window.unit == "km") this.altitudeOverlay.setValue(parseInt(altitude));
+                if(window.unit.toLowerCase() == "km") this.altitudeOverlay.setValue(parseInt(altitude));
                 else this.altitudeOverlay.setValue(parseInt(altitude*3.28084));
             }//if
         } catch (err) {
@@ -3099,11 +3216,11 @@ cesiumExplorer.main = function (v) {
         geocoder: false,
         animation: false,
         scene3DOnly: true,
-	clock : new Cesium.Clock({ currentTime : currentTime }),
+        clock : new Cesium.Clock({ currentTime : currentTime }),
         imageryProvider: new Cesium.BingMapsImageryProvider({
             url : '//dev.virtualearth.net',
             key : Cesium.BingMapsApi.defaultKey,
-            mapStyle : Cesium.BingMapsStyle.AERIAL,
+            mapStyle : Cesium.BingMapsStyle.AERIAL_WITH_LABELS,
             hasAlphaChannel : false,
             defaultAlpha : 1.0
         })
@@ -3146,6 +3263,32 @@ cesiumExplorer.main = function (v) {
     cesiumExplorer.physics.ellipsoid = cesiumExplorer.physics.scene.globe.ellipsoid;
     cesiumExplorer.physics.camera = cesiumExplorer.physics.scene.camera;
     cesiumExplorer.physics.camera.constrainedAxis = undefined;
+
+
+    cesiumExplorer.physics.minimap = new Cesium.Viewer('minimap', {
+        homeButton: false,
+        baseLayerPicker: false,
+        infoBox: false,
+        sceneModePicker: false,
+        selectionIndicator: false,
+        timeline: false,
+        navigationHelpButton: false,
+        fullscreenButton: false,
+        navigationInstructionsInitiallyVisible: false,
+        geocoder: false,
+        animation: false,
+        scene3DOnly: false,
+        sceneMode: Cesium.SceneMode.SCENE2D,
+        clock : new Cesium.Clock({ currentTime : currentTime }),
+        imageryProvider: new Cesium.BingMapsImageryProvider({
+            url : '//dev.virtualearth.net',
+            key : Cesium.BingMapsApi.defaultKey,
+            mapStyle : Cesium.BingMapsStyle.AERIAL_WITH_LABELS,
+            hasAlphaChannel : false,
+            defaultAlpha : 1.0
+        })
+    });
+
 
     cesiumExplorer.physics.init(v);
 

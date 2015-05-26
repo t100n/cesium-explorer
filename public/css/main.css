@@ -263,11 +263,122 @@ header {
         text-decoration: none;
       }
 			
+      #minimap {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        
+        width: 120px;
+        height: 120px;
+        
+        background-color: #CCC;
+      }
+      
+      #minimap .cesium-viewer-bottom {
+        display: none;
+      }
+      
+      #path {
+        position: absolute;
+        left: 122px;
+        right: 200px;
+        top: 12px;
+        
+				background-color: rgba(255,255,255,0);
+				padding: 6px 12px;
+				color: #fff;
+        
+				border-radius: 0px;
+        text-decoration: none;
+        
+        height: 60px;
+      }
+      
+      #progress {
+        position: absolute;
+				border-top: 1px solid transparent;
+				border-bottom: 1px solid transparent;
+        
+        background-color: #dcc34e;
+        
+				border-radius: 0px;
+        
+        height: 6px;
+        
+				border-radius: 0px;
+        left: 0px;
+        bottom: 0px;
+        
+        width: 0%;
+      }
+			
+      #position {
+        position: absolute;
+				border-top: 1px solid #dcc34e;
+				border-bottom: 1px solid #dcc34e;
+        
+        height: 6px;
+        
+				border-radius: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+      }
+      
+      #placemarks {
+        position: absolute;
+        
+        left: 0px;
+        right: 0px;
+        bottom: 6px;
+      }
+      
+      #placemarks .poi {
+        display: inline-block;
+        color: #fff;
+        text-decoration: none;
+      }
+      
+      #placemarks .poi:active, 
+      #placemarks .poi:visited,
+      #placemarks .poi:hover {
+        color: #fff;
+        text-decoration: none;
+      }
+      
+      #placemarks .poi > p {
+        margin-bottom: 6px;
+        font-size: 11px;
+      }
+      
+      #placemarks img {
+        height: 24px;
+      }
+      
+      /*
+      #placemarks img.visited {
+        display: none;
+      }
+			
+      #placemarks .visited img.not-visited {
+        display: none;
+      }
+			
+      #placemarks .visited img.visited {
+        display: block;
+      }
+			*/
+      
 			#controls {
 				position: absolute;
 				left: 5px;
 				bottom: 50px;
+        color: #fff;
 			}
+      
+      .accel-container {
+        font-size: 11px;
+      }
 			
 			#controls button {
 				background-color: rgba(255,255,255,0);
@@ -707,4 +818,16 @@ b {
   box-shadow: inset 0 1px 0 #fff,0 1px 0 #ccc;
   margin-bottom: 6px;
   margin-right: 3px;
+}
+
+@media(max-width: 420px) {
+  
+      #map3d .cesium-viewer-bottom {
+        display: none;
+      }
+      
+      #controls {
+        bottom: 5px;
+      }
+      
 }

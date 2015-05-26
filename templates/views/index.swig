@@ -23,7 +23,24 @@
 				<a id="restart" href="#"><i class="fa fa-repeat"></i></a>
 			</div>
 			
+			<div id="path">
+				<div id="placemarks"></div>
+									
+				<div id="progress"></div>
+				<div id="position"></div>
+			</div>
+			
+			<div id="minimap">
+			</div>
+			
 			<div id="controls">
+				<div class="row">
+					<div class="accel-container">
+						<p>Aceleração</p>
+						<span>min </span><input id="accel-multiplier" type="range" name="points" min="1" max="5" value="1"><span> máx</span>
+					</div>
+				</div>
+				
 				<div class="row">
 					<button id="up">Cima</button>
 				</div>
@@ -136,18 +153,18 @@
 
 		</div>
 		
-		<script type="text/javascript" src="/js/jquery.min.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/mousetrap.min.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/EventEmitter.min.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/attitude_indicator.min.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/variables.min.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/latlon_v1.min.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/gamepad.min.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/audioMonkey.min.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/box2d.min.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/math3d.min.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/vehicle.min.js?{{version}}"></script>
-		<script type="text/javascript" src="/js/physics.min.js?{{version}}"></script>
+		<script type="text/javascript" src="/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/mousetrap.min.js"></script>
+		<script type="text/javascript" src="/js/EventEmitter.min.js"></script>
+		<script type="text/javascript" src="/js/attitude_indicator.min.js"></script>
+		<script type="text/javascript" src="/js/variables.min.js"></script>
+		<script type="text/javascript" src="/js/latlon_v1.min.js"></script>
+		<script type="text/javascript" src="/js/gamepad.min.js"></script>
+		<script type="text/javascript" src="/js/audioMonkey.min.js"></script>
+		<script type="text/javascript" src="/js/box2d.min.js"></script>
+		<script type="text/javascript" src="/js/math3d.min.js"></script>
+		<script type="text/javascript" src="/js/vehicle.js"></script>
+		<script type="text/javascript" src="/js/physics.js"></script>
 		<script type="text/javascript" src="/js/Cesium/Cesium.js"></script>
 		<script>
 			$('#options').click(function(e) {
@@ -223,9 +240,23 @@
 				cesiumExplorer.goto(window.defaultLat, window.defaultLon, window.defaultAlt, window.defaultSpeed, window.defaultHeading);
 			});
 			
+			$('#accel-multiplier').on('change', function(e) {
+				window.speedMultiplier = $(this).val();
+				$(this).blur();
+			});
+			
 			var format = (new Audio().canPlayType('audio/ogg') !== '' ? 'ogg' : 'mp3');
 			
-			window.SITE_URL = 'http://andresantos.cloudapp.net';
+			window.POIS = [
+				{ id: 'centro', lat: -22.907132, lon: -43.182110, alt: 55, heading: 0, label: 'Centro' },
+				{ id: 'copacabana', lat: -22.972560, lon: -43.184092, alt: 55, heading: 0, label: 'Copacabana' },
+				{ id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 55, heading: 0, label: 'Maracanã' },
+				{ id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 55, heading: 0, label: 'Barra da Tijuca' },
+				{ id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 55, heading: 0, label: 'Deodoro' }
+			];
+			
+			//window.SITE_URL = 'http://andresantos.cloudapp.net';
+			window.SITE_URL = 'http://localhost:3000';
 			
 			window.userId = "ojogador";
 			window.isExploring = true;
@@ -240,6 +271,8 @@
 			window.audioMonkey = new AudioMonkey();
 			
 			window.audioMonkey.init();
+			
+			window.speedMultiplier = $('#accel-multiplier').val();
 			
 			// Physics initial data
 			window.unit = 'Km';
@@ -438,6 +471,19 @@
 			window.defaultMaxVolume = window.maxVolume = v.maxVolume ? v.maxVolume : 80;
 			
 			try {
+						if((!Platform.isIE() && format == 'ogg')) {
+							window.audioMonkey.add("up", '/sounds/wind_up.ogg');
+						}//if
+						else {
+							window.audioMonkey.add("up", '/sounds/wind_up.mp3');
+						}//else
+						if((!Platform.isIE() && format == 'ogg')) {
+							window.audioMonkey.add("down", '/sounds/wind_down.ogg');
+						}//if
+						else {
+							window.audioMonkey.add("down", '/sounds/wind_down.mp3');
+						}//else
+						
         if(v.sound && v.sound.ogg!="" && (!Platform.isIE() && format == 'ogg')) {
             var sound = v.sound;
 
