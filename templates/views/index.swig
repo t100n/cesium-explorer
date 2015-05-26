@@ -248,11 +248,23 @@
 			var format = (new Audio().canPlayType('audio/ogg') !== '' ? 'ogg' : 'mp3');
 			
 			window.POIS = [
-				{ id: 'centro', lat: -22.907132, lon: -43.182110, alt: 55, heading: 0, label: 'Centro' },
+				{ id: 'centro', lat: -22.906948, lon: -43.182830, alt: 55, heading: 0, label: 'Centro' },
 				{ id: 'copacabana', lat: -22.972560, lon: -43.184092, alt: 55, heading: 0, label: 'Copacabana' },
 				{ id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 55, heading: 0, label: 'Maracanã' },
 				{ id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 55, heading: 0, label: 'Barra da Tijuca' },
 				{ id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 55, heading: 0, label: 'Deodoro' }
+			];
+			
+			window.POISPOLYLINE = [
+				{ id: 'centro', lat: -22.906948, lon: -43.182830, alt: 200, heading: 0, label: 'Centro' },
+				{ id: 'centro_copacabana', lat: -22.952560, lon: -43.183092, alt: 300, heading: 0, label: '' },
+				{ id: 'copacabana', lat: -22.972560, lon: -43.184092, alt: 150, heading: 0, label: 'Copacabana' },
+				{ id: 'copacabana_maracana', lat: -22.952134, lon: -43.210128, alt: 600, heading: 0, label: '' },
+				{ id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 50, heading: 0, label: 'Maracanã' },
+				{ id: 'maracana_barra-da-tijuca', lat: -22.950138, lon: -43.306109, alt: 900, heading: 0, label: '' },
+				{ id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 50, heading: 0, label: 'Barra da Tijuca' },
+				{ id: 'barra-da-tijuca_deodoro', lat: -22.956096, lon: -43.375161, alt: 250, heading: 0, label: '' },
+				{ id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 50, heading: 0, label: 'Deodoro' }
 			];
 			
 			//window.SITE_URL = 'http://andresantos.cloudapp.net';
@@ -276,9 +288,9 @@
 			
 			// Physics initial data
 			window.unit = 'Km';
-			window.defaultLat = window.lat = -22.888286010415;
-			window.defaultLon = window.lon = -43.17069974208982;
-			window.defaultAlt = window.alt = 400;
+			window.defaultLat = window.lat = -22.899599; //-22.888286010415;
+			window.defaultLon = window.lon = -43.183192; //-43.17069974208982;
+			window.defaultAlt = window.alt = 150; //400;
 			window.defaultSpeed = window.speed = 100;
 			window.defaultHeading = window.heading = 180;
 			window.defaultTilt = window.tilt = -0.0014993722426054328;

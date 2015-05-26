@@ -1370,7 +1370,7 @@ DrivingSimulator = function () {
         this.drawOverlays(true, true);
         
         this.loadPlacemarks();
-
+        
         var that = this;
 
         this.viewer.clock.onTick.addEventListener($bind(this, this.update));
@@ -1385,6 +1385,9 @@ DrivingSimulator = function () {
         
         this.minimapPlacemark = new Placemark(this.minimap.scene, window.lat, window.lon, false, window.SITE_URL+"/img/handglider.png");
         this.minimapPlacemark.setVisibility(true);
+        
+        var times = [];
+        var points = [];
         
         for(var i=0, n=window.POIS.length; i<n; i++) {
             
@@ -1402,6 +1405,64 @@ DrivingSimulator = function () {
             
         }//for
         
+        for(var i=0, n=window.POISPOLYLINE.length; i<n; i++) {
+            
+            var POI = window.POISPOLYLINE[i];
+            times.push(parseFloat(i+""));
+            
+            var position = Cesium.Cartesian3.fromDegrees(POI.lon, POI.lat, POI.alt);
+            
+            //console.log(alt, position);
+            points.push(position);
+            
+        }//for
+        
+        this.spline = new Cesium.CatmullRomSpline({
+            times : times, //[ 0.0, 1.5, 3.0, 4.5, 6.0 ],
+            points : points /*[
+                new Cesium.Cartesian3(1235398.0, -4810983.0, 4146266.0),
+                new Cesium.Cartesian3(1372574.0, -5345182.0, 4606657.0),
+                new Cesium.Cartesian3(-757983.0, -5542796.0, 4514323.0),
+                new Cesium.Cartesian3(-2821260.0, -5248423.0, 4021290.0),
+                new Cesium.Cartesian3(-2539788.0, -4724797.0, 3620093.0)
+            ]*/
+        });
+        
+        var path = [];
+        var i=0, n=window.POISPOLYLINE.length-1;
+        
+        while(i<n) {
+            path.push(this.spline.evaluate(i));
+            
+            i += 0.1;
+        }//for
+        
+        Cesium.Color.PURPLE.red = 221;
+        Cesium.Color.PURPLE.green = 25;
+        Cesium.Color.PURPLE.blue = 121;
+        
+        this.viewer.entities.add({
+            polyline : {
+                positions : path,
+                width : 10,
+                material : new Cesium.PolylineGlowMaterialProperty({
+                    color : Cesium.Color.PURPLE,
+                    glowPower: 0.2
+                })
+            }
+        });
+        
+        this.minimap.entities.add({
+            polyline : {
+                positions : path,
+                width : 10,
+                material : new Cesium.PolylineGlowMaterialProperty({
+                    color : Cesium.Color.PURPLE,
+                    glowPower: 0.2
+                })
+            }
+        });
+        
     };
     
     this.updateProgress = function () {
@@ -1414,7 +1475,9 @@ DrivingSimulator = function () {
             
             var POI = window.POIS[i];
             
-            var height = this.getAltitude(POI.latLng, POI.id) + 10;
+            var height = this.getAltitude(POI.latLng, POI.id);
+            
+            if(!POI.placemark) continue;
             
             POI.placemark.setLatLngAlt(POI.lat, POI.lon, height);
             
@@ -1422,7 +1485,7 @@ DrivingSimulator = function () {
             
             //console.log('distance', distance, 'height', height);
             
-            if(distance < 25) {
+            if(distance < 200) {
                 $('#'+POI.id).addClass('visited');
                 $('#'+POI.id).html('<p>'+POI.label+'</p><div><img class="visited" src="'+window.SITE_URL+"/img/placemark.png"+'"/></div>');
                 //progress += this.widthPerPoi;
@@ -1438,7 +1501,7 @@ DrivingSimulator = function () {
         this.flightTimeMinutes = (this.flightTime / 60) % 60;
         this.flightTimeHours = this.flightTime / 60 / 60;
         
-        this.minimapPlacemark.setLatLng(window.lat, window.lon);
+        if(this.minimapPlacemark) this.minimapPlacemark.setLatLng(window.lat, window.lon);
         
     };
 
@@ -2062,7 +2125,9 @@ DrivingSimulator = function () {
                     this.isSpawningDiv = false;
 
                     this.teleported = false;
-                    if(!this.gameStart) this.gameStart = new Date();
+                    if(!this.gameStart) {
+                        this.gameStart = new Date();
+                    }//if
                 }//if
 
             this.isSpawning = false;
@@ -2084,7 +2149,7 @@ DrivingSimulator = function () {
         if(this.vehicleData.mainCategory == "air") {
             if(this.vehicle.tilt > 0.5 || (this.vehicle.isHoverAbsoluteCeiling && this.vehicle.tilt > 0.1)) {
                 if(this.stallOverlay) this.stallOverlay.remove();
-                this.stallOverlay = new Text(this.scene, $('#map3d').width()/2-26, false, 53, false, "STALL");
+                this.stallOverlay = new Text(this.scene, $('#map3d').width()/2-26, false, 103, false, "STALL");
                 this.stallOverlay.unitContainer.css('padding-left','0px');
                 this.stallOverlay.unitContainer.css('font-weight','800');
 
