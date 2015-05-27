@@ -242,6 +242,9 @@ header {
 				height: 100vh;
 				position: relative;
 				overflow: hidden;
+        background-image: url('/img/background.png');
+        background-size: cover;
+        background-position: 50%;
 			}
       
       #map3d-container, #map3d {

@@ -94,6 +94,11 @@
 			                            </div>
 										
 			                            <div style="min-height: 35px">
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">v</b></div>
+			                                <div>Piloto Automático</div>
+			                            </div>
+										
+			                            <div style="min-height: 35px">
 			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">o</b></div>
 			                                <div>Instrumentos de orientação</div>
 			                            </div>
@@ -157,9 +162,9 @@
 		<script type="text/javascript" src="/js/mousetrap.min.js"></script>
 		<script type="text/javascript" src="/js/EventEmitter.min.js"></script>
 		<script type="text/javascript" src="/js/attitude_indicator.min.js"></script>
-		<script type="text/javascript" src="/js/variables.min.js"></script>
+		<script type="text/javascript" src="/js/variables.js"></script>
 		<script type="text/javascript" src="/js/latlon_v1.min.js"></script>
-		<script type="text/javascript" src="/js/gamepad.min.js"></script>
+		<script type="text/javascript" src="/js/gamepad.js"></script>
 		<script type="text/javascript" src="/js/audioMonkey.min.js"></script>
 		<script type="text/javascript" src="/js/box2d.min.js"></script>
 		<script type="text/javascript" src="/js/math3d.min.js"></script>
@@ -258,12 +263,21 @@
 			window.POISPOLYLINE = [
 				{ id: 'centro', lat: -22.906948, lon: -43.182830, alt: 200, heading: 0, label: 'Centro' },
 				{ id: 'centro_copacabana', lat: -22.952560, lon: -43.183092, alt: 300, heading: 0, label: '' },
-				{ id: 'copacabana', lat: -22.972560, lon: -43.184092, alt: 150, heading: 0, label: 'Copacabana' },
-				{ id: 'copacabana_maracana', lat: -22.952134, lon: -43.210128, alt: 600, heading: 0, label: '' },
-				{ id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 50, heading: 0, label: 'Maracanã' },
-				{ id: 'maracana_barra-da-tijuca', lat: -22.950138, lon: -43.306109, alt: 900, heading: 0, label: '' },
+				{ id: 'copacabana', lat: -22.972560, lon: -43.184092, alt: 250, heading: 0, label: 'Copacabana' },
+				{ id: 'copacabana_maracana_1', lat: -22.977084, lon: -43.194288, alt: 350, heading: 0, label: '' },
+				{ id: 'copacabana_maracana_2', lat: -22.971717, lon: -43.210723, alt: 500, heading: 0, label: '' },
+				{ id: 'copacabana_maracana_3', lat: -22.957938, lon: -43.219971, alt: 700, heading: 0, label: '' },
+				{ id: 'copacabana_maracana_4', lat: -22.943529, lon: -43.220543, alt: 700, heading: 0, label: '' },
+				{ id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 100, heading: 0, label: 'Maracanã' },
+				{ id: 'maracana_barra-da-tijuca_1', lat: -22.882544, lon: -43.330298, alt: 200, heading: 0, label: '' },
+				{ id: 'maracana_barra-da-tijuca_2', lat: -22.895890, lon: -43.362829, alt: 350, heading: 0, label: '' },
+				{ id: 'maracana_barra-da-tijuca_3', lat: -22.946299, lon: -43.371842, alt: 150, heading: 0, label: '' },
 				{ id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 50, heading: 0, label: 'Barra da Tijuca' },
-				{ id: 'barra-da-tijuca_deodoro', lat: -22.956096, lon: -43.375161, alt: 250, heading: 0, label: '' },
+				{ id: 'barra-da-tijuca_deodoro_1', lat: -23.008053, lon: -43.374067, alt: 150, heading: 0, label: '' },
+				{ id: 'barra-da-tijuca_deodoro_2', lat: -23.000412, lon: -43.391372, alt: 250, heading: 0, label: '' },
+				{ id: 'barra-da-tijuca_deodoro_3', lat: -22.972589, lon: -43.409063, alt: 250, heading: 0, label: '' },
+				{ id: 'barra-da-tijuca_deodoro_4', lat: -22.944587, lon: -43.387152, alt: 300, heading: 0, label: '' },
+				{ id: 'barra-da-tijuca_deodoro_5', lat: -22.915946, lon: -43.360929, alt: 350, heading: 0, label: '' },
 				{ id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 50, heading: 0, label: 'Deodoro' }
 			];
 			

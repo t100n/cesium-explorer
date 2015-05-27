@@ -17,6 +17,7 @@ function Gamepad(keybindings) {
         cruiseControl: 8,
         compass: 15,
         fps: 16,
+        autopilot: 17,
         pause: 9,
         tiltUp: 6,
         tiltDown: 7,
@@ -40,6 +41,7 @@ function Gamepad(keybindings) {
     this.cruiseControl = 0;
     this.compass = 0;
     this.fps = 0;
+    this.autopilot = 0;
     this.automatic = 0;
     this.gearUp = 0;
     this.gearDown = 0;
@@ -149,6 +151,7 @@ function Gamepad(keybindings) {
         this.cruiseControl = 0;
         this.compass = 0;
         this.fps = 0;
+        this.autopilot = 0;
         this.automatic = 0;
         this.gearUp = 0;
         this.gearDown = 0;
@@ -218,6 +221,9 @@ function Gamepad(keybindings) {
             }//if
             if(this.keybindings.gamepad.fps.type == "button" && this.keybindings.gamepad.fps.key == j) {
                 this.fps = 1;
+            }//if
+            if(this.keybindings.gamepad.autopilot.type == "button" && this.keybindings.gamepad.autopilot.key == j) {
+                this.autopilot = 1;
             }//if
             if(this.keybindings.gamepad.automatic.type == "button" && this.keybindings.gamepad.automatic.key == j) {
                 this.automatic = 1;
@@ -311,6 +317,9 @@ function Gamepad(keybindings) {
             if(this.keybindings.gamepad.fps.type == "axis" && this.keybindings.gamepad.fps.key == k) {
                 this.fps = controller.axes[k];
             }//if
+            if(this.keybindings.gamepad.autopilot.type == "axis" && this.keybindings.gamepad.autopilot.key == k) {
+                this.autopilot = controller.axes[k];
+            }//if
             if(this.keybindings.gamepad.automatic.type == "axis" && this.keybindings.gamepad.automatic.key == k) {
                 this.automatic = controller.axes[k];
             }//if
@@ -382,6 +391,10 @@ function Gamepad(keybindings) {
 
     this.getFps = function() {
         return this.fps;
+    };
+
+    this.getAutopilot = function() {
+        return this.autopilot;
     };
 
     this.getAutomatic = function() {

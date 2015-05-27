@@ -547,6 +547,7 @@ window.keybindings = {
 	"gamepad":{
         "pause":{"key":9,"type":"button"},
         "fps":{"key":16,"type":"button"},
+        "autopilot":{"key":17,"type":"button"},
         "compass":{"key":15,"type":"button"},
         "camera":{"key":0,"type":"button"},
         "lookBack":{"key":2,"type":"button"},
@@ -561,6 +562,7 @@ window.keybindings = {
 		"throttle":{"key":7,"type":"button"}
 	},
 	"keyboard":{
+        "autopilot":"v",
         "pause":"p",
         "fps":"u",
         "compass":"o",
