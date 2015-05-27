@@ -256,8 +256,8 @@
 				{ id: 'centro', lat: -22.906948, lon: -43.182830, alt: 55, heading: 0, label: 'Centro' },
 				{ id: 'copacabana', lat: -22.972560, lon: -43.184092, alt: 55, heading: 0, label: 'Copacabana' },
 				{ id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 55, heading: 0, label: 'Maracanã' },
-				{ id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 55, heading: 0, label: 'Barra da Tijuca' },
-				{ id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 55, heading: 0, label: 'Deodoro' }
+				{ id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 55, heading: 0, label: 'Deodoro' },
+				{ id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 55, heading: 0, label: 'Barra da Tijuca' }
 			];
 			
 			window.POISPOLYLINE = [
@@ -267,18 +267,17 @@
 				{ id: 'copacabana_maracana_1', lat: -22.977084, lon: -43.194288, alt: 350, heading: 0, label: '' },
 				{ id: 'copacabana_maracana_2', lat: -22.971717, lon: -43.210723, alt: 500, heading: 0, label: '' },
 				{ id: 'copacabana_maracana_3', lat: -22.957938, lon: -43.219971, alt: 700, heading: 0, label: '' },
-				{ id: 'copacabana_maracana_4', lat: -22.943529, lon: -43.220543, alt: 700, heading: 0, label: '' },
-				{ id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 100, heading: 0, label: 'Maracanã' },
-				{ id: 'maracana_barra-da-tijuca_1', lat: -22.882544, lon: -43.330298, alt: 200, heading: 0, label: '' },
-				{ id: 'maracana_barra-da-tijuca_2', lat: -22.895890, lon: -43.362829, alt: 350, heading: 0, label: '' },
-				{ id: 'maracana_barra-da-tijuca_3', lat: -22.946299, lon: -43.371842, alt: 150, heading: 0, label: '' },
-				{ id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 50, heading: 0, label: 'Barra da Tijuca' },
-				{ id: 'barra-da-tijuca_deodoro_1', lat: -23.008053, lon: -43.374067, alt: 150, heading: 0, label: '' },
-				{ id: 'barra-da-tijuca_deodoro_2', lat: -23.000412, lon: -43.391372, alt: 250, heading: 0, label: '' },
-				{ id: 'barra-da-tijuca_deodoro_3', lat: -22.972589, lon: -43.409063, alt: 250, heading: 0, label: '' },
-				{ id: 'barra-da-tijuca_deodoro_4', lat: -22.944587, lon: -43.387152, alt: 300, heading: 0, label: '' },
-				{ id: 'barra-da-tijuca_deodoro_5', lat: -22.915946, lon: -43.360929, alt: 350, heading: 0, label: '' },
-				{ id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 50, heading: 0, label: 'Deodoro' }
+				{ id: 'copacabana_maracana_4', lat: -22.943529, lon: -43.220543, alt: 800, heading: 0, label: '' },
+				{ id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 150, heading: 0, label: 'Maracanã' },
+				{ id: 'maracana_deodoro_1', lat: -22.877181, lon: -43.293723, alt: 300, heading: 0, label: '' },
+				{ id: 'maracana_deodoro_2', lat: -22.850427, lon: -43.336085, alt: 200, heading: 0, label: '' },
+				{ id: 'maracana_deodoro_3', lat: -22.851215, lon: -43.370183, alt: 150, heading: 0, label: '' },
+				{ id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 100, heading: 0, label: 'Deodoro' },
+				{ id: 'deodoro-barra-da-tijuca_1', lat: -22.869822, lon: -43.396160, alt: 250, heading: 0, label: '' },
+				{ id: 'deodoro-barra-da-tijuca_2', lat: -22.888635, lon: -43.375008, alt: 350, heading: 0, label: '' },
+				{ id: 'deodoro-barra-da-tijuca_3', lat: -22.921269, lon: -43.363363, alt: 450, heading: 0, label: '' },
+				{ id: 'deodoro-barra-da-tijuca_4', lat: -22.953611, lon: -43.368828, alt: 150, heading: 0, label: '' },
+				{ id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 50, heading: 0, label: 'Barra da Tijuca' }
 			];
 			
 			//window.SITE_URL = 'http://andresantos.cloudapp.net';
