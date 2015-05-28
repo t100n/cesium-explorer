@@ -1579,7 +1579,7 @@ DrivingSimulator = function () {
         this.flightTimeMinutes = (this.flightTime / 60) % 60;
         this.flightTimeHours = this.flightTime / 60 / 60;
         
-        if(this.minimapPlacemark) this.minimapPlacemark.setLatLng(window.lat, window.lon);
+        if(this.minimapPlacemark) this.minimapPlacemark.setLatLngAlt(window.lat, window.lon, this.vehicleAltitude.position);
         
     };
 
