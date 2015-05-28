@@ -332,7 +332,7 @@ header {
       #progress_glider img {
         position: absolute;
         top: 14px;
-        left: -15px;
+        left: -10px;
         height: 14px;
         
         -ms-transform: rotate(90deg);
