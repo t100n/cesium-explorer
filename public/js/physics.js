@@ -1400,6 +1400,8 @@ DrivingSimulator = function () {
     
     this.loadPlacemarks = function () {
         
+        var currentPosition = Cesium.Cartesian3.fromDegrees(this.vehiclePosition.lng(), this.vehiclePosition.lat(), this.vehicleAltitude.position, this.scene.globe.ellipsoid, new Cesium.Cartesian3());
+        
         var availableWidth = $('#placemarks').width();
         this.widthPerPoi = 100 / window.POIS.length;
         
@@ -1408,6 +1410,18 @@ DrivingSimulator = function () {
         
         var times = [];
         var points = [];
+        
+        this.totalDistance = 0;
+        
+        for(var i=0, n=window.POIS.length; i<n; i++) {
+            
+            var POI = window.POIS[i];
+            var position = Cesium.Cartesian3.fromDegrees(POI.lon, POI.lat, POI.alt, this.scene.globe.ellipsoid, new Cesium.Cartesian3());
+            
+            var distance = Cesium.Cartesian3.distance(position, currentPosition);
+            this.totalDistance += distance;
+            
+        }//for
         
         for(var i=0, n=window.POIS.length; i<n; i++) {
             
@@ -1421,7 +1435,14 @@ DrivingSimulator = function () {
             POI.placemarkMinimap = new Placemark(this.minimap.scene, POI.lat, POI.lon, POI.label, window.SITE_URL+"/img/placemark.png");
             POI.placemarkMinimap.setVisibility(true);
             
-            $('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto('+POI.startLatLng.lat()+', '+POI.startLatLng.lng()+', '+POI.alt+', cesiumExplorer.physics.vehicle.speedKmh, '+POI.heading+');" id="'+POI.id+'" class="poi" style="width: '+this.widthPerPoi+'%"><p>'+POI.label+'</p><div><img class="not-visited" src="'+window.SITE_URL+"/img/placemark_outline.png"+'"/></div></a>');
+            //var position = Cesium.Cartesian3.fromDegrees(POI.lon, POI.lat, POI.alt, this.scene.globe.ellipsoid, new Cesium.Cartesian3());
+            
+            //var distance = Cesium.Cartesian3.distance(position, currentPosition);
+            //POI.widthPerPoi = (distance / this.totalDistance) * 100;
+            
+            $('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto('+POI.startLatLng.lat()+', '+POI.startLatLng.lng()+', '+POI.alt+', cesiumExplorer.physics.vehicle.speedKmh, '+POI.heading+');" id="'+POI.id+'" class="poi"><p>'+POI.label+'</p><div><img class="not-visited" src="'+window.SITE_URL+"/img/placemark_outline.png"+'"/></div></a>');
+            
+            //$('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto('+POI.startLatLng.lat()+', '+POI.startLatLng.lng()+', '+POI.alt+', cesiumExplorer.physics.vehicle.speedKmh, '+POI.heading+');" id="'+POI.id+'" class="poi" style="width: '+this.widthPerPoi+'%"><p>'+POI.label+'</p><div><img class="not-visited" src="'+window.SITE_URL+"/img/placemark_outline.png"+'"/></div></a>');
             
         }//for
         
@@ -1434,8 +1455,32 @@ DrivingSimulator = function () {
             
             //console.log(alt, position);
             points.push(position);
-            
         }//for
+        
+        var i = 0, widthSum = 0;
+        
+        while(i<=window.POISPOLYLINE.length) {
+            
+            var POI = parseInt(i*10)%10 == 0 ? window.POISPOLYLINE[parseInt(i)] : false;
+            
+            var elWidth = Math.ceil(((i*10) / (window.POISPOLYLINE.length*10))*100);
+            $('#placemarks #'+POI.id).css('left', Math.ceil(((i*10) / ((window.POISPOLYLINE.length-2)*10))*100)+'%');
+            
+            /*
+            if(POI && POI.label != "") {
+                
+                var rWidth = widthSum > 0 ? (widthSum+elWidth)-elWidth : elWidth;
+                
+                $('#placemarks #'+POI.id).css('width', rWidth+'%');
+                
+                widthSum+=rWidth;
+                
+            }//if
+            */
+            
+            i+=0.1;
+            
+        }//while
         
         this.spline = new Cesium.CatmullRomSpline({
             times : times, //[ 0.0, 1.5, 3.0, 4.5, 6.0 ],
@@ -1485,7 +1530,11 @@ DrivingSimulator = function () {
         
     };
     
+    this.currentPOI = -1;
+    this.currentProgress = 0;
     this.updateProgress = function () {
+        
+        var currentPosition = Cesium.Cartesian3.fromDegrees(this.vehiclePosition.lng(), this.vehiclePosition.lat(), this.vehicleAltitude.position, this.scene.globe.ellipsoid, new Cesium.Cartesian3());
         
         var myLatLng = new LatLng(window.lat, window.lon);
         
@@ -1506,15 +1555,24 @@ DrivingSimulator = function () {
             //console.log('distance', distance, 'height', height);
             
             if(distance < 200) {
+                
+                if(this.currentPOI != i) window.audioMonkey.play(POI.id, 0, 0, 1, false);
+                this.currentPOI = i;
+                
                 $('#'+POI.id).addClass('visited');
                 $('#'+POI.id).html('<p>'+POI.label+'</p><div><img class="visited" src="'+window.SITE_URL+"/img/placemark.png"+'"/></div>');
-                //progress += this.widthPerPoi;
+                
+                //progress += POI.widthPerPoi;
                 updateProgress = true;
+                
             }//if
+            /*else if(i < this.currentPOI) {
+                progress += POI.widthPerPoi;
+            }//else*/
             
         }//for
         
-        if(updateProgress) $('#progress').css('width', ($('.poi.visited').length*this.widthPerPoi)+'%');
+        //if(updateProgress) $('#progress').css('width', ($('.poi.visited').length*this.widthPerPoi)+'%');
         
         this.flightTime = (new Date()-this.gameStart) / 1000;
         this.flightTimeSeconds = this.flightTime % 60;
@@ -1685,7 +1743,7 @@ DrivingSimulator = function () {
             this.throttle = 0;
         }//if
         
-        if(this.spline && this.showAutopilot) {
+        if(this.spline) {
             var currentPosition = Cesium.Cartesian3.fromDegrees(this.vehiclePosition.lng(), this.vehiclePosition.lat(), this.vehicleAltitude.position, this.scene.globe.ellipsoid, new Cesium.Cartesian3());
             
             var i= this.lastIndex ? this.lastIndex : 0;
@@ -1693,14 +1751,14 @@ DrivingSimulator = function () {
             var closestDistance = false;
             var closestAngle = false;
             
-            while(i<window.POISPOLYLINE.length) {
+            while(i<=window.POISPOLYLINE.length) {
                 
                 var position = this.spline.evaluate(i);
                 
                 var distance = Cesium.Cartesian3.distance(position, currentPosition);
                 var angle = Cesium.Cartesian3.angleBetween(position, currentPosition);
                 
-                if((!closestPosition || distance < closestDistance) && distance > 200) {
+                if((!closestPosition || distance < closestDistance) && distance > 300) {
                     closestPosition = position;
                     closestDistance = distance;
                     closestAngle = angle;
@@ -1711,118 +1769,125 @@ DrivingSimulator = function () {
                 
             }//while
             
-            var cPosition = Cesium.Ellipsoid.WGS84.cartesianToCartographic(closestPosition);
-            var position = new LatLng(cPosition.latitude*57.2957795, cPosition.longitude*57.2957795);
+            var cIndex = this.lastIndex > (window.POISPOLYLINE.length-2) ? (window.POISPOLYLINE.length-2) : this.lastIndex;
+            $('#progress').css('width', Math.ceil(((cIndex*10) / ((window.POISPOLYLINE.length-2)*10))*100)+'%');
+            $('#progress_glider').css('left', Math.ceil(((cIndex*10) / ((window.POISPOLYLINE.length-2)*10))*100)+'%');
             
-            var myCPosition = new LatLng(window.lat, window.lon);
-            var mPangle = position.heading(myCPosition);
-            var angle = myCPosition.heading(position);
-            
-            /*
-            if(this.currentPositionPlacemark) {
-                this.currentPositionPlacemark.setLatLngAlt(cPosition.latitude*57.2957795, cPosition.longitude*57.2957795, this.vehicleAltitude.position);
-            }//if
-            else {
-                this.currentPositionPlacemark = new Placemark(this.scene, cPosition.latitude*57.2957795, cPosition.longitude*57.2957795, "Current Target", window.SITE_URL+"/img/my_marker.png");
-                this.currentPositionPlacemark.setVisibility(true);
-            }//else
-            */
-            
-            var heading = Math3D.Angle.wrap(this.getVehicleHeading());
-            var bHeading = Math3D.MyMath.linearMap(heading, -Math.PI, Math.PI, 0, Math.PI);
-            var angle = Math3D.MyMath.linearMap(angle, -Math.PI, Math.PI, 0, Math.PI);
-            //var angle = Math3D.MyMath.linearMap(this.bodyModel.heading, -Math.PI, Math.PI, -Math.PI/2, Math.PI/2);
-            
-            var headingOffset = Math.abs(angle-bHeading);
-            var diff = angle-bHeading;
-            
-            //console.log('offset', headingOffset, 'v heading', bHeading, 'heading', angle, 'diff', diff);
-            //console.log(this.bodyModel.heading, this.bodyModel.heading-angle, Math.abs(this.bodyModel.heading - (this.bodyModel.heading-angle)));
-            
-            if( (this.direction > 0 || diff > 0) && Math.abs(diff) < Math.PI/2) {
-                if(diff < 0.1) this.direction = 0;
-                else if(diff > 1.5) this.direction = 1;
+            if(this.showAutopilot) {
+                var cPosition = Cesium.Ellipsoid.WGS84.cartesianToCartographic(closestPosition);
+                var position = new LatLng(cPosition.latitude*57.2957795, cPosition.longitude*57.2957795);
                 
-                //console.log('diff', diff, 1);
+                var myCPosition = new LatLng(window.lat, window.lon);
+                var mPangle = position.heading(myCPosition);
+                var angle = myCPosition.heading(position);
                 
-                if(Math.abs(this.vehicleRoll.position) < 2.5) {
-                    if(diff < 2.7) {
-                        this.steeringDelta = headingOffset;
-                    }//if
-                    else {
-                        this.steeringDelta = headingOffset*0.1;
-                    }//else
+                /*
+                //console.log(closestDistance);
+                if(this.currentPositionPlacemark) {
+                    this.currentPositionPlacemark.setLatLngAlt(cPosition.latitude*57.2957795, cPosition.longitude*57.2957795, this.vehicleAltitude.position);
                 }//if
                 else {
-                    this.steeringDelta = headingOffset*0.5;
+                    this.currentPositionPlacemark = new Placemark(this.scene, cPosition.latitude*57.2957795, cPosition.longitude*57.2957795, "Current Target", window.SITE_URL+"/img/my_marker.png");
+                    this.currentPositionPlacemark.setVisibility(true);
                 }//else
-            }//if
-            else if( (this.direction > 0 || diff > 0) ) {
-                if(diff > -0.1) this.direction = 0;
-                else if(diff < -1.5) this.direction = -1;
+                */
                 
-                //console.log('diff', diff, 2);
+                var heading = Math3D.Angle.wrap(this.getVehicleHeading());
+                var bHeading = Math3D.MyMath.linearMap(heading, -Math.PI, Math.PI, 0, Math.PI);
+                var angle = Math3D.MyMath.linearMap(angle, -Math.PI, Math.PI, 0, Math.PI);
+                //var angle = Math3D.MyMath.linearMap(this.bodyModel.heading, -Math.PI, Math.PI, -Math.PI/2, Math.PI/2);
                 
-                if(Math.abs(this.vehicleRoll.position) < 2.5) {
-                    if(diff < 2.7) {
-                        this.steeringDelta = -headingOffset;
+                var headingOffset = Math.abs(angle-bHeading);
+                var diff = angle-bHeading;
+                
+                //console.log('offset', headingOffset, 'v heading', bHeading, 'heading', angle, 'diff', diff);
+                //console.log(this.bodyModel.heading, this.bodyModel.heading-angle, Math.abs(this.bodyModel.heading - (this.bodyModel.heading-angle)));
+                
+                if( (this.direction > 0 || diff > 0) && Math.abs(diff) < Math.PI/2) {
+                    if(diff < 0.1) this.direction = 0;
+                    else if(diff > 1.5) this.direction = 1;
+                    
+                    //console.log('diff', diff, 1);
+                    
+                    if(Math.abs(this.vehicleRoll.position) < 2.5) {
+                        if(diff < 2.7) {
+                            this.steeringDelta = headingOffset;
+                        }//if
+                        else {
+                            this.steeringDelta = headingOffset*0.1;
+                        }//else
                     }//if
                     else {
-                        this.steeringDelta = -headingOffset*0.1;
+                        this.steeringDelta = headingOffset*0.5;
                     }//else
                 }//if
-                else {
-                    this.steeringDelta = -headingOffset*0.5;
-                }//else
-            }//else if
-            else if( (this.direction < 0 || diff < 0) && Math.abs(diff) < Math.PI/2) {
-                if(diff > -0.1) this.direction = 0;
-                else if(diff < -1.5) this.direction = -1;
-                
-                //console.log('diff', diff, 3);
-                
-                if(Math.abs(this.vehicleRoll.position) < 2.5) {
-                    if(diff > -2.7) {
-                        this.steeringDelta = -headingOffset;
+                else if( (this.direction > 0 || diff > 0) ) {
+                    if(diff > -0.1) this.direction = 0;
+                    else if(diff < -1.5) this.direction = -1;
+                    
+                    //console.log('diff', diff, 2);
+                    
+                    if(Math.abs(this.vehicleRoll.position) < 2.5) {
+                        if(diff < 2.7) {
+                            this.steeringDelta = -headingOffset;
+                        }//if
+                        else {
+                            this.steeringDelta = -headingOffset*0.1;
+                        }//else
                     }//if
                     else {
-                        this.steeringDelta = -headingOffset*0.1;
+                        this.steeringDelta = -headingOffset*0.5;
                     }//else
-                }//if
-                else {
-                    this.steeringDelta = -headingOffset*0.5;
-                }//else
-            }//else if
-            else if( (this.direction < 0 || diff < 0) ) {
-                if(diff < 0.1) this.direction = 0;
-                else if(diff > 1.5) this.direction = 1;
-                
-                //console.log('diff', diff, 4);
-                
-                if(Math.abs(this.vehicleRoll.position) < 2.5) {
-                    if(diff > -2.7) {
-                        this.steeringDelta = headingOffset;
+                }//else if
+                else if( (this.direction < 0 || diff < 0) && Math.abs(diff) < Math.PI/2) {
+                    if(diff > -0.1) this.direction = 0;
+                    else if(diff < -1.5) this.direction = -1;
+                    
+                    //console.log('diff', diff, 3);
+                    
+                    if(Math.abs(this.vehicleRoll.position) < 2.5) {
+                        if(diff > -2.7) {
+                            this.steeringDelta = -headingOffset;
+                        }//if
+                        else {
+                            this.steeringDelta = -headingOffset*0.1;
+                        }//else
                     }//if
                     else {
-                        this.steeringDelta = headingOffset*0.1;
+                        this.steeringDelta = -headingOffset*0.5;
                     }//else
+                }//else if
+                else if( (this.direction < 0 || diff < 0) ) {
+                    if(diff < 0.1) this.direction = 0;
+                    else if(diff > 1.5) this.direction = 1;
+                    
+                    //console.log('diff', diff, 4);
+                    
+                    if(Math.abs(this.vehicleRoll.position) < 2.5) {
+                        if(diff > -2.7) {
+                            this.steeringDelta = headingOffset;
+                        }//if
+                        else {
+                            this.steeringDelta = headingOffset*0.1;
+                        }//else
+                    }//if
+                    else {
+                        this.steeringDelta = headingOffset*0.5;
+                    }//else
+                }//else if
+                /*else if(Math.abs(this.bodyModel.heading - (this.bodyModel.heading-angle)) && this.vehicle.speedKmh > 60) {
+                    this.steeringDelta = (this.bodyModel.heading - (this.bodyModel.heading-angle))*deltaTime;
+                }//else if*/
+                
+                if(this.vehicleAltitude.targetPosition > cPosition.height && Math.abs(this.vehicleAltitude.targetPosition - cPosition.height) > 5 && this.vehicle.tiltOffset > 105) {
+                    this.down = true;
                 }//if
-                else {
-                    this.steeringDelta = headingOffset*0.5;
-                }//else
-            }//else if
-            /*else if(Math.abs(this.bodyModel.heading - (this.bodyModel.heading-angle)) && this.vehicle.speedKmh > 60) {
-                this.steeringDelta = (this.bodyModel.heading - (this.bodyModel.heading-angle))*deltaTime;
-            }//else if*/
-            
-            if(this.vehicleAltitude.targetPosition > cPosition.height && Math.abs(this.vehicleAltitude.targetPosition - cPosition.height) > 5 && this.vehicle.tiltOffset > 105) {
-                this.down = true;
+                else if(this.vehicleAltitude.targetPosition < cPosition.height && Math.abs(this.vehicleAltitude.targetPosition - cPosition.height) > 5  && this.vehicle.tiltOffset < 205 && this.vehicle.speedKmh > 60) {
+                    this.up = true;
+                }//if
+                
+                //console.log('position', closestPosition, 'distance', closestDistance, 'angle', closestAngle);
             }//if
-            else if(this.vehicleAltitude.targetPosition < cPosition.height && Math.abs(this.vehicleAltitude.targetPosition - cPosition.height) > 5  && this.vehicle.tiltOffset < 205 && this.vehicle.speedKmh > 60) {
-                this.up = true;
-            }//if
-            
-            //console.log('position', closestPosition, 'distance', closestDistance, 'angle', closestAngle);
             
         }//if
         
@@ -2382,6 +2447,15 @@ DrivingSimulator = function () {
         else {
             window.audioMonkey.stop("up");
         }//else
+        
+        if(this.vehicleAltitude.position < 50 && !this.played) {
+            this.played = true;
+            
+            window.audioMonkey.play("altitude", 0, 0, 1, false);
+        }//if
+        else if(this.vehicleAltitude.position > 50) {
+            this.played = false;
+        }//else
 
     };
 
@@ -2644,10 +2718,10 @@ DrivingSimulator = function () {
                     this.vehicleAltitude.targetPosition-=(value-(tilt*tiltDirection*0.05))*deltaTime;
             }//if
             else if(this.vehicle.tiltOffset > 185 || (this.vehicle.tiltOffset > 275 && this.vehicle.speedKmh < this.vehicle.liftOffMinSpeed*0.7)) {
-                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*deltaTime);
+                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*0.1);
             }//if
             else if(this.vehicle.tiltOffset < 185) {
-                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*deltaTime);
+                this.vehicleAltitude.targetPosition+=tiltDirection*(tilt*deltaTime*Math.max(speedMass, 25)*0.1);
             }//else if
             
             var wasAirborne = this.vehicle.wasAirborne = this.vehicle.airborne;

@@ -25,7 +25,11 @@
 			
 			<div id="path">
 				<div id="placemarks"></div>
-									
+				
+				<div id="progress_glider">
+					<img src="/img/handglider.png"/>
+				</div>
+				
 				<div id="progress"></div>
 				<div id="position"></div>
 			</div>
@@ -165,7 +169,7 @@
 		<script type="text/javascript" src="/js/variables.js"></script>
 		<script type="text/javascript" src="/js/latlon_v1.min.js"></script>
 		<script type="text/javascript" src="/js/gamepad.js"></script>
-		<script type="text/javascript" src="/js/audioMonkey.min.js"></script>
+		<script type="text/javascript" src="/js/audioMonkey.js"></script>
 		<script type="text/javascript" src="/js/box2d.min.js"></script>
 		<script type="text/javascript" src="/js/math3d.min.js"></script>
 		<script type="text/javascript" src="/js/vehicle.js"></script>
@@ -243,6 +247,10 @@
 				e.preventDefault();
 				
 				cesiumExplorer.goto(window.defaultLat, window.defaultLon, window.defaultAlt, window.defaultSpeed, window.defaultHeading);
+				
+				cesiumExplorer.physics.lastIndex = false;
+				$('#progress').css('width', '0%');
+				$('#placemarks .poi img').attr('src', window.SITE_URL+"/img/placemark_outline.png");
 			});
 			
 			$('#accel-multiplier').on('change', function(e) {
@@ -261,6 +269,7 @@
 			];
 			
 			window.POISPOLYLINE = [
+				{ id: 'start', lat: -22.899599, lon: -43.183192, alt: 150, heading: 0, label: '' },
 				{ id: 'centro', lat: -22.906948, lon: -43.182830, alt: 200, heading: 0, label: 'Centro' },
 				{ id: 'centro_copacabana', lat: -22.952560, lon: -43.183092, alt: 300, heading: 0, label: '' },
 				{ id: 'copacabana', lat: -22.972560, lon: -43.184092, alt: 250, heading: 0, label: 'Copacabana' },
@@ -277,7 +286,10 @@
 				{ id: 'deodoro-barra-da-tijuca_2', lat: -22.888635, lon: -43.375008, alt: 350, heading: 0, label: '' },
 				{ id: 'deodoro-barra-da-tijuca_3', lat: -22.921269, lon: -43.363363, alt: 450, heading: 0, label: '' },
 				{ id: 'deodoro-barra-da-tijuca_4', lat: -22.953611, lon: -43.368828, alt: 150, heading: 0, label: '' },
-				{ id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 50, heading: 0, label: 'Barra da Tijuca' }
+				{ id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 50, heading: 0, label: 'Barra da Tijuca' },
+				{ id: 'barra-da-tijuca_1', lat: -23.007742, lon: -43.366201, alt: 50, heading: 0, label: '' },
+				{ id: 'barra-da-tijuca_2', lat: -23.011035, lon: -43.363473, alt: 50, heading: 0, label: '' },
+				{ id: 'barra-da-tijuca_3', lat: -23.010944, lon: -43.358813, alt: 0, heading: 0, label: '' }
 			];
 			
 			//window.SITE_URL = 'http://andresantos.cloudapp.net';
@@ -498,15 +510,25 @@
 			try {
 						if((!Platform.isIE() && format == 'ogg')) {
 							window.audioMonkey.add("up", '/sounds/wind_up.ogg');
+							window.audioMonkey.add("down", '/sounds/wind_down.ogg');
+							window.audioMonkey.add("altitude", '/sounds/altitude_warning.ogg');
+							
+							window.audioMonkey.add("barra-da-tijuca", '/sounds/barra_da_tijuca.ogg');
+							window.audioMonkey.add("centro", '/sounds/centro.ogg');
+							window.audioMonkey.add("copacabana", '/sounds/copacabana.ogg');
+							window.audioMonkey.add("deodoro", '/sounds/deodoro.ogg');
+							window.audioMonkey.add("maracana", '/sounds/maracana.ogg');
 						}//if
 						else {
 							window.audioMonkey.add("up", '/sounds/wind_up.mp3');
-						}//else
-						if((!Platform.isIE() && format == 'ogg')) {
-							window.audioMonkey.add("down", '/sounds/wind_down.ogg');
-						}//if
-						else {
 							window.audioMonkey.add("down", '/sounds/wind_down.mp3');
+							window.audioMonkey.add("altitude", '/sounds/altitude_warning.mp3');
+							
+							window.audioMonkey.add("barra-da-tijuca", '/sounds/barra_da_tijuca.mp3');
+							window.audioMonkey.add("centro", '/sounds/centro.mp3');
+							window.audioMonkey.add("copacabana", '/sounds/copacabana.mp3');
+							window.audioMonkey.add("deodoro", '/sounds/deodoro.mp3');
+							window.audioMonkey.add("maracana", '/sounds/maracana.mp3');
 						}//else
 						
         if(v.sound && v.sound.ogg!="" && (!Platform.isIE() && format == 'ogg')) {

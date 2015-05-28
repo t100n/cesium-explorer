@@ -242,6 +242,17 @@ function AudioMonkey() {
     };
 
     this.play = function(id, throttle, timeOffset, rate, loop, loopStart, loopEnd, volume) {
+        
+        if(volume == undefined) {
+            volume = 1;
+        }//if
+        
+        if(window.globalVolume == undefined) {
+            window.globalVolume = 1;
+        }//if
+        
+        var sound, buffer, gain;
+        
         try {
             //log("info", id, throttle, timeOffset, rate, loop, loopStart, loopEnd, volume);
 
@@ -254,14 +265,18 @@ function AudioMonkey() {
                 if(loop) return;
                 else this.stop(id);
             }//if
-
+        } catch(err) {
+            log("error", err);
+        }
+        
+        try {
             //if(typeof this.sounds[id].sound != "undefined") this.stop(id);
 
-            var sound = this.context.createBufferSource();  // creates a sound source
+            sound = this.context.createBufferSource();  // creates a sound source
             this.sounds[id].sound = sound;
             this.sounds[id].reversed = false;
 
-            var buffer = this.sounds[id].buffer;
+            buffer = this.sounds[id].buffer;
 
             if(rate < 0) {
                 buffer = this.cloneAudioBuffer(this.sounds[id].buffer);
@@ -291,7 +306,11 @@ function AudioMonkey() {
 
             if(loop && loopStart) sound.loopStart = loopStart;
             if(loop && loopEnd) sound.loopEnd = loopEnd;
-
+        } catch(err) {
+            log("error", err);
+        }
+        
+        try {
             //log("info", "play: "+id+", "+throttle+"*"+this.sounds[id].buffer.duration+"+"+timeOffset);
 
             if (!sound.start)
@@ -304,9 +323,13 @@ function AudioMonkey() {
                 sound.start(this.context.currentTime, (throttle*this.sounds[id].buffer.duration)+timeOffset);                            // play the source now
             }//else
             // note: on older systems, may have to use deprecated noteOn(time);
+        } catch(err) {
+            log("error", err);
+        }
 
+        try {
             // Create a gain node.
-            var gain = this.context.createGain();
+            gain = this.context.createGain();
 
             this.sounds[id].gain = gain;
 
@@ -315,13 +338,25 @@ function AudioMonkey() {
 
             // Connect the gain node to the destination.
             gain.connect(this.context.destination);
-
+        } catch(err) {
+            log("error", err);
+        }
+        
+        try {
             if(typeof this.sounds[id].gain.gain != "undefined") this.sounds[id].gain.gain.value = volume*window.globalVolume;
-
+        } catch(err) {
+            log("error", err);
+        }
+        
+        try {
             this.sounds[id].startTime = this.context.currentTime;
 
             this.sounds[id].startedAt = Date.now();
-
+        } catch(err) {
+            log("error", err);
+        }
+        
+        try {
             if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = AudioBufferSourceNode.PLAYING_STATE;
 
             //this.fadeIn(id);

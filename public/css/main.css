@@ -314,6 +314,31 @@ header {
         
         width: 0%;
       }
+      
+      #progress_glider {
+        
+        position: absolute;
+				
+        border-radius: 0px;
+        left: 0px;
+        bottom: -15px;
+        
+        height: 40px;
+        width: 32px;
+        
+        z-index: 1040;
+      }
+      
+      #progress_glider img {
+        position: absolute;
+        top: 14px;
+        left: -15px;
+        height: 14px;
+        
+        -ms-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+      }
 			
       #position {
         position: absolute;
@@ -334,13 +359,15 @@ header {
         left: 0px;
         right: 0px;
         bottom: 6px;
+        height: 45px;
       }
       
       #placemarks .poi {
         display: inline-block;
         color: #fff;
         text-decoration: none;
-        text-align: right;
+        text-align: left;
+        position: absolute;
       }
       
       #placemarks .poi:active, 
