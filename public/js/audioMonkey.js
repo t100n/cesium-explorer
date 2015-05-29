@@ -1,3 +1,31 @@
+
+function log() {
+    var str = "";
+    
+    if(window.loglevel == undefined) window.loglevel = 0;
+    
+    function getErrorObject(){
+        try { throw Error('') } catch(err) { return err; }
+    }
+
+    var err = getErrorObject();
+    var caller_line = err.stack ? err.stack.split("\n")[4] : "";
+    var index = caller_line.indexOf("at ");
+    var clean = caller_line.slice(index+2, caller_line.length);
+
+    if(arguments[0] == "error" || (arguments[0] == "warning" && window.loglevel > 0) || (arguments[0] == "info" && window.loglevel > 1)) {
+        for(var i=0; i<arguments.length; i++) {
+            str += typeof arguments[i] == "object" ? JSON.stringify(arguments[i]) : arguments[i];
+
+            if(i<arguments.length-1) str += ", ";
+        }
+
+        if(typeof console != "undefined") {
+            console.log(clean, str);
+        }//if
+    }//if
+}
+
 function AudioMonkey() {
     this.class = "AudioMonkey";
 
@@ -15,6 +43,8 @@ function AudioMonkey() {
     this.manifest = {
     };
 
+    this.format = (new Audio().canPlayType('audio/ogg') !== '' ? 'ogg' : 'mp3');
+    
     this.sounds = {
         /*sound: false,
          buffer: false,
@@ -207,11 +237,23 @@ function AudioMonkey() {
         }
     };
 
-    this.load = function(id, url) {
+    this.load = function(id, sound) {
         try {
             var that = this;
             var request = new XMLHttpRequest();
-
+            
+            var url;
+            
+            if(typeof sound == "string") {
+                url = sound;
+            }//if
+            else if(this.format == "ogg") {
+                url = sound.ogg;
+            }//else if
+            else {
+                url = sound.mp3;
+            }//else
+    	    
             request.open('GET', url, true);
             request.responseType = 'arraybuffer';
 
@@ -280,9 +322,9 @@ function AudioMonkey() {
 
             if(rate < 0) {
                 buffer = this.cloneAudioBuffer(this.sounds[id].buffer);
-
-                Array.prototype.reverse.call( buffer.getChannelData(0) );
-                Array.prototype.reverse.call( buffer.getChannelData(1) );
+    	        
+                if(buffer.numberOfChannels > 0) Array.prototype.reverse.call( buffer.getChannelData(0) );
+                if(buffer.numberOfChannels > 1) Array.prototype.reverse.call( buffer.getChannelData(1) );
             }//if
 
             sound.buffer = buffer;                          // tell the source which sound to play
@@ -326,7 +368,9 @@ function AudioMonkey() {
         } catch(err) {
             log("error", err);
         }
-
+        
+        this.sounds[id].sound = sound;
+        
         try {
             // Create a gain node.
             gain = this.context.createGain();
@@ -373,8 +417,8 @@ function AudioMonkey() {
 
             var buffer = this.cloneAudioBuffer(this.sounds[id].buffer);
 
-            Array.prototype.reverse.call( buffer.getChannelData(0) );
-            Array.prototype.reverse.call( buffer.getChannelData(1) );
+            if(buffer.numberOfChannels > 0) Array.prototype.reverse.call( buffer.getChannelData(0) );
+            if(buffer.numberOfChannels > 1) Array.prototype.reverse.call( buffer.getChannelData(1) );
 
             this.sounds[id].sound.loop = false;
 

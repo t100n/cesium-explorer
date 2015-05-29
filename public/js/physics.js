@@ -2519,8 +2519,7 @@ DrivingSimulator = function () {
         this.updateAttitude(this.vehicleTilt.position.toDeg(), this.vehicleRoll.position.toDeg());
         this.updateTimeMeter();
         
-        if(!window.physics) return;
-        var speedKmh = window.physics.absSpeed = this.vehicle.getSpeedKmh();
+        var speedKmh = this.absSpeed = this.vehicle.getSpeedKmh();
 
         this.handleSounds(deltaTimeLimited, speedKmh);
 
@@ -3607,8 +3606,6 @@ cesiumExplorer.main = function (v) {
 
 
     cesiumExplorer.physics.init(v);
-
-    window.full.init();
 
     var processQueue = $bind(cesiumExplorer, cesiumExplorer.processQueue);
 

@@ -528,10 +528,15 @@ var cesiumExplorer = function () {};
 window.myVehicle = {"__v":10,"_id":"533d9853bcf8e598037b601d","crashsoundtime":1,"description":"Good for exploring the city from above.<br/>Cruise Speed: 140mph","fastsoundtime":1,"modelheight":1.5,"name":"4seat Aircraft","soundtime":16000,"createdAt":"2014-04-03T17:20:19.000Z","showRPM":false,"showAltitude":true,"showSpeed":true,"keys":{"fa-minus":"Zoom Out","fa-plus":"Zoom In","fa-arrow-right":"Steer Right","fa-arrow-left":"Steer Left","fa-arrow-down":"Brake / Reverse","fa-arrow-up":"Accelerate"},"location":{"lat":37.2321326,"lon":-115.790874},"fourWheelDrive":false,"absoluteCeiling":4100,"maxGear":5,"sixthGearRatioTopSpeed":1.2,"fifthGearRatioTopSpeed":1,"fourthGearRatioTopSpeed":0.8,"thirdGearRatioTopSpeed":0.6,"secondGearRatioTopSpeed":0.4,"firstGearRatioTopSpeed":0.2,"reverseGearRatioTopSpeed":0.2,
 	"sixthGearRatio":0.1,"fifthGearRatio":0.1,"fourthGearRatio":0.1,"thirdGearRatio":0.1,"secondGearRatio":0.1,"firstGearRatio":0.1,"reverseGearRatio":-0.275,"brakeRatio":0.01,
 	"liftOffMinSpeed":20,"slipFactor":0,"slipMinimumRate":0.8,"slipLoopEnd":0.6,"slipLoopStart":0.2,
+    "crashSound":{
+        "mp3":{"filename":"crashSound3.mp3","path":"public/uploads","size":12185,"filetype":"audio/mp3","url":"/sounds/crashSound3.mp3"},
+        "ogg":{"filename":"crashSound3.ogg","path":"public/uploads","size":12185,"filetype":"audio/ogg","url":"/sounds/crashSound3.ogg"}
+    },
     "slip":{
         "mp3":{"filename":"Tires Squealing-SoundBible.com-1814115127.mp3","path":"public/uploads","size":12185,"filetype":"audio/mp3","url":"/uploads/Tires Squealing-SoundBible.com-1814115127.mp3"},
         "ogg":{"filename":"Tires Squealing-SoundBible.com-1814115127.ogg","path":"public/uploads","size":12185,"filetype":"audio/ogg","url":"/uploads/Tires Squealing-SoundBible.com-1814115127.ogg"}
-    },"soundMinimumRate":0.1,"soundLoopEnd":2,"soundLoopStart":0,
+    },
+    "soundMinimumRate":0.1,"soundLoopEnd":2,"soundLoopStart":0,
     "sound":{
         "duration":5,
         "mp3":{"filename":"glider_sound.mp3","path":"public/uploads","size":20000,"filetype":"audio/mp3","url":"/uploads/glider_sound.mp3"},
