@@ -116,8 +116,8 @@
 				{ id: 'barra-da-tijuca_3', lat: -23.010944, lon: -43.358813, alt: 0, heading: 0, label: '' }
 			];
 			
-			//window.SITE_URL = 'http://andresantos.cloudapp.net';
-			window.SITE_URL = 'http://localhost:3000';
+			window.SITE_URL = 'http://andresantos.cloudapp.net';
+			//window.SITE_URL = 'http://localhost:3000';
 			
 			window.userId = "ojogador";
 			window.isExploring = true;
