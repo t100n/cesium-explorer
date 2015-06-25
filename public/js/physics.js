@@ -1321,7 +1321,7 @@ DrivingSimulator = function () {
                 if(!this.autopilotOverlay || (resetRight && resetLeft)) {
                     if(this.autopilotOverlay) this.autopilotOverlay.remove();
                     
-                    this.autopilotOverlay = new Text(this.scene, false, 15, 138, false, "autopilot");
+                    this.autopilotOverlay = new Text(this.scene, false, 15, 258, false, "autopilot");
                     this.autopilotOverlay.unitContainer.css('padding-left','0px');
                     this.autopilotOverlay.unitContainer.css('font-weight','800');
                 }//if
@@ -1428,7 +1428,7 @@ DrivingSimulator = function () {
             var POI = window.POIS[i];
             POI.latLng = new LatLng(POI.lat, POI.lon);
             POI.startLatLng = POI.latLng.createOffset(-180, 500);
-            POI.placemark = new Placemark(this.scene, POI.lat, POI.lon, POI.label, window.SITE_URL+"/img/placemark.png");
+            POI.placemark = new Placemark(this.scene, POI.lat, POI.lon, POI.label, window.SITE_URL+"/img/placemark_big.png");
             POI.placemark.setVisibility(true);
             POI.heading = POI.startLatLng.heading(POI.latLng)*180/Math.PI;
             

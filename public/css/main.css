@@ -271,8 +271,8 @@ header {
         right: 12px;
         top: 12px;
         
-        width: 120px;
-        height: 120px;
+        width: 240px;
+        height: 240px;
         
         background-color: #CCC;
       }
@@ -284,7 +284,7 @@ header {
       #path {
         position: absolute;
         left: 122px;
-        right: 200px;
+        right: 320px;
         top: 12px;
         
 				background-color: rgba(255,255,255,0);

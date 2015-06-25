@@ -10,6 +10,9 @@
 			<link type="text/css" rel="stylesheet" href="/js/Cesium/Widgets/widgets.css" />
 	</head>
 	<body>
+		
+		<!--<audio id="audioplayer" preload="true" autoplay="" src="http://66.55.145.43:7008/;"></audio>!-->
+		
 		<div id="explorer-container">
 			<div id="map3d-container">
 				<div id="map3d"></div>
@@ -50,7 +53,7 @@
 				</div>
 				<div class="row">
 					<button id="left">Esquerda</button>
-					<button id="options">Opções</button>
+					<button id="options">Comandos</button>
 					<button id="right">Direita</button>
 				</div>
 				<div class="row">
@@ -63,7 +66,7 @@
 			        <div class="explorer-modal-content">
 			            <div class="explorer-modal-header">
 			                <button class="explorer-close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
-			                <h4 class="explorer-modal-title">Opções</h4>
+			                <h4 class="explorer-modal-title">Comandos</h4>
 			            </div>
 			            <div class="explorer-modal-body clearfix">
 			                <div class="explorer-tab-content">
