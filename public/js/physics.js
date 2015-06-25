@@ -3648,7 +3648,12 @@ cesiumExplorer.main = function (v) {
         })
     });
 
-
+    var cesiumTerrainProviderMeshes = new Cesium.VRTheWorldTerrainProvider({
+        url : '//www.vr-theworld.com/vr-theworld/tiles1.0.0/73/'
+    });
+    
+    cesiumExplorer.physics.minimap.scene.terrainProvider = cesiumTerrainProviderMeshes;
+    
     cesiumExplorer.physics.init(v);
 
     var processQueue = $bind(cesiumExplorer, cesiumExplorer.processQueue);
