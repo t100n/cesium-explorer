@@ -3501,6 +3501,32 @@ function cal_to_jd( era, y, m, d, h, mn, s )
     return jd/100000;
 }
 
+cesiumExplorer.hideLabels = function () {
+    
+    cesiumExplorer.physics.viewer.imageryLayers.removeAll();
+    cesiumExplorer.physics.viewer.imageryLayers.addImageryProvider(new Cesium.BingMapsImageryProvider({
+        url : '//dev.virtualearth.net',
+        key : Cesium.BingMapsApi.defaultKey,
+        mapStyle : Cesium.BingMapsStyle.AERIAL,
+        hasAlphaChannel : false,
+        defaultAlpha : 1.0
+    }));
+    
+};
+
+cesiumExplorer.showLabels = function () {
+    
+    cesiumExplorer.physics.viewer.imageryLayers.removeAll();
+    cesiumExplorer.physics.viewer.imageryLayers.addImageryProvider(new Cesium.BingMapsImageryProvider({
+        url : '//dev.virtualearth.net',
+        key : Cesium.BingMapsApi.defaultKey,
+        mapStyle : Cesium.BingMapsStyle.AERIAL_WITH_LABELS,
+        hasAlphaChannel : false,
+        defaultAlpha : 1.0
+    }));
+    
+};
+
 cesiumExplorer.main = function (v) {
     cesiumExplorer.baseURL = "http://"+window.location.host+"/";
     cesiumExplorer.modelsURL = cesiumExplorer.baseURL + "models/";
