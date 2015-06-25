@@ -3512,12 +3512,30 @@ cesiumExplorer.hideLabels = function () {
         defaultAlpha : 1.0
     }));
     
+    cesiumExplorer.physics.minimap.imageryLayers.removeAll();
+    cesiumExplorer.physics.minimap.imageryLayers.addImageryProvider(new Cesium.BingMapsImageryProvider({
+        url : '//dev.virtualearth.net',
+        key : Cesium.BingMapsApi.defaultKey,
+        mapStyle : Cesium.BingMapsStyle.AERIAL,
+        hasAlphaChannel : false,
+        defaultAlpha : 1.0
+    }));
+    
 };
 
 cesiumExplorer.showLabels = function () {
     
     cesiumExplorer.physics.viewer.imageryLayers.removeAll();
     cesiumExplorer.physics.viewer.imageryLayers.addImageryProvider(new Cesium.BingMapsImageryProvider({
+        url : '//dev.virtualearth.net',
+        key : Cesium.BingMapsApi.defaultKey,
+        mapStyle : Cesium.BingMapsStyle.AERIAL_WITH_LABELS,
+        hasAlphaChannel : false,
+        defaultAlpha : 1.0
+    }));
+    
+    cesiumExplorer.physics.minimap.imageryLayers.removeAll();
+    cesiumExplorer.physics.minimap.imageryLayers.addImageryProvider(new Cesium.BingMapsImageryProvider({
         url : '//dev.virtualearth.net',
         key : Cesium.BingMapsApi.defaultKey,
         mapStyle : Cesium.BingMapsStyle.AERIAL_WITH_LABELS,
