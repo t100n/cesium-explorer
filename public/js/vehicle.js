@@ -492,7 +492,7 @@ vehicle.Vehicle = function (world, vertices, spec, x, y, heading, automatic, dat
 
     this.getRPM = function () {
         var _g = this.gearBox.getCurrentGear();
-        var maxSpeed = (this.vehicleData.maxspeed);
+        var maxSpeed = (this.vehicleData.maxspeed*Math.max(1, parseInt(window.speedMultiplier)/2.5));
 
         var last = _g > 1 ? (this.gearBox.gearRatioTopSpeed[_g-1] * maxSpeed) : 0;
 
@@ -544,7 +544,7 @@ vehicle.Vehicle = function (world, vertices, spec, x, y, heading, automatic, dat
 
         this.speedForward = box2D.common.math.B2Math.dot(this.body.getLinearVelocity(), vehicle.Box2DUtils.getFrontVector(this.body));
         var _g = this.gearBox.getCurrentGear();
-        var maxSpeed = this.vehicleData.maxspeed;
+        var maxSpeed = this.vehicleData.maxspeed*Math.max(1, parseInt(window.speedMultiplier)/2.5);
 
         //log("info", this.speedForward+" | "+this.brake);
 
@@ -633,7 +633,7 @@ vehicle.Vehicle = function (world, vertices, spec, x, y, heading, automatic, dat
             //log("info", "check4", _g, this.vehicleData.category, this.airborne);
             accelerationForce = 0;
         }//else if
-        else if(this.speedKmh < ((this.vehicleData.maxspeed) * (this.konamiCodeSuperFast ? 4 : (this.konamiCodeFast ? 2 : 1)))) {
+        else if(this.speedKmh < ((this.vehicleData.maxspeed*Math.max(1, parseInt(window.speedMultiplier)/2.5)) * (this.konamiCodeSuperFast ? 4 : (this.konamiCodeFast ? 2 : 1)))) {
 
             /*if(this.tilt < 0) {
              this.throttle = -this.tilt;
@@ -812,7 +812,7 @@ vehicle.Vehicle = function (world, vertices, spec, x, y, heading, automatic, dat
          Where V is the velocity vector and Cdrag is a constant, which is proportional to
          the frontal area of the car
          */
-        if((this.vehicleData.mainCategory != "air" && !this.konamiCodeFly) || (this.tilt > 0.5 && this.tilt < 2.5 && (this.tilt > 0 || this.speedKmh < (this.vehicleData.maxspeed)*1.5))) {
+        if((this.vehicleData.mainCategory != "air" && !this.konamiCodeFly) || (this.tilt > 0.5 && this.tilt < 2.5 && (this.tilt > 0 || this.speedKmh < (this.vehicleData.maxspeed*Math.max(1, parseInt(window.speedMultiplier)/2.5))*1.5))) {
             this.airDragForce = this.speedKmh * this.speedKmh * .04861111111111111;
             //this.airDragForce = this.speedKmh * this.speedKmh * (window.airDragForceFactor);
             var airDragV = this.body.getLinearVelocity().copy();
@@ -848,7 +848,7 @@ vehicle.Vehicle = function (world, vertices, spec, x, y, heading, automatic, dat
          either forwards or backwards depending on whether the car is pointing uphill
          or downhill.
          */
-        if((this.vehicleData.mainCategory != "air" && !this.konamiCodeFly) || (this.tilt > 0.5 && this.tilt < 2.5 && (this.tilt > 0 || this.speedKmh < (this.vehicleData.maxspeed)*1.5))) {
+        if((this.vehicleData.mainCategory != "air" && !this.konamiCodeFly) || (this.tilt > 0.5 && this.tilt < 2.5 && (this.tilt > 0 || this.speedKmh < (this.vehicleData.maxspeed*Math.max(1, parseInt(window.speedMultiplier)/2.5))*1.5))) {
             var tiltForceV = this.body.getWorldVector(new box2D.common.math.B2Vec2(0, -1));
             var tiltForce = -this.getMass() * this.vehicleData.gravity * Math.sin(this.tilt);
             //var tiltForce = -this.getMass() * window.tiltForceFactor * Math.sin(this.tilt);
@@ -856,7 +856,7 @@ vehicle.Vehicle = function (world, vertices, spec, x, y, heading, automatic, dat
             this.body.applyForce(tiltForceV, this.body.getWorldCenter());
         }//if
 
-        if((this.vehicleData.mainCategory != "air" && !this.konamiCodeFly) || (this.tilt > 0.5 && this.tilt < 2.5 && (this.tilt > 0 || this.speedKmh < (this.vehicleData.maxspeed)*1.5))) {
+        if((this.vehicleData.mainCategory != "air" && !this.konamiCodeFly) || (this.tilt > 0.5 && this.tilt < 2.5 && (this.tilt > 0 || this.speedKmh < (this.vehicleData.maxspeed*Math.max(1, parseInt(window.speedMultiplier)/2.5))*1.5))) {
             var rollForceV = this.body.getWorldVector(new box2D.common.math.B2Vec2(1, 0));
             var rollForce = -this.getMass() * this.vehicleData.gravity * Math.sin(this.roll);
             if (Math.abs(rollForce) > 3e3) {
