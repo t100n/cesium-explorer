@@ -110,7 +110,8 @@
 				{ id: 'deodoro-barra-da-tijuca_2', lat: -22.888635, lon: -43.375008, alt: 450, heading: 0, label: '' },
 				{ id: 'deodoro-barra-da-tijuca_3', lat: -22.921269, lon: -43.363363, alt: 550, heading: 0, label: '' },
 				{ id: 'deodoro-barra-da-tijuca_4', lat: -22.953611, lon: -43.368828, alt: 450, heading: 0, label: '' },
-				{ id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 400, heading: 0, label: 'Barra da Tijuca' }
+				{ id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 400, heading: 0, label: 'Barra da Tijuca' },
+				{ id: 'barra-da-tijuca_1', lat: -23.007742, lon: -43.366201, alt: 400, heading: 0, label: '' }
 			];
 			
 			window.SITE_URL = 'http://andresantos.cloudapp.net';
