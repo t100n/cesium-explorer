@@ -144,19 +144,6 @@ window.models = [
         z: 1
     },
     {
-        name: "UERJ",
-        url: "http://andresantos.cloudapp.net/models/uerj/gltf/UERJ_1.gltf",
-        lat: -22.911194,
-        lng: -43.236180,
-        alt: 15,
-        heading: 0,
-        tilt: 0,
-        roll: 0,
-        x: 1,
-        y: 1,
-        z: 1
-    },
-    {
         name: "River Niteroi bridge",
         url: "http://andresantos.cloudapp.net/models/niteroi/gltf/niteroi_1.gltf",
         lat: -22.8683,
