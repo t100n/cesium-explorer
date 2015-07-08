@@ -44,7 +44,7 @@
 				<div class="row">
 					<div class="accel-container">
 						<p>Aceleração</p>
-						<span>min </span><input id="accel-multiplier" type="range" name="points" min="5" max="10" value="5"><span> máx</span>
+						<span>min </span><input id="accel-multiplier" type="range" name="points" min="1" max="5" value="1"><span> máx</span>
 					</div>
 				</div>
 				
