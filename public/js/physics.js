@@ -1389,6 +1389,7 @@ DrivingSimulator = function() {
       for(var i=0, n= window.models.length; i<n; i++) {
 
           var model = window.models[i];
+          if (model.model) model.model.remove();
           model.model = new Model(this.scene, model.url, false, false, model.x, model.y, model.z, false);
           model.model.load(this.username);
           model.model.setLocation(model.lat, model.lng, model.alt, model.heading, model.title, model.roll);
@@ -1621,6 +1622,16 @@ DrivingSimulator = function() {
     if (this.bodyModel) this.bodyModel.remove();
     this.bodyModel = new Model(this.scene, this.vehicleData.chassi ? this.vehicleData.chassi.url : "https://dl.dropboxusercontent.com/u/3050123/Archive3.gltf", false, false, this.vehicleData.modelxscale, this.vehicleData.modelyscale, this.vehicleData.modelzscale, this.vehicleData);
     this.bodyModel.load(this.username);
+
+      for(var i=0, n= window.models.length; i<n; i++) {
+
+          var model = window.models[i];
+          if (model.model) model.model.remove();
+          model.model = new Model(this.scene, model.url, false, false, model.x, model.y, model.z, false);
+          model.model.load(this.username);
+          model.model.setLocation(model.lat, model.lng, model.alt, model.heading, model.title, model.roll);
+
+      }//for
 
     this.setupVehicle(window.lat, window.lon, window.heading, this.getAltitude(new LatLng(window.lat, window.lon), "startLocation"));
 
@@ -2406,6 +2417,14 @@ DrivingSimulator = function() {
         if (!this.gameStart) {
           this.gameStart = new Date();
         } //if
+
+          for(var i=0, n= window.models.length; i<n; i++) {
+
+              var model = window.models[i];
+              if(model.model) model.model.setLocation(model.lat, model.lng, model.alt, model.heading, model.title, model.roll);
+
+          }//for
+
       } //if
 
       this.isSpawning = false;
