@@ -97,9 +97,10 @@ function Placemark(scene, lat, lng, name, url) {
     x.position = Cesium.Cartesian3.fromDegrees(lng, lat, 0);
   } //for
 
-  this.setLatLng = function(lat, lng) {
+  this.setLatLng = function(lat, lng, labelAltOffset) {
     if (isNaN(lat)) lat = 0;
     if (isNaN(lng)) lng = 0;
+    if (isNaN(labelAltOffset)) labelAltOffset = 0;
 
     for (var i = 0, n = this.billboards.length; i < n; i++) {
       var x = this.billboards.get(i);
@@ -108,17 +109,18 @@ function Placemark(scene, lat, lng, name, url) {
 
     for (var i = 0, n = this.labels.length; i < n; i++) {
       var x = this.labels.get(i);
-      x.position = Cesium.Cartesian3.fromDegrees(lng, lat, 5);
+      x.position = Cesium.Cartesian3.fromDegrees(lng, lat, 5 + labelAltOffset);
     } //for
 
     this.lat = lat;
     this.lng = lng;
   };
 
-  this.setLatLngAlt = function(lat, lng, alt) {
+  this.setLatLngAlt = function(lat, lng, alt, labelAltOffset) {
     if (isNaN(lat)) lat = 0;
     if (isNaN(lng)) lng = 0;
     if (isNaN(alt)) alt = 0;
+    if (isNaN(labelAltOffset)) labelAltOffset = 0;
 
     for (var i = 0, n = this.billboards.length; i < n; i++) {
       var x = this.billboards.get(i);
@@ -127,7 +129,7 @@ function Placemark(scene, lat, lng, name, url) {
 
     for (var i = 0, n = this.labels.length; i < n; i++) {
       var x = this.labels.get(i);
-      x.position = Cesium.Cartesian3.fromDegrees(lng, lat, alt + 5);
+      x.position = Cesium.Cartesian3.fromDegrees(lng, lat, alt + 5 + labelAltOffset);
     } //for
 
     this.lat = lat;
@@ -1569,7 +1571,7 @@ DrivingSimulator = function() {
 
       var distance = POI.latLng.distance(myLatLng);
 
-      POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100);
+      POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100, distance/100);
 
       //console.log('distance', distance, 'height', height);
 
