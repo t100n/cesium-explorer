@@ -155,6 +155,19 @@ window.models = [
         x: 1,
         y: 1,
         z: 1
+    },
+    {
+        name: "River Niteroi bridge",
+        url: "http://andresantos.cloudapp.net/models/uerj/gltf/niteroi_1.gltf",
+        lat: -22.870649,
+        lng: -43.161538,
+        alt: 0,
+        heading: 0,
+        tilt: 0,
+        roll: 0,
+        x: 1,
+        y: 1,
+        z: 1
     }
 ];
 
