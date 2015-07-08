@@ -139,7 +139,7 @@
 			window.unit = 'Km';
 			window.defaultLat = window.lat = -22.899599; //-22.888286010415;
 			window.defaultLon = window.lon = -43.183192; //-43.17069974208982;
-			window.defaultAlt = window.alt = 400;
+			window.defaultAlt = window.alt = 300;
 			window.defaultSpeed = window.speed = 100;
 			window.defaultHeading = window.heading = 180;
 			window.defaultTilt = window.tilt = -0.0014993722426054328;

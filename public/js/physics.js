@@ -1069,9 +1069,11 @@ DrivingSimulator = function() {
   this.changeCompassCount = 0;
   this.changeFpsCount = 0;
   this.changeAutopilotCount = 0;
+  this.changeLabelsCount = 0;
   this.showCompass = 0;
   this.showFps = 0;
   this.showAutopilot = 0;
+  this.showLabels = 0;
   this.brake = 0;
   this.throttle = 0;
   this.steeringDelta = 0;
@@ -1700,6 +1702,9 @@ DrivingSimulator = function() {
     else if (this.isDown(cca(this.keybindings.keyboard.autopilot, 0)) > 0) this.changeAutopilotCount++;
     else this.changeAutopilotCount = 0;
 
+    if (this.isDown(cca(this.keybindings.keyboard.labels, 0)) > 0) this.changeLabelsCount++;
+    else this.changeLabelsCount = 0;
+
     if (this.gamepad && this.gamepad.getViewX() != 0) this.viewX = this.gamepad.getViewX();
     else {
       //if (this.isDown(cca("D", 0))) this.viewX = 1;
@@ -1982,6 +1987,9 @@ DrivingSimulator = function() {
   };
   this.changeAutopilotPressed = function() {
     return this.changeAutopilotCount == 1
+  };
+  this.changeLabelsPressed = function() {
+    return this.changeLabelsCount == 1
   };
   this.switchDriverSheetPressed = function() {
     return this.switchDriverSheetCount == 1
@@ -2299,6 +2307,21 @@ DrivingSimulator = function() {
       this.showAutopilot = !this.showAutopilot;
 
       this.drawOverlays(false, false);
+    } //if
+    if (this.changeLabelsPressed()) {
+      this.showLabels = !this.showLabels;
+
+      if(this.showLabels) {
+
+        cesiumExplorer.showLabels();
+
+      }//if
+      else {
+
+        cesiumExplorer.hideLabels();
+
+      }//else
+
     } //if
     if (this.switchDriverSheetPressed()) {
       this.isRightHandDrive = !this.isRightHandDrive;

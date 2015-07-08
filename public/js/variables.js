@@ -139,7 +139,7 @@ var dateStr = function (date) {
 };
 var cca = function (s, index) {
     if(!s) return undefined;
-    
+
     function displayKeyCode(value) {
         if (value == "backspace") return 8; //  backspace
         if (value == "tab") return 9; //  tab
@@ -553,6 +553,7 @@ window.keybindings = {
         "pause":{"key":9,"type":"button"},
         "fps":{"key":16,"type":"button"},
         "autopilot":{"key":17,"type":"button"},
+        "labels":{"key":18,"type":"button"},
         "compass":{"key":15,"type":"button"},
         "camera":{"key":0,"type":"button"},
         "lookBack":{"key":2,"type":"button"},
@@ -567,21 +568,22 @@ window.keybindings = {
 		"throttle":{"key":7,"type":"button"}
 	},
 	"keyboard":{
-        "autopilot":"v",
-        "pause":"p",
-        "fps":"u",
-        "compass":"o",
-        "camera":"c",
-        "lookBack":"e",
-        "lookFront":"q",
-        "lookRight":"d",
-        "lookLeft":"a",
-		"handbrake":"space",
-		"down":"down",
-		"up":"up",
-		"right":"right",
-		"left":"left",
-		"brake":"s",
-		"throttle":"w"
+    "autopilot":"v",
+    "labels":"l",
+    "pause":"p",
+    "fps":"u",
+    "compass":"o",
+    "camera":"c",
+    "lookBack":"e",
+    "lookFront":"q",
+    "lookRight":"d",
+    "lookLeft":"a",
+    "handbrake":"space",
+  	"down":"down",
+  	"up":"up",
+  	"right":"right",
+  	"left":"left",
+  	"brake":"s",
+  	"throttle":"w"
 	}
 };
