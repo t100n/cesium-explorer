@@ -1390,8 +1390,8 @@ DrivingSimulator = function() {
 
           var model = window.models[i];
           model.model = new Model(this.scene, model.url, false, false, model.x, model.y, model.z, false);
-          model.load(this.username);
-          model.setLocation(model.lat, model.lng, model.alt, model.heading, model.title, model.roll);
+          model.model.load(this.username);
+          model.model.setLocation(model.lat, model.lng, model.alt, model.heading, model.title, model.roll);
 
       }//for
 
