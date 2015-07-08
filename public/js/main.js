@@ -85,11 +85,11 @@ $('#accel-multiplier').on('change', function(e) {
 var format = (new Audio().canPlayType('audio/ogg') !== '' ? 'ogg' : 'mp3');
 
 window.POIS = [
-    { id: 'centro', lat: -22.906948, lon: -43.182830, alt: 400, heading: 0, label: 'Centro' },
-    { id: 'copacabana', lat: -22.972560, lon: -43.184092, alt: 400, heading: 0, label: 'Copacabana' },
-    { id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 400, heading: 0, label: 'Maracanã' },
-    { id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 400, heading: 0, label: 'Deodoro' },
-    { id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 400, heading: 0, label: 'Barra da Tijuca' }
+    { id: 'centro', lat: -22.906948, lon: -43.182830, alt: 400, altOffset: 10, heading: 0, label: 'Centro' },
+    { id: 'copacabana', lat: -22.972560, lon: -43.184092, alt: 400, altOffset: 10, heading: 0, label: 'Copacabana' },
+    { id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 400, altOffset: 50, heading: 0, label: 'Maracanã' },
+    { id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 400, altOffset: 10, heading: 0, label: 'Deodoro' },
+    { id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 400, altOffset: 10, heading: 0, label: 'Barra da Tijuca' }
 ];
 
 window.POISPOLYLINE = [
@@ -120,10 +120,10 @@ window.models = [
     {
         name: "Maracana",
         url: "http://andresantos.cloudapp.net/models/gltf/Maracana_1.gltf",
-        lat: -22.91228,
-        lng: -43.23043,
+        lat: -22.91221,
+        lng: -43.23046,
         alt: 15,
-        heading: 0.5,
+        heading: 0.55,
         tilt: 0,
         roll: 0,
         x: 0.5,

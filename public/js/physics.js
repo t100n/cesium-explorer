@@ -1566,9 +1566,9 @@ DrivingSimulator = function() {
 
       if (!POI.placemark) continue;
 
-      POI.placemark.setLatLngAlt(POI.lat, POI.lon, height);
-
       var distance = POI.latLng.distance(myLatLng);
+
+      POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100);
 
       //console.log('distance', distance, 'height', height);
 
