@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns='http://earth.google.com/kml/2.1'>
+<Folder>
+    <name>Maracanã</name>
+    <description><![CDATA[Created with <a href="http://sketchup.google.com/">Google SketchUp 6.4.112</a>]]></description>
+    <DocumentSource>SketchUp</DocumentSource>
+<visibility>1</visibility>
+<LookAt>
+<heading>0.254025</heading>
+<tilt>74.241</tilt>
+<latitude>40.01263257221383</latitude>
+<longitude>-105.2825987416828</longitude>
+<range>639.363919037571</range>
+<altitude>178.1505172347487</altitude>
+</LookAt>
+<Folder>
+<name>Tour</name>
+<Placemark>
+<name>Scene 1</name>
+<visibility>1</visibility>
+<LookAt>
+<heading>180.61</heading>
+<tilt>81.3856</tilt>
+<latitude>40.01692662289877</latitude>
+<longitude>-105.2824723869364</longitude>
+<range>13.73230854531775</range>
+<altitude>2.072500002113944</altitude>
+</LookAt>
+</Placemark>
+<Placemark>
+<name>Scene 3</name>
+<visibility>1</visibility>
+<LookAt>
+<heading>270.973</heading>
+<tilt>75.4873</tilt>
+<latitude>40.01735784783844</latitude>
+<longitude>-105.2806464492604</longitude>
+<range>181.5017084388366</range>
+<altitude>46.47985760366152</altitude>
+</LookAt>
+</Placemark>
+<Placemark>
+<name>Scene 4</name>
+<visibility>1</visibility>
+<LookAt>
+<heading>270.271</heading>
+<tilt>83.9805</tilt>
+<latitude>40.0173989112718</latitude>
+<longitude>-105.2814543861033</longitude>
+<range>103.5532630954063</range>
+<altitude>10.8994066873669</altitude>
+</LookAt>
+</Placemark>
+</Folder>
+  <Placemark>
+    <name>Model</name>
+    <description><![CDATA[]]></description>
+    <Style id='default'>
+    </Style>
+    <Model>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <Location>
+            <longitude>-105.283000000000</longitude>
+            <latitude>40.017000000000</latitude>
+            <altitude>0.000000000000</altitude>
+        </Location>
+        <Orientation>
+            <heading>0</heading>
+            <tilt>0</tilt>
+            <roll>0</roll>
+        </Orientation>
+        <Scale>
+            <x>1.0</x>
+            <y>1.0</y>
+            <z>1.0</z>
+        </Scale>
+        <Link>
+            <href>models/Maracanã.dae</href>
+        </Link>
+    </Model>
+  </Placemark></Folder>
+</kml>
