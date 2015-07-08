@@ -155,6 +155,45 @@ window.models = [
         x: 1,
         y: 1,
         z: 1
+    },
+    {
+        name: "Teatro",
+        url: "http://andresantos.cloudapp.net/models/teatro/gltf/teatro_1.gltf",
+        lat: -22.908964,
+        lng: -43.176612,
+        alt: 0,
+        heading: 0,
+        tilt: 0,
+        roll: 0,
+        x: 1,
+        y: 1,
+        z: 1
+    },
+    {
+        name: "Catedral",
+        url: "http://andresantos.cloudapp.net/models/catedral/gltf/catedral_1.gltf",
+        lat: -22.910786,
+        lng: -43.180679,
+        alt: 0,
+        heading: 0,
+        tilt: 0,
+        roll: 0,
+        x: 1,
+        y: 1,
+        z: 1
+    },
+    {
+        name: "Camara Municipal",
+        url: "http://andresantos.cloudapp.net/models/camara_municipal/gltf/camara_municipal_1.gltf",
+        lat: -22.910076,
+        lng: -43.176663,
+        alt: 0,
+        heading: 0,
+        tilt: 0,
+        roll: 0,
+        x: 1,
+        y: 1,
+        z: 1
     }
 ];
 
