@@ -1386,6 +1386,15 @@ DrivingSimulator = function() {
     this.bodyModel = new Model(this.scene, this.vehicleData.chassi ? this.vehicleData.chassi.url : "https://dl.dropboxusercontent.com/u/3050123/Archive3.gltf", false, false, this.vehicleData.modelxscale, this.vehicleData.modelyscale, this.vehicleData.modelzscale, this.vehicleData);
     this.bodyModel.load(this.username);
 
+      for(var i=0, n= window.models.length; i<n; i++) {
+
+          var model = window.models[i];
+          model.model = new Model(this.scene, model.url, false, false, model.x, model.y, model.z, false);
+          model.load(this.username);
+          model.setLocation(model.lat, model.lng, model.alt, model.heading, model.title, model.roll);
+
+      }//for
+
     this.setupVehicle(window.lat, window.lon, window.heading, this.getAltitude(new LatLng(window.lat, window.lon), "startLocation"));
     this.prevCamera = new LatLngAlt(0, 0, 0);
     //log("info", "onLoad finished");
