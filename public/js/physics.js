@@ -1073,7 +1073,7 @@ DrivingSimulator = function() {
   this.showCompass = 0;
   this.showFps = 0;
   this.showAutopilot = 0;
-  this.showLabels = 0;
+  this.showLabel = true;
   this.brake = 0;
   this.throttle = 0;
   this.steeringDelta = 0;
@@ -2309,9 +2309,9 @@ DrivingSimulator = function() {
       this.drawOverlays(false, false);
     } //if
     if (this.changeLabelsPressed()) {
-      this.showLabels = !this.showLabels;
+      this.showLabel = !this.showLabel;
 
-      if(this.showLabels) {
+      if(this.showLabel) {
 
         cesiumExplorer.showLabels();
 

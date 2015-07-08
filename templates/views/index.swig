@@ -119,6 +119,12 @@
 			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">u</b></div>
 			                                <div>FPS</div>
 			                            </div>
+                                        
+			                            <div style="min-height: 35px">
+			                                <div class="explorer-pull-left" style="min-width: 60px;"><b class="explorer-sc-key">l</b></div>
+			                                <div>Nome das ruas</div>
+			                            </div>
+										
 			                        </div>
 									
 			                        <div class="explorer-dl-horizontal">
