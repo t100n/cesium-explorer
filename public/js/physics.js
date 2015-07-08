@@ -3659,8 +3659,8 @@ cesiumExplorer.main = function(v) {
   //cesiumExplorer.physics.scene.globe.tileCacheSize=500; // higher values bigger cache
 
   var cesiumTerrainProviderMeshes = new Cesium.CesiumTerrainProvider({
-    url: '//cesiumjs.org/stk-terrain/tilesets/world/tiles'
-      //url : '//cesiumjs.org/smallterrain' // contains watermask
+    //url: '//cesiumjs.org/stk-terrain/tilesets/world/tiles'
+    url : '//cesiumjs.org/smallterrain' // contains watermask
       //,   requestVertexNormals : true
   });
   /*var cesiumTerrainProviderMeshes = new Cesium.VRTheWorldTerrainProvider({
