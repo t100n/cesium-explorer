@@ -1629,7 +1629,7 @@ DrivingSimulator = function() {
           if (model.model) model.model.remove();
           model.model = new Model(this.scene, model.url, false, false, model.x, model.y, model.z, false);
           model.model.load(this.username);
-          model.model.setLocation(model.lat, model.lng, model.alt, model.heading, model.title, model.roll);
+          //model.model.setLocation(model.lat, model.lng, model.alt, model.heading, model.title, model.roll);
 
       }//for
 
