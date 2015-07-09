@@ -1075,7 +1075,7 @@ DrivingSimulator = function() {
   this.showCompass = 0;
   this.showFps = 0;
   this.showAutopilot = 0;
-  this.showLabel = true;
+  this.showLabel = false;
   this.brake = 0;
   this.throttle = 0;
   this.steeringDelta = 0;
@@ -3634,7 +3634,8 @@ cesiumExplorer.main = function(v) {
     imageryProvider: new Cesium.BingMapsImageryProvider({
         url: '//dev.virtualearth.net',
         key: Cesium.BingMapsApi.defaultKey,
-        mapStyle: Cesium.BingMapsStyle.AERIAL_WITH_LABELS,
+        //mapStyle: Cesium.BingMapsStyle.AERIAL_WITH_LABELS,
+        mapStyle: Cesium.BingMapsStyle.AERIAL,
         hasAlphaChannel: false,
         defaultAlpha: 1.0
       })
@@ -3699,7 +3700,8 @@ cesiumExplorer.main = function(v) {
     imageryProvider: new Cesium.BingMapsImageryProvider({
       url: '//dev.virtualearth.net',
       key: Cesium.BingMapsApi.defaultKey,
-      mapStyle: Cesium.BingMapsStyle.AERIAL_WITH_LABELS,
+      //mapStyle: Cesium.BingMapsStyle.AERIAL_WITH_LABELS,
+      mapStyle: Cesium.BingMapsStyle.AERIAL,
       hasAlphaChannel: false,
       defaultAlpha: 1.0
     })
