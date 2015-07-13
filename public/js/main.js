@@ -85,7 +85,7 @@ $('#accel-multiplier').on('change', function(e) {
 var format = (new Audio().canPlayType('audio/ogg') !== '' ? 'ogg' : 'mp3');
 
 window.POIS = [
-    { id: 'centro', lat: -22.906948, lon: -43.182830, alt: 400, altOffset: 10, heading: 0, label: 'Centro' },
+    { id: 'centro', lat: -22.906948, lon: -43.182830, alt: 400, altOffset: 10, heading: 0, radius: 200, label: 'Centro' },
     { id: 'copacabana', lat: -22.972560, lon: -43.184092, alt: 400, altOffset: 10, heading: 0, radius: 3700, label: 'Copacabana' },
     { id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 400, altOffset: 50, heading: 0, radius: 3700, label: 'Maracanã' },
     { id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 400, altOffset: 10, heading: 0, radius: 1960, label: 'Deodoro' },
