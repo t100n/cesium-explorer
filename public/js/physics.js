@@ -1634,7 +1634,7 @@ DrivingSimulator = function() {
 
         if(window.audioMonkey.playbackState(POI.id) == AudioBufferSourceNode.PLAYING_STATE) {
 
-          $('#sound-notification').html('<span style="float: left; width: 22px; height: 22px; background: url(\'/img/radio_small.png\');"></span>');
+          $('#sound-notification').html('<div style="width: 22px; height: 22px; background: url(\'/img/radio_small.png\'); background-size: contain; background-position: 50%; background-repeat: no-repeat;"></div>');
 
         }//if
 

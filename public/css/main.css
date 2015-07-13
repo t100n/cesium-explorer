@@ -416,6 +416,15 @@ header {
 			height: 30px;
 		}
 
+		#sound-notification {
+			display: inline-block;
+			margin-right: 38px;
+		}
+
+		#area-notification {
+			display: inline-block;
+		}
+
 		#controls {
 				position: absolute;
 				left: 5px;
