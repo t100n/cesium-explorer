@@ -38,7 +38,7 @@
 			</div>
 
 			<div id="notifications">
-				<div id="sound-notification"></div>
+				<span id="sound-notification"></span>
 				<div id="area-notification"></div>
             </div>
 			

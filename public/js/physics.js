@@ -1565,7 +1565,8 @@ DrivingSimulator = function() {
     var myLatLng = new LatLng(window.lat, window.lon);
 
     var progress = 0,
-      updateProgress = false;
+        updateProgress = false,
+        gotAPOI = false;
 
     for (var i = 0, n = window.POIS.length; i < n; i++) {
 
@@ -1581,7 +1582,9 @@ DrivingSimulator = function() {
 
       //console.log('distance', distance, 'height', height);
 
-      if (distance < POI.radius*1.1 && distance >= POI.radius) {
+      if (distance < POI.radius*1.2 && distance >= POI.radius) {
+
+        gotAPOI = true;
 
         if (this.currentPOI != i) {
 
@@ -1592,6 +1595,8 @@ DrivingSimulator = function() {
           }//if
 
           this.alertType = NEAR_AREA;
+
+          console.log('POI entering', POI.id);
 
         }//if
 
@@ -1605,8 +1610,8 @@ DrivingSimulator = function() {
 
           this.alertType = LEAVING_AREA;
 
-          var volume = 1 - ((POI.radius-distance) / (POI.radius*1.1 - distance));
-          window.audioMonkey.volume(POI.id, volume > 1 ? 1 : volume);
+          var volume = 1 - ((distance-POI.radius) / (POI.radius*1.2 - distance));
+          window.audioMonkey.volume(POI.id, volume > 1 ? 1 : (volume < 0 ? 0 : volume));
 
           console.log('POI leaving', POI.id, volume);
 
@@ -1614,6 +1619,8 @@ DrivingSimulator = function() {
 
       }//if
       else if (distance < POI.radius) {
+
+        gotAPOI = true;
 
         if (this.currentPOI != i) {
 
@@ -1627,7 +1634,7 @@ DrivingSimulator = function() {
 
         if(window.audioMonkey.playbackState(POI.id) == AudioBufferSourceNode.PLAYING_STATE) {
 
-          $('#sound-notification').html('<img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/walkie_talkie_radio.png" style="width: 22px; height: 22px;"/>');
+          $('#sound-notification').html('<span style="float: left; width: 22px; height: 22px; background: url(\'/img/radio_small.png\');"></span>');
 
         }//if
 
@@ -1645,24 +1652,27 @@ DrivingSimulator = function() {
         updateProgress = true;
 
       } //else if
-      else {
-
-        if (this.alertType != NO_AREA) {
-
-          $('#area-notification').html('');
-
-        }//if
-
-        if(window.POIS[this.currentPOI]) window.audioMonkey.stop(window.POIS[this.currentPOI].id);
-
-        this.alertType = NO_AREA;
-
-      }//else
       /*else if(i < this.currentPOI) {
           progress += POI.widthPerPoi;
       }//else*/
 
     } //for
+
+    if (!gotAPOI) {
+
+      if (this.alertType != NO_AREA) {
+
+        $('#area-notification').html('');
+        $('#sound-notification').html('');
+
+      }//if
+
+      if(window.POIS[this.currentPOI]) window.audioMonkey.stop(window.POIS[this.currentPOI].id);
+
+      this.alertType = NO_AREA;
+      this.currentPOI = -1;
+
+    }//if
 
     //if(updateProgress) $('#progress').css('width', ($('.poi.visited').length*this.widthPerPoi)+'%');
 
