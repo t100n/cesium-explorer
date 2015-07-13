@@ -97,6 +97,15 @@ function Placemark(scene, lat, lng, name, url) {
     x.position = Cesium.Cartesian3.fromDegrees(lng, lat, 0);
   } //for
 
+  this.setName = function(name) {
+
+    for (var i = 0, n = this.labels.length; i < n; i++) {
+      var x = this.labels.get(i);
+      x.text = name;
+    } //for
+
+  };
+
   this.setLatLng = function(lat, lng, labelAltOffset) {
     if (isNaN(lat)) lat = 0;
     if (isNaN(lng)) lng = 0;
@@ -1554,6 +1563,7 @@ DrivingSimulator = function() {
   var NEAR_AREA = 0;
   var ARRIVED_AREA = 1;
   var LEAVING_AREA = 2;
+  var IN_AREA = 3;
 
   this.alertType = -1;
   this.currentPOI = -1;
@@ -1579,6 +1589,7 @@ DrivingSimulator = function() {
       var distance = POI.latLng.distance(myLatLng);
 
       POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100, distance/40);
+      POI.placemark.setName(POI.label+" "+distance+"m");
 
       //console.log('distance', distance, 'height', height);
 
