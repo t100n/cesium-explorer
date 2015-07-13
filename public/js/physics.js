@@ -3403,7 +3403,7 @@ DrivingSimulator = function() {
 
       this.minimap.camera.lookAt(
         position,
-        new Cesium.HeadingPitchRange(target.cameraHeading, -(((Math.PI / 2) - cameraTilt) - this.camera.tilt), 20000)
+        new Cesium.HeadingPitchRange(target.cameraHeading, -(((Math.PI / 2) - cameraTilt) - this.camera.tilt), 15000)
       );
 
       var transform = this.camera.transform;
