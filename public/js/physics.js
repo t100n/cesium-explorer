@@ -1550,6 +1550,7 @@ DrivingSimulator = function() {
 
   };
 
+  var NO_AREA = 0;
   var NEAR_AREA = 0;
   var ARRIVED_AREA = 1;
   var LEAVING_AREA = 2;
@@ -1637,7 +1638,18 @@ DrivingSimulator = function() {
         //progress += POI.widthPerPoi;
         updateProgress = true;
 
-      } //if
+      } //else if
+      else {
+
+        if (this.alertType != NO_AREA) {
+
+          $('#area-notification').html('');
+
+        }//if
+
+        this.alertType = NO_AREA;
+
+      }//else
       /*else if(i < this.currentPOI) {
           progress += POI.widthPerPoi;
       }//else*/
@@ -3391,7 +3403,7 @@ DrivingSimulator = function() {
 
       this.minimap.camera.lookAt(
         position,
-        new Cesium.HeadingPitchRange(target.cameraHeading, -(((Math.PI / 2) - cameraTilt) - this.camera.tilt), 50000)
+        new Cesium.HeadingPitchRange(target.cameraHeading, -(((Math.PI / 2) - cameraTilt) - this.camera.tilt), 20000)
       );
 
       var transform = this.camera.transform;
