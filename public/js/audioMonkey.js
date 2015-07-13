@@ -283,6 +283,18 @@ function AudioMonkey() {
         }
     };
 
+    this.playbackState = function(id) {
+
+        if(this.sounds[id].sound && this.sounds[id].sound.playbackState) {
+
+            return this.sounds[id].sound.playbackState;
+
+        }//if
+
+        return AudioBufferSourceNode.FINISHED_STATE;
+
+    };
+
     this.play = function(id, throttle, timeOffset, rate, loop, loopStart, loopEnd, volume) {
         
         if(volume == undefined) {

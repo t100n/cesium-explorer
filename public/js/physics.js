@@ -1550,6 +1550,11 @@ DrivingSimulator = function() {
 
   };
 
+  var NEAR_AREA = 0;
+  var ARRIVED_AREA = 1;
+  var LEAVING_AREA = 2;
+
+  this.alertType = -1;
   this.currentPOI = -1;
   this.currentProgress = 0;
   this.updateProgress = function() {
@@ -1575,10 +1580,56 @@ DrivingSimulator = function() {
 
       //console.log('distance', distance, 'height', height);
 
-      if (distance < 200) {
+      if (distance < POI.radius*1.1 && distance >= POI.radius) {
+
+        if (this.currentPOI != i) {
+
+          if (this.alertType != NEAR_AREA) {
+
+            $('#area-notification').html('Voçê está se aproximando de '+POI.label);
+
+          }//if
+
+          this.alertType = NEAR_AREA;
+
+        }//if
+
+        else {
+
+          if (this.alertType != LEAVING_AREA) {
+
+            $('#area-notification').html('Voçê está deixando '+POI.label);
+
+          }//if
+
+          this.alertType = LEAVING_AREA;
+
+          var volume = 1 - ((POI.radius-distance) / (POI.radius*1.1 - distance));
+          window.audioMonkey.volume(POI.id, volume > 1 ? 1 : volume);
+
+          console.log('POI leaving', POI.id, volume);
+
+        }//else
+
+      }//if
+      else if (distance < POI.radius) {
+
+        if (this.currentPOI != i) {
+
+          if (this.alertType != ARRIVED_AREA) {
+
+            $('#area-notification').html('Voçê chegou a ' + (POI.text ? POI.text : POI.label));
+
+          }//if
+
+        }//if
+
+        this.alertType = ARRIVED_AREA;
 
         if (this.currentPOI != i) window.audioMonkey.play(POI.id, 0, 0, 1, false);
         this.currentPOI = i;
+
+        window.audioMonkey.volume(POI.id, 1);
 
         $('#' + POI.id).addClass('visited');
         $('#' + POI.id).html('<p>' + POI.label + '</p><div><img class="visited" src="' + window.SITE_URL + "/img/placemark.png" + '"/></div>');
@@ -3340,7 +3391,7 @@ DrivingSimulator = function() {
 
       this.minimap.camera.lookAt(
         position,
-        new Cesium.HeadingPitchRange(target.cameraHeading, -(((Math.PI / 2) - cameraTilt) - this.camera.tilt), 10000)
+        new Cesium.HeadingPitchRange(target.cameraHeading, -(((Math.PI / 2) - cameraTilt) - this.camera.tilt), 50000)
       );
 
       var transform = this.camera.transform;

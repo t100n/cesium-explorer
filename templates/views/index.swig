@@ -36,6 +36,11 @@
 				<div id="progress"></div>
 				<div id="position"></div>
 			</div>
+
+			<div id="notifications">
+				<div id="sound-notification"></div>
+				<div id="area-notification"></div>
+            </div>
 			
 			<div id="minimap">
 			</div>

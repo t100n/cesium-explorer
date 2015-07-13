@@ -280,7 +280,7 @@ header {
       #minimap .cesium-viewer-bottom {
         display: none;
       }
-      
+
       #path {
         position: absolute;
         left: 122px;
@@ -399,8 +399,25 @@ header {
         display: block;
       }
 			*/
-      
-			#controls {
+
+		#notifications {
+			position: absolute;
+			left: 122px;
+			right: 270px;
+			top: 12px;
+
+			background-color: rgba(255,255,255,0);
+			padding: 6px 12px;
+			color: #fff;
+
+			border-radius: 0px;
+			text-align: center;
+			text-decoration: none;
+
+			height: 60px;
+		}
+
+		#controls {
 				position: absolute;
 				left: 5px;
 				bottom: 50px;

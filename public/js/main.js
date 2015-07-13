@@ -86,10 +86,10 @@ var format = (new Audio().canPlayType('audio/ogg') !== '' ? 'ogg' : 'mp3');
 
 window.POIS = [
     { id: 'centro', lat: -22.906948, lon: -43.182830, alt: 400, altOffset: 10, heading: 0, label: 'Centro' },
-    { id: 'copacabana', lat: -22.972560, lon: -43.184092, alt: 400, altOffset: 10, heading: 0, label: 'Copacabana' },
-    { id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 400, altOffset: 50, heading: 0, label: 'Maracanã' },
-    { id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 400, altOffset: 10, heading: 0, label: 'Deodoro' },
-    { id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 400, altOffset: 10, heading: 0, label: 'Barra da Tijuca' }
+    { id: 'copacabana', lat: -22.972560, lon: -43.184092, alt: 400, altOffset: 10, heading: 0, radius: 3700, label: 'Copacabana' },
+    { id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 400, altOffset: 50, heading: 0, radius: 3700, label: 'Maracanã' },
+    { id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 400, altOffset: 10, heading: 0, radius: 1960, label: 'Deodoro' },
+    { id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 400, altOffset: 10, heading: 0, radius: 3000, label: 'Barra da Tijuca' }
 ];
 
 window.POISPOLYLINE = [
@@ -287,11 +287,21 @@ try {
     window.audioMonkey.add("up", { ogg: '/sounds/wind_up.ogg', mp3: '/sounds/wind_up.mp3' });
     window.audioMonkey.add("down", { ogg: '/sounds/wind_down.ogg', mp3: '/sounds/wind_down.mp3' });
     window.audioMonkey.add("altitude", { ogg: '/sounds/altitude_warning.ogg', mp3: '/sounds/altitude_warning.mp3' });
+
+    /*
     window.audioMonkey.add("barra-da-tijuca", { ogg: '/sounds/barra_da_tijuca.ogg', mp3: '/sounds/barra_da_tijuca.mp3' });
     window.audioMonkey.add("centro", { ogg: '/sounds/centro.ogg', mp3: '/sounds/centro.mp3' });
     window.audioMonkey.add("copacabana", { ogg: '/sounds/copacabana.ogg', mp3: '/sounds/copacabana.mp3' });
     window.audioMonkey.add("deodoro", { ogg: '/sounds/deodoro.ogg', mp3: '/sounds/deodoro.mp3' });
     window.audioMonkey.add("maracana", { ogg: '/sounds/maracana.ogg', mp3: '/sounds/maracana.mp3' });
+    */
+
+    window.audioMonkey.add("barra-da-tijuca", { ogg: '/sounds/test/Air_Raid.ogg', mp3: '/sounds/test/Air_Raid.mp3' });
+    window.audioMonkey.add("centro", { ogg: '/sounds/test/Exploding_Hearts.ogg', mp3: '/sounds/test/Exploding_Hearts.mp3' });
+    window.audioMonkey.add("copacabana", { ogg: '/sounds/test/Hawk_Land.ogg', mp3: '/sounds/test/Hawk_Land.mp3' });
+    window.audioMonkey.add("deodoro", { ogg: '/sounds/test/The_End_is_Nigh.ogg', mp3: '/sounds/test/The_End_is_Nigh.mp3' });
+    window.audioMonkey.add("maracana", { ogg: '/sounds/test/Welcomed_Death.ogg', mp3: '/sounds/test/Welcomed_Death.mp3' });
+
     window.audioMonkey.add("forward", { ogg: v.sound.ogg.url, mp3: v.sound.mp3.url });
     window.audioMonkey.add("slip", { ogg: v.slip.ogg.url, mp3: v.slip.mp3.url });
     window.audioMonkey.add("vehicleCrash", { ogg: v.crashSound.ogg.url, mp3: v.crashSound.mp3.url });
