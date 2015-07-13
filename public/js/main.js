@@ -132,7 +132,7 @@ window.models = [
     },
     {
         name: "Engenhao",
-        url: "http://andresantos.cloudapp.net/models/maracananew/gltf/estadioengenhao.gltf",
+        url: "http://andresantos.cloudapp.net/models/engenhao/gltf/estadioengenhao.gltf",
         lat: -22.893264,
         lng: -43.292303,
         alt: 15,
