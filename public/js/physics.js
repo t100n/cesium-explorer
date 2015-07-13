@@ -1589,7 +1589,8 @@ DrivingSimulator = function() {
       var distance = POI.latLng.distance(myLatLng);
 
       POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100, distance/40);
-      if(parseInt(distance) > 100) POI.placemark.setName(POI.label+" "+parseInt(distance)+"m");
+      if(parseInt(distance-POI.radius) > 0) POI.placemark.setName(POI.label+" "+parseInt(distance-POI.radius)+"m");
+      else POI.placemark.setName(POI.label);
 
       //console.log('distance', distance, 'height', height);
 
@@ -1605,7 +1606,8 @@ DrivingSimulator = function() {
 
         this.alertType = LEAVING_AREA;
 
-        var volume = 1 - ((distance-POI.radius) / (POI.radius*1.2 - distance));
+        var volume = 1 - ((distance-POI.radius) / (POI.radius*1.3 - distance));
+        if(distance > POI.radius*1.3) volume = 0;
         window.audioMonkey.volume(POI.id, volume > 1 ? 1 : (volume < 0 ? 0 : volume));
 
         //console.log('POI leaving', POI.id, (volume > 1 ? 1 : (volume < 0 ? 0 : volume)));
