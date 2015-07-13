@@ -419,6 +419,7 @@ header {
 		#sound-notification {
 			display: inline-block;
 			margin-right: 38px;
+			height: 28px;
 		}
 
 		#area-notification {

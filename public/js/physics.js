@@ -1582,7 +1582,25 @@ DrivingSimulator = function() {
 
       //console.log('distance', distance, 'height', height);
 
-      if (distance < POI.radius*1.2 && distance >= POI.radius) {
+      if (distance < POI.radius*1.3 && distance >= POI.radius && this.currentPOI == i) {
+
+        gotAPOI = true;
+
+        if (this.alertType != LEAVING_AREA) {
+
+          $('#area-notification').html('Voçê está deixando '+POI.label);
+
+        }//if
+
+        this.alertType = LEAVING_AREA;
+
+        var volume = 1 - ((distance-POI.radius) / (POI.radius*1.2 - distance));
+        window.audioMonkey.volume(POI.id, volume > 1 ? 1 : (volume < 0 ? 0 : volume));
+
+        //console.log('POI leaving', POI.id, (volume > 1 ? 1 : (volume < 0 ? 0 : volume)));
+
+      }//if
+      else if (distance < POI.radius*1.2 && distance >= POI.radius) {
 
         gotAPOI = true;
 
@@ -1596,26 +1614,9 @@ DrivingSimulator = function() {
 
           this.alertType = NEAR_AREA;
 
-          console.log('POI entering', POI.id);
+          //console.log('POI entering', POI.id);
 
         }//if
-
-        else {
-
-          if (this.alertType != LEAVING_AREA) {
-
-            $('#area-notification').html('Voçê está deixando '+POI.label);
-
-          }//if
-
-          this.alertType = LEAVING_AREA;
-
-          var volume = 1 - ((distance-POI.radius) / (POI.radius*1.2 - distance));
-          window.audioMonkey.volume(POI.id, volume > 1 ? 1 : (volume < 0 ? 0 : volume));
-
-          console.log('POI leaving', POI.id, volume);
-
-        }//else
 
       }//if
       else if (distance < POI.radius) {
@@ -1634,7 +1635,7 @@ DrivingSimulator = function() {
 
         if(window.audioMonkey.playbackState(POI.id) == AudioBufferSourceNode.PLAYING_STATE) {
 
-          $('#sound-notification').html('<div style="width: 22px; height: 22px; background: url(\'/img/radio_small.png\'); background-size: contain; background-position: 50%; background-repeat: no-repeat;"></div>');
+          $('#sound-notification').html('<div style="float: left; width: 44px; height: 44px; background: url(\'/img/radio_small.png\'); background-size: contain; background-position: 50%; background-repeat: no-repeat;"></div>');
 
         }//if
 
