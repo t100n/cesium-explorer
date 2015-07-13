@@ -1550,7 +1550,7 @@ DrivingSimulator = function() {
 
   };
 
-  var NO_AREA = 0;
+  var NO_AREA = -1;
   var NEAR_AREA = 0;
   var ARRIVED_AREA = 1;
   var LEAVING_AREA = 2;
@@ -1625,6 +1625,12 @@ DrivingSimulator = function() {
 
         }//if
 
+        if(window.audioMonkey.playbackState(POI.id) == AudioBufferSourceNode.PLAYING_STATE) {
+
+          $('#sound-notification').html('<img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/walkie_talkie_radio.png" style="width: 22px; height: 22px;"/>');
+
+        }//if
+
         this.alertType = ARRIVED_AREA;
 
         if (this.currentPOI != i) window.audioMonkey.play(POI.id, 0, 0, 1, false);
@@ -1646,6 +1652,8 @@ DrivingSimulator = function() {
           $('#area-notification').html('');
 
         }//if
+
+        if(window.POIS[this.currentPOI]) window.audioMonkey.stop(window.POIS[this.currentPOI].id);
 
         this.alertType = NO_AREA;
 
