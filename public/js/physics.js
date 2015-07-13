@@ -1589,7 +1589,7 @@ DrivingSimulator = function() {
       var distance = POI.latLng.distance(myLatLng);
 
       POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100, distance/40);
-      POI.placemark.setName(POI.label+" "+distance+"m");
+      if(parseInt(distance) > 100) POI.placemark.setName(POI.label+" "+parseInt(distance)+"m");
 
       //console.log('distance', distance, 'height', height);
 
