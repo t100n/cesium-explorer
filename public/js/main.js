@@ -119,7 +119,7 @@ window.POISPOLYLINE = [
 window.models = [
     {
         name: "Maracana",
-        url: "http://andresantos.cloudapp.net/models/maracananew/gltf/estadiomaracana.gltf",
+        url: "http://andresantos.cloudapp.net/models/maracana/gltf/Maracana_1.gltf",
         lat: -22.91221,
         lng: -43.23046,
         alt: 15,
@@ -133,15 +133,15 @@ window.models = [
     {
         name: "Engenhao",
         url: "http://andresantos.cloudapp.net/models/engenhao/gltf/estadioengenhao.gltf",
-        lat: -22.893264,
-        lng: -43.292303,
-        alt: 15,
+        lat: -22.893334,
+        lng: -43.2919855,
+        alt: 27,
         heading: 0,
         tilt: 0,
         roll: 0,
-        x: 0.5,
-        y: 0.5,
-        z: 0.5
+        x: 1.1,
+        y: 1.1,
+        z: 1.1
     },
     {
         name: "Christ the Redeemer",
