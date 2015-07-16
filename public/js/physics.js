@@ -1609,18 +1609,16 @@ DrivingSimulator = function() {
 
       var height = this.getAltitude(POI.latLng, POI.id);
 
-      if (!POI.placemark) continue;
-
       var distance = POI.latLng.distance(myLatLng);
 
-      POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100, distance/40);
+      if (POI.placemark) POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100, distance/40);
 
       if(POI.label) {
         if (parseInt(distance - POI.radius) > 0) POI.placemark.setName(POI.label + " " + parseInt(distance - POI.radius) + "m");
         else POI.placemark.setName(POI.label);
       }//if
 
-      //console.log('distance', distance, 'height', height);
+      //console.log(POI.id, 'distance', distance, 'height', height);
 
       if (distance < POI.radius*1.3 && distance >= POI.radius && this.currentPOI == i) {
 
@@ -1661,6 +1659,8 @@ DrivingSimulator = function() {
 
       }//if
       else if (distance < POI.radius) {
+
+        //console.log(POI.id, distance, '<', POI.radius);
 
         gotAPOI = true;
 
