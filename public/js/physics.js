@@ -1467,10 +1467,11 @@ DrivingSimulator = function() {
       POI.latLng = new LatLng(POI.lat, POI.lon);
       POI.startLatLng = new LatLng(POI.startLat, POI.startLon);
 
+      POI.placemark = new Placemark(this.scene, POI.lat, POI.lon, POI.label, POI.showPlacemark ? window.SITE_URL + "/img/placemark_big.png" : false, POI.font);
+      POI.heading = POI.startLatLng.heading(POI.latLng) * 180 / Math.PI;
+
       if(POI.label) {
-        POI.placemark = new Placemark(this.scene, POI.lat, POI.lon, POI.label, POI.showPlacemark ? window.SITE_URL + "/img/placemark_big.png" : false, POI.font);
         POI.placemark.setVisibility(true);
-        POI.heading = POI.startLatLng.heading(POI.latLng) * 180 / Math.PI;
 
         POI.placemarkMinimap = new Placemark(this.minimap.scene, POI.lat, POI.lon, POI.label, window.SITE_URL + "/img/placemark.png", POI.font);
         POI.placemarkMinimap.setVisibility(true);
@@ -1609,9 +1610,11 @@ DrivingSimulator = function() {
 
       var height = this.getAltitude(POI.latLng, POI.id);
 
+      if (!POI.placemark) continue;
+
       var distance = POI.latLng.distance(myLatLng);
 
-      if (POI.placemark) POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100, distance/40);
+      POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100, distance/40);
 
       if(POI.label) {
         if (parseInt(distance - POI.radius) > 0) POI.placemark.setName(POI.label + " " + parseInt(distance - POI.radius) + "m");
