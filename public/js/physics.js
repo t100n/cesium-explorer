@@ -1712,7 +1712,7 @@ DrivingSimulator = function() {
 
       var distance = POI.latLng.distance(myLatLng);
 
-      POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100, distance/40);
+      POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100, distance/80);
 
     } //for
 
