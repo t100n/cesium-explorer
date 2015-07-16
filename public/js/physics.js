@@ -1459,6 +1459,9 @@ DrivingSimulator = function() {
       var distance = Cesium.Cartesian3.distance(position, currentPosition);
       this.totalDistance += distance;
 
+      // Build the boundbox to accel the check for containing points
+      if(POI.area) POI.area.computeBoundingBox();
+
     } //for
 
     for (var i = 0, n = window.POIS.length; i < n; i++) {
@@ -1602,7 +1605,12 @@ DrivingSimulator = function() {
 
     var progress = 0,
         updateProgress = false,
-        gotAPOI = false;
+        gotAPOI = false,
+        POIId = false,
+        actionType = false,
+        POIDistance = false,
+        POILabel = false,
+        POII = false;
 
     for (var i = 0, n = window.POIS.length; i < n; i++) {
 
@@ -1616,95 +1624,148 @@ DrivingSimulator = function() {
 
       POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100, distance/40);
 
+      if(POI.area) {
+        if(POI.area.contains(window.lat, window.lon)) {
+          distance *= -1;
+
+          //console.log(POI.id, 'INSIDE POLYGON', distance);
+        }//if
+        else {
+          distance = (POI.area.distance(window.lat, window.lon)*100000);
+
+          //console.log(POI.id, distance);
+        }//else
+      }//if
+      else {
+        distance -= POI.radius;
+      }//else
+
       if(POI.label) {
-        if (parseInt(distance - POI.radius) > 0) POI.placemark.setName(POI.label + " " + parseInt(distance - POI.radius) + "m");
+        if (parseInt(distance) > 0) POI.placemark.setName(POI.label + " " + parseInt(distance) + "m");
         else POI.placemark.setName(POI.label);
       }//if
 
       //console.log(POI.id, 'distance', distance, 'height', height);
 
-      if (distance < POI.radius*1.3 && distance >= POI.radius && this.currentPOI == i) {
+      var distanceOffset = 400;
 
+      if (distance < 0 && distance > -distanceOffset && this.currentPOI == i) {
+      //if (distance < POI.radius*1.3 && distance >= POI.radius && this.currentPOI == i) {
+
+        //console.log(POI.id, 'leaving', distance);
+
+        if(actionType == ARRIVED_AREA && (POIDistance && POIDistance < distance)) continue;
+
+        actionType = LEAVING_AREA;
+        POIId = POI.id;
+        POIDistance = distance;
+        POILabel = (POI.text ? POI.text : POI.label);
+        POII = i;
         gotAPOI = true;
 
-        if (this.alertType != LEAVING_AREA) {
-
-          var label = (POI.text ? POI.text : POI.label);
-          if(label) $('#area-notification').html('Voçê está deixando '+label);
-
-        }//if
-
-        this.alertType = LEAVING_AREA;
-
-        var volume = 1 - ((distance-POI.radius) / (POI.radius*1.3 - distance));
-        if(distance > POI.radius*1.3) volume = 0;
-        window.audioMonkey.volume(POI.id, volume > 1 ? 1 : (volume < 0 ? 0 : volume));
-
-        //console.log('POI leaving', POI.id, (volume > 1 ? 1 : (volume < 0 ? 0 : volume)));
-
       }//if
-      else if (distance < POI.radius*1.2 && distance >= POI.radius) {
+      else if (distance > 0 && distance < distanceOffset) {
+      //else if (distance < POI.radius*1.2 && distance >= POI.radius) {
 
+        //console.log(POI.id, 'near', distance);
+
+        if(actionType == ARRIVED_AREA && (POIDistance && POIDistance < distance)) continue;
+
+        actionType = NEAR_AREA;
+        POIId = POI.id;
+        POIDistance = distance;
+        POILabel = (POI.text ? POI.text : POI.label);
+        POII = i;
         gotAPOI = true;
 
-        if (this.currentPOI != i) {
-
-          if (this.alertType != NEAR_AREA) {
-
-            var label = (POI.text ? POI.text : POI.label);
-            if(label) $('#area-notification').html('Voçê está se aproximando de '+label);
-
-          }//if
-
-          this.alertType = NEAR_AREA;
-
-          //console.log('POI entering', POI.id);
-
-        }//if
-
       }//if
-      else if (distance < POI.radius) {
+      //else if (distance < POI.radius) {
+      else if (distance <= 0) {
+
+        //console.log(POI.id, 'inside', distance);
 
         //console.log(POI.id, distance, '<', POI.radius);
 
+        if((POIDistance && POIDistance < distance)) continue;
+
+        actionType = ARRIVED_AREA;
+        POIId = POI.id;
+        POIDistance = distance;
+        POILabel = (POI.text ? POI.text : POI.label);
+        POII = i;
         gotAPOI = true;
 
-        if (this.currentPOI != i) {
-
-          if (this.alertType != ARRIVED_AREA) {
-
-            var label = (POI.text ? POI.text : POI.label);
-            if(label) $('#area-notification').html('Voçê chegou a ' + label);
-
-          }//if
-
-        }//if
-
-        if(window.audioMonkey.playbackState(POI.id) == AudioBufferSourceNode.PLAYING_STATE) {
-
-          $('#sound-notification').html('<div style="float: left; width: 44px; height: 44px; background: url(\'/img/radio_small.png\'); background-size: contain; background-position: 50%; background-repeat: no-repeat;"></div>');
-
-        }//if
-
-        this.alertType = ARRIVED_AREA;
-
-        if (this.currentPOI != i) window.audioMonkey.play(POI.id, 0, 0, 1, false);
-        this.currentPOI = i;
-
-        window.audioMonkey.volume(POI.id, 1);
-
-        $('#' + POI.id).addClass('visited');
-        $('#' + POI.id).html('<p>' + POI.label + '</p><div><img class="visited" src="' + window.SITE_URL + "/img/placemark.png" + '"/></div>');
-
-        //progress += POI.widthPerPoi;
-        updateProgress = true;
-
       } //else if
-      /*else if(i < this.currentPOI) {
-          progress += POI.widthPerPoi;
-      }//else*/
 
     } //for
+
+    if(actionType == LEAVING_AREA) {
+
+      if (this.alertType != LEAVING_AREA) {
+
+        if (POILabel) $('#area-notification').html('Voçê está deixando ' + POILabel);
+
+      }//if
+
+      this.alertType = LEAVING_AREA;
+
+      var volume = 1 - (POIDistance / distanceOffset);
+      if (POIDistance > distanceOffset) volume = 0;
+      window.audioMonkey.volume(POIId, volume > 1 ? 1 : (volume < 0 ? 0 : volume));
+
+      //console.log('POI leaving', POI.id, (volume > 1 ? 1 : (volume < 0 ? 0 : volume)));
+
+    }//if
+    else if(actionType == NEAR_AREA) {
+
+      if (this.currentPOI != POII) {
+
+        if (this.alertType != NEAR_AREA) {
+
+          if(POILabel) $('#area-notification').html('Voçê está se aproximando de '+POILabel);
+
+        }//if
+
+        this.alertType = NEAR_AREA;
+
+        //console.log('POI entering', POI.id);
+
+      }//if
+
+    }//else if
+    else if(actionType == ARRIVED_AREA) {
+
+      if (this.currentPOI != POII) {
+
+        if (this.alertType != ARRIVED_AREA) {
+
+          if(POILabel) $('#area-notification').html('Voçê chegou a ' + POILabel);
+
+        }//if
+
+      }//if
+
+      if(window.audioMonkey.playbackState(POIId) == AudioBufferSourceNode.PLAYING_STATE) {
+
+        $('#sound-notification').html('<div style="float: left; width: 44px; height: 44px; background: url(\'/img/radio_small.png\'); background-size: contain; background-position: 50%; background-repeat: no-repeat;"></div>');
+
+      }//if
+
+      this.alertType = ARRIVED_AREA;
+
+      if (this.currentPOI >= 0 && this.currentPOI != POII) window.audioMonkey.stop(window.POIS[this.currentPOI].id);
+      if (this.currentPOI != POII) window.audioMonkey.play(POIId, 0, 0, 1, false);
+      this.currentPOI = POII;
+
+      window.audioMonkey.volume(POIId, 1);
+
+      $('#' + POIId).addClass('visited');
+      $('#' + POIId).html('<p>' + POILabel + '</p><div><img class="visited" src="' + window.SITE_URL + "/img/placemark.png" + '"/></div>');
+
+      //progress += POI.widthPerPoi;
+      updateProgress = true;
+
+    }//else if
 
     if (!gotAPOI) {
 
