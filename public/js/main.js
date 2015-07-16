@@ -121,7 +121,7 @@ window.POIS = [
             { lat: -22.969459799999996, lon: -43.22516890000001 }
         ]*/
     },
-    { id: 'maracana', lat: -22.912134, lon: -43.230128, startLat: -22.912584, startLon: -43.191695, alt: 400, altOffset: 0, heading: 0, radius: 3700, label: 'Estádio do Maracanã', showPlacemark: false,
+    { id: 'maracana', lat: -22.912134, lon: -43.230128, startLat: -22.912584, startLon: -43.191695, alt: 400, altOffset: 0, heading: 0, radius: 3700, label: 'Estádio do Maracanã', text: 'Maracanã', showPlacemark: false,
         area: new Math3D.geometry.Polygon2([
             new Math3D.geometry.Vector2(-22.9012956, -43.1696767),
             new Math3D.geometry.Vector2(-22.8691369, -43.3014965),
