@@ -285,7 +285,7 @@ function AudioMonkey() {
 
     this.playbackState = function(id) {
 
-        if(this.sounds[id].sound && this.sounds[id].sound.playbackState) {
+        if(this.sounds[id] && this.sounds[id].sound && this.sounds[id].sound.playbackState) {
 
             return this.sounds[id].sound.playbackState;
 

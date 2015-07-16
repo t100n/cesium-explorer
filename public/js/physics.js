@@ -1629,7 +1629,8 @@ DrivingSimulator = function() {
 
         if (this.alertType != LEAVING_AREA) {
 
-          $('#area-notification').html('Voçê está deixando '+POI.label);
+          var label = (POI.text ? POI.text : POI.label);
+          if(label) $('#area-notification').html('Voçê está deixando '+label);
 
         }//if
 
@@ -1650,7 +1651,8 @@ DrivingSimulator = function() {
 
           if (this.alertType != NEAR_AREA) {
 
-            $('#area-notification').html('Voçê está se aproximando de '+POI.label);
+            var label = (POI.text ? POI.text : POI.label);
+            if(label) $('#area-notification').html('Voçê está se aproximando de '+label);
 
           }//if
 
@@ -1671,7 +1673,8 @@ DrivingSimulator = function() {
 
           if (this.alertType != ARRIVED_AREA) {
 
-            $('#area-notification').html('Voçê chegou a ' + (POI.text ? POI.text : POI.label));
+            var label = (POI.text ? POI.text : POI.label);
+            if(label) $('#area-notification').html('Voçê chegou a ' + label);
 
           }//if
 
