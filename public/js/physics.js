@@ -3875,6 +3875,15 @@ cesiumExplorer.goto = window.cesiumExplorer.goto = function(lat, lng, altOffset,
 
   alt = cAlt;
 
+  //window.audioMonkey.stop(window.POIS[cesiumExplorer.physics.currentPOI].id);
+  //cesiumExplorer.physics.currentPOI = false;
+  cesiumExplorer.physics.lastIndex = false;
+  $('#progress').css('width', '0%');
+  $('#progress_glider').css('left', '0%');
+  $('#sound-notification').html('');
+  $('#area-notification').html('');
+  $('#placemarks .poi img').attr('src', window.SITE_URL+"/img/placemark_outline.png");
+
   cesiumExplorer.physics.teleported = true;
   cesiumExplorer.physics.bodyModel.initialModelMatrix = false;
 

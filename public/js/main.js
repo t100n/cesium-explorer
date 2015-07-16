@@ -70,11 +70,15 @@ $('#restart').click(function(e) {
 
     cesiumExplorer.goto(window.defaultLat, window.defaultLon, window.defaultAlt, window.defaultSpeed, window.defaultHeading);
 
+    /*
     cesiumExplorer.physics.lastIndex = false;
     $('#progress').css('width', '0%');
     $('#progress_glider').css('left', '0%');
+    $('#sound-notification').html('');
+    $('#area-notification').html('');
 
     $('#placemarks .poi img').attr('src', window.SITE_URL+"/img/placemark_outline.png");
+    */
 });
 
 $('#accel-multiplier').on('change', function(e) {
