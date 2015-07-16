@@ -92,6 +92,25 @@ window.POIS = [
     { id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 400, altOffset: 10, heading: 0, radius: 3000, label: 'Barra da Tijuca' }
 ];
 
+window.SUBPOIS = [
+    { id: 'vila_olimpica', lat: -22.983681100000002, lon: -43.4141063, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Vila Olímpica', showPlacemark: true },
+    { id: 'campo_golfe_olimpico', lat: -23.0047376, lon: -43.4074545, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Campo de Golfe Olímpico', showPlacemark: true },
+    { id: 'complexo_desportivo_deodoro', lat: -22.8582625, lon: -43.410244, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Complexo Esportivo Deodoro', showPlacemark: true },
+    { id: 'riocentro', lat: -22.9779029, lon: -43.4114778, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Riocentro', showPlacemark: true },
+    { id: 'area_campo_golfe', lat: -23.004545, lon: -43.406640, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Área do campo de golfe', showPlacemark: true },
+    { id: 'sambodromo', lat: -22.911452, lon: -43.196804, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Sambódromo', showPlacemark: true },
+    { id: 'estadio_maracana', lat: -22.9121122, lon: -43.2301497, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Estádio do Maracanã', showPlacemark: false },
+    { id: 'engenhao', lat: -22.8935716, lon: -43.292141, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Engenhão', showPlacemark: false },
+    { id: 'maracanazinho', lat: -22.9139306, lon: -43.2292163, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Maracanãzinho', showPlacemark: true },
+    { id: 'marina_gloria', lat: -22.920205, lon: -43.169906, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Marina da Glória', showPlacemark: true },
+    { id: 'lagoa_rodrigo_freitas', lat: -22.9764311, lon: -43.2175112, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Lagoa Rodrigo de Freitas', showPlacemark: true },
+    { id: 'forte_copacabana', lat: -22.9883825, lon: -43.1946373, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Forte Copacabana', showPlacemark: true },
+    { id: 'copacabana', lat: -22.9645577, lon: -43.1716347, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Copacabana', showPlacemark: true },
+    { id: 'pontal', lat: -23.0319125, lon: -43.4711409, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Pontal', showPlacemark: true },
+    { id: 'parque_olimpico', lat: -22.9769053, lon: -43.3947944, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Parque Olímpico', showPlacemark: true },
+    { id: 'linha_48', lat: -23.006961, lon: -43.282948, alt: 0, altOffset: 10, heading: 0, radius: 0, label: 'Linha 48', showPlacemark: true }
+];
+
 window.POISPOLYLINE = [
     { id: 'start', lat: -22.899599, lon: -43.183192, alt: 400, heading: 0, label: '' },
     { id: 'centro', lat: -22.906948, lon: -43.182830, alt: 400, heading: 0, label: 'Centro' },
