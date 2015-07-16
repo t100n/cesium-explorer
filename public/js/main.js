@@ -85,54 +85,60 @@ $('#accel-multiplier').on('change', function(e) {
 var format = (new Audio().canPlayType('audio/ogg') !== '' ? 'ogg' : 'mp3');
 
 window.POIS = [
-    { id: 'centro', lat: -22.906948, lon: -43.182830, alt: 400, altOffset: 10, heading: 0, radius: 200, label: 'Centro' },
-    { id: 'copacabana', lat: -22.972560, lon: -43.184092, alt: 400, altOffset: 10, heading: 0, radius: 3700, label: 'Copacabana' },
-    { id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 400, altOffset: 50, heading: 0, radius: 3700, label: 'Maracanã' },
-    { id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 400, altOffset: 10, heading: 0, radius: 1960, label: 'Deodoro' },
-    { id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 400, altOffset: 10, heading: 0, radius: 3000, label: 'Barra da Tijuca' }
+    { id: 'start', lat: -22.983772, lon: -43.238004, startLat: -22.983772, startLon: -43.238004, alt: 400, altOffset: 10, heading: 0, radius: 3700, label: false, showPlacemark: false },
+    { id: 'copacabana', lat: -22.971414, lon: -43.183009, startLat: -22.979869, startLon: -43.217513, alt: 400, altOffset: 10, heading: 0, radius: 3700, label: 'Copacabana', showPlacemark: true },
+    { id: 'maracana', lat: -22.912134, lon: -43.230128, startLat: -22.912584, startLon: -43.191695, alt: 400, altOffset: 0, heading: 0, radius: 3700, label: 'Estádio do Maracanã', showPlacemark: false },
+    { id: 'deodoro', lat: -22.853387, lon: -43.405504, startLat: -22.845967, startLon: -43.384060, alt: 400, altOffset: 10, heading: 0, radius: 1960, label: 'Deodoro', showPlacemark: true },
+    { id: 'barra-da-tijuca', lat: -22.979135, lon: -43.393849, startLat: -23.003253, startLon: -43.359519, alt: 400, altOffset: 10, heading: 0, radius: 3000, label: 'Barra da Tijuca', showPlacemark: true }
 ];
 
 window.SUBPOIS = [
-    { id: 'vila_olimpica', lat: -22.983681100000002, lon: -43.4141063, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Vila Olímpica', showPlacemark: true },
-    { id: 'campo_golfe_olimpico', lat: -23.0047376, lon: -43.4074545, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Campo de Golfe Olímpico', showPlacemark: true },
-    { id: 'complexo_desportivo_deodoro', lat: -22.8582625, lon: -43.410244, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Complexo Esportivo Deodoro', showPlacemark: true },
-    { id: 'riocentro', lat: -22.9779029, lon: -43.4114778, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Riocentro', showPlacemark: true },
-    { id: 'area_campo_golfe', lat: -23.004545, lon: -43.406640, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Área do campo de golfe', showPlacemark: true },
-    { id: 'sambodromo', lat: -22.911452, lon: -43.196804, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Sambódromo', showPlacemark: true },
-    { id: 'estadio_maracana', lat: -22.9121122, lon: -43.2301497, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Estádio do Maracanã', showPlacemark: false },
-    { id: 'engenhao', lat: -22.8935716, lon: -43.292141, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Engenhão', showPlacemark: false },
-    { id: 'maracanazinho', lat: -22.9139306, lon: -43.2292163, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Maracanãzinho', showPlacemark: true },
-    { id: 'marina_gloria', lat: -22.920205, lon: -43.169906, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Marina da Glória', showPlacemark: true },
-    { id: 'lagoa_rodrigo_freitas', lat: -22.9764311, lon: -43.2175112, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Lagoa Rodrigo de Freitas', showPlacemark: true },
-    { id: 'forte_copacabana', lat: -22.9883825, lon: -43.1946373, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Forte Copacabana', showPlacemark: true },
-    { id: 'copacabana', lat: -22.9645577, lon: -43.1716347, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Copacabana', showPlacemark: true },
-    { id: 'pontal', lat: -23.0319125, lon: -43.4711409, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Pontal', showPlacemark: true },
-    { id: 'parque_olimpico', lat: -22.9769053, lon: -43.3947944, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Parque Olímpico', showPlacemark: true },
-    { id: 'linha_48', lat: -23.006961, lon: -43.282948, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Linha 48', showPlacemark: true }
+    { id: 'vila_olimpica', lat: -22.983681100000002, lon: -43.4141063, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Vila Olímpica', showPlacemark: true, font: "14px sans-serif" },
+    { id: 'campo_golfe_olimpico', lat: -23.0047376, lon: -43.4074545, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Campo de Golfe Olímpico', showPlacemark: true, font: "14px sans-serif" },
+    { id: 'complexo_desportivo_deodoro', lat: -22.8582625, lon: -43.410244, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Complexo Esportivo Deodoro', showPlacemark: true, font: "14px sans-serif" },
+    { id: 'riocentro', lat: -22.9779029, lon: -43.4114778, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Riocentro', showPlacemark: true, font: "14px sans-serif" },
+    { id: 'area_campo_golfe', lat: -23.004545, lon: -43.406640, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Área do campo de golfe', showPlacemark: true, font: "14px sans-serif" },
+    { id: 'sambodromo', lat: -22.911452, lon: -43.196804, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Sambódromo', showPlacemark: true, font: "14px sans-serif" },
+    //{ id: 'estadio_maracana', lat: -22.9121122, lon: -43.2301497, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Estádio do Maracanã', showPlacemark: false, font: "14px sans-serif" },
+    { id: 'engenhao', lat: -22.8935716, lon: -43.292141, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Engenhão', showPlacemark: false, font: "14px sans-serif" },
+    { id: 'maracanazinho', lat: -22.9139306, lon: -43.2292163, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Maracanãzinho', showPlacemark: true, font: "14px sans-serif" },
+    { id: 'marina_gloria', lat: -22.920205, lon: -43.169906, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Marina da Glória', showPlacemark: true, font: "14px sans-serif" },
+    { id: 'lagoa_rodrigo_freitas', lat: -22.9764311, lon: -43.2175112, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Lagoa Rodrigo de Freitas', showPlacemark: true, font: "14px sans-serif" },
+    { id: 'forte_copacabana', lat: -22.9883825, lon: -43.1946373, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Forte Copacabana', showPlacemark: true, font: "14px sans-serif" },
+    //{ id: 'copacabana', lat: -22.9645577, lon: -43.1716347, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Copacabana', showPlacemark: true, font: "14px sans-serif" },
+    { id: 'pontal', lat: -23.0319125, lon: -43.4711409, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Pontal', showPlacemark: true, font: "14px sans-serif" },
+    { id: 'parque_olimpico', lat: -22.9769053, lon: -43.3947944, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Parque Olímpico', showPlacemark: true, font: "14px sans-serif" },
+    { id: 'linha_48', lat: -23.006961, lon: -43.282948, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Linha 48', showPlacemark: true, font: "14px sans-serif" }
 ];
 
 window.POISPOLYLINE = [
-    { id: 'start', lat: -22.899599, lon: -43.183192, alt: 400, heading: 0, label: '' },
-    { id: 'centro', lat: -22.906948, lon: -43.182830, alt: 400, heading: 0, label: 'Centro' },
-    { id: 'centro_copacabana', lat: -22.952560, lon: -43.183092, alt: 500, heading: 0, label: '' },
-    { id: 'copacabana', lat: -22.972560, lon: -43.184092, alt: 450, heading: 0, label: 'Copacabana' },
-    { id: 'copacabana_maracana_1', lat: -22.977084, lon: -43.194288, alt: 550, heading: 0, label: '' },
-    { id: 'copacabana_maracana_2', lat: -22.971717, lon: -43.210723, alt: 600, heading: 0, label: '' },
-    { id: 'copacabana_maracana_3', lat: -22.957938, lon: -43.219971, alt: 700, heading: 0, label: '' },
-    { id: 'copacabana_maracana_4', lat: -22.943529, lon: -43.220543, alt: 800, heading: 0, label: '' },
-    { id: 'maracana', lat: -22.912134, lon: -43.230128, alt: 450, heading: 0, label: 'Maracanã' },
-    { id: 'maracana_deodoro_1', lat: -22.877181, lon: -43.293723, alt: 400, heading: 0, label: '' },
-    { id: 'maracana_deodoro_2', lat: -22.850427, lon: -43.336085, alt: 450, heading: 0, label: '' },
-    { id: 'maracana_deodoro_3', lat: -22.851215, lon: -43.370183, alt: 400, heading: 0, label: '' },
-    { id: 'deodoro', lat: -22.856096, lon: -43.385161, alt: 100, heading: 0, label: 'Deodoro' },
-    { id: 'deodoro-barra-da-tijuca_1', lat: -22.869822, lon: -43.396160, alt: 400, heading: 0, label: '' },
-    { id: 'deodoro-barra-da-tijuca_2', lat: -22.888635, lon: -43.375008, alt: 450, heading: 0, label: '' },
-    { id: 'deodoro-barra-da-tijuca_3', lat: -22.921269, lon: -43.363363, alt: 550, heading: 0, label: '' },
-    { id: 'deodoro-barra-da-tijuca_4', lat: -22.953611, lon: -43.368828, alt: 450, heading: 0, label: '' },
-    { id: 'barra-da-tijuca', lat: -23.000138, lon: -43.366109, alt: 400, heading: 0, label: 'Barra da Tijuca', last: true },
-    { id: 'barra-da-tijuca_1', lat: -23.007742, lon: -43.366201, alt: 400, heading: 0, label: '' },
-    { id: 'barra-da-tijuca_2', lat: -23.011035, lon: -43.363473, alt: 400, heading: 0, label: '' },
-    { id: 'barra-da-tijuca_3', lat: -23.010944, lon: -43.358813, alt: 0, heading: 0, label: '' }
+    { id: 'start', lat: -22.983772, lon: -43.238004, alt: 400, heading: 0, label: '' },
+    { id: 'start_copacabana_1', lat: -22.979869, lon: -43.217513, alt: 400, heading: 0, label: '' },
+    { id: 'start_copacabana_2', lat: -22.973226, lon: -43.202312, alt: 400, heading: 0, label: '' },
+    { id: 'copacabana', lat: -22.960310, lon: -43.190569, alt: 450, heading: 0, label: 'Copacabana' },
+    { id: 'copacabana_maracana_1', lat: -22.943564, lon: -43.185581, alt: 550, heading: 0, label: '' },
+    { id: 'copacabana_maracana_2', lat: -22.925170, lon: -43.183540, alt: 600, heading: 0, label: '' },
+    { id: 'copacabana_maracana_3', lat: -22.912584, lon: -43.191695, alt: 700, heading: 0, label: '' },
+    { id: 'copacabana_maracana_4', lat: -22.906469, lon: -43.209593, alt: 800, heading: 0, label: '' },
+    { id: 'maracana', lat: -22.903986, lon: -43.228818, alt: 800, heading: 0, label: '' },
+    { id: 'maracana_deodoro_1', lat: -22.901007, lon: -43.248223, alt: 800, heading: 0, label: '' },
+    { id: 'maracana_deodoro_2', lat: -22.885896, lon: -43.291846, alt: 800, heading: 0, label: '' },
+    { id: 'maracana_deodoro_3', lat: -22.864475, lon: -43.333393, alt: 800, heading: 0, label: '' },
+    { id: 'maracana_deodoro_4', lat: -22.852523, lon: -43.353655, alt: 800, heading: 0, label: '' },
+    { id: 'maracana_deodoro_5', lat: -22.845967, lon: -43.384060, alt: 800, heading: 0, label: '' },
+    { id: 'deodoro', lat: -22.853387, lon: -43.405504, alt: 100, heading: 0, label: 'Deodoro' },
+    { id: 'deodoro-barra-da-tijuca_1', lat: -22.863374, lon: -43.413788, alt: 400, heading: 0, label: '' },
+    { id: 'deodoro-barra-da-tijuca_2', lat: -22.871595, lon: -43.414145, alt: 450, heading: 0, label: '' },
+    { id: 'deodoro-barra-da-tijuca_3', lat: -22.899870, lon: -43.397193, alt: 550, heading: 0, label: '' },
+    { id: 'deodoro-barra-da-tijuca_4', lat: -22.950823, lon: -43.356545, alt: 450, heading: 0, label: '' },
+    { id: 'deodoro-barra-da-tijuca_5', lat: -22.982299, lon: -43.345044, alt: 450, heading: 0, label: '' },
+    { id: 'deodoro-barra-da-tijuca_6', lat: -22.995980, lon: -43.346118, alt: 450, heading: 0, label: '' },
+    { id: 'barra-da-tijuca', lat: -23.003253, lon: -43.359519, alt: 450, heading: 0, label: '' },
+    { id: 'barra-da-tijuca_1', lat: -23.005210, lon: -43.369574, alt: 450, heading: 0, label: '' },
+    { id: 'barra-da-tijuca_2', lat: -23.001914, lon: -43.402520, alt: 450, heading: 0, label: '' },
+    { id: 'barra-da-tijuca_3', lat: -23.012956, lon: -43.445493, alt: 450, heading: 0, label: '' },
+    { id: 'barra-da-tijuca_1', lat: -23.031083, lon: -43.471277, alt: 450, heading: 0, label: '' },
+    { id: 'end', lat: -23.050438, lon: -43.479223, alt: 0, heading: 0, label: '' }
 ];
 
 window.models = [
@@ -237,11 +243,11 @@ window.speedMultiplier = $('#accel-multiplier').val();
 
 // Physics initial data
 window.unit = 'Km';
-window.defaultLat = window.lat = -22.899599; //-22.888286010415;
-window.defaultLon = window.lon = -43.183192; //-43.17069974208982;
+window.defaultLat = window.lat = -22.983772; //-22.888286010415;
+window.defaultLon = window.lon = -43.238004; //-43.17069974208982;
 window.defaultAlt = window.alt = 300;
 window.defaultSpeed = window.speed = 100;
-window.defaultHeading = window.heading = 180;
+window.defaultHeading = window.heading = 90;
 window.defaultTilt = window.tilt = -0.0014993722426054328;
 window.defaultRoll = window.roll = 0;
 
@@ -315,11 +321,11 @@ try {
     window.audioMonkey.add("maracana", { ogg: '/sounds/maracana.ogg', mp3: '/sounds/maracana.mp3' });
     */
 
-    window.audioMonkey.add("barra-da-tijuca", { ogg: '/sounds/test/Air_Raid.ogg', mp3: '/sounds/test/Air_Raid.mp3' });
-    window.audioMonkey.add("centro", { ogg: '/sounds/test/Exploding_Hearts.ogg', mp3: '/sounds/test/Exploding_Hearts.mp3' });
+    window.audioMonkey.add("start", { ogg: '/sounds/test/Exploding_Hearts.ogg', mp3: '/sounds/test/Exploding_Hearts.mp3' });
     window.audioMonkey.add("copacabana", { ogg: '/sounds/test/Hawk_Land.ogg', mp3: '/sounds/test/Hawk_Land.mp3' });
-    window.audioMonkey.add("deodoro", { ogg: '/sounds/test/The_End_is_Nigh.ogg', mp3: '/sounds/test/The_End_is_Nigh.mp3' });
     window.audioMonkey.add("maracana", { ogg: '/sounds/test/Welcomed_Death.ogg', mp3: '/sounds/test/Welcomed_Death.mp3' });
+    window.audioMonkey.add("deodoro", { ogg: '/sounds/test/The_End_is_Nigh.ogg', mp3: '/sounds/test/The_End_is_Nigh.mp3' });
+    window.audioMonkey.add("barra-da-tijuca", { ogg: '/sounds/test/Air_Raid.ogg', mp3: '/sounds/test/Air_Raid.mp3' });
 
     window.audioMonkey.add("forward", { ogg: v.sound.ogg.url, mp3: v.sound.mp3.url });
     window.audioMonkey.add("slip", { ogg: v.slip.ogg.url, mp3: v.slip.mp3.url });

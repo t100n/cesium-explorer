@@ -60,11 +60,13 @@ var rotCameraMatrix = function(mat, h, t, r) {
   return mat;
 };
 
-function Placemark(scene, lat, lng, name, url) {
+function Placemark(scene, lat, lng, name, url, font) {
   this.scene = scene;
   this.visibility = true;
   this.lat = lat;
   this.lng = lng;
+  this.font = font;
+  this.url = url;
   this.alt = 0;
 
   this.billboards = this.scene.primitives.add(new Cesium.BillboardCollection());
@@ -85,7 +87,7 @@ function Placemark(scene, lat, lng, name, url) {
       position: new Cesium.Cartesian3(0, 0, 5),
       //eyeOffset: new Cesium.Cartesian3(0,0,0),
       horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-      font: '18px sans-serif'
+      font: font ? font : '18px sans-serif'
     });
   }//if
 
@@ -103,11 +105,15 @@ function Placemark(scene, lat, lng, name, url) {
     } //for
   }//if
 
-  this.setName = function(name) {
+  this.setName = function(name, font) {
 
     for (var i = 0, n = this.labels.length; i < n; i++) {
       var x = this.labels.get(i);
       x.text = name;
+
+      if(font) {
+        x.font = font;
+      }//if
     } //for
 
   };
@@ -1459,22 +1465,26 @@ DrivingSimulator = function() {
 
       var POI = window.POIS[i];
       POI.latLng = new LatLng(POI.lat, POI.lon);
-      POI.startLatLng = POI.latLng.createOffset(-180, 500);
-      POI.placemark = new Placemark(this.scene, POI.lat, POI.lon, POI.label, window.SITE_URL + "/img/placemark_big.png");
-      POI.placemark.setVisibility(true);
-      POI.heading = POI.startLatLng.heading(POI.latLng) * 180 / Math.PI;
+      POI.startLatLng = new LatLng(POI.startLat, POI.startLon);
 
-      POI.placemarkMinimap = new Placemark(this.minimap.scene, POI.lat, POI.lon, POI.label, window.SITE_URL + "/img/placemark.png");
-      POI.placemarkMinimap.setVisibility(true);
+      if(POI.label) {
+        POI.placemark = new Placemark(this.scene, POI.lat, POI.lon, POI.label, POI.showPlacemark ? window.SITE_URL + "/img/placemark_big.png" : false, POI.font);
+        POI.placemark.setVisibility(true);
+        POI.heading = POI.startLatLng.heading(POI.latLng) * 180 / Math.PI;
 
-      //var position = Cesium.Cartesian3.fromDegrees(POI.lon, POI.lat, POI.alt, this.scene.globe.ellipsoid, new Cesium.Cartesian3());
+        POI.placemarkMinimap = new Placemark(this.minimap.scene, POI.lat, POI.lon, POI.label, window.SITE_URL + "/img/placemark.png", POI.font);
+        POI.placemarkMinimap.setVisibility(true);
 
-      //var distance = Cesium.Cartesian3.distance(position, currentPosition);
-      //POI.widthPerPoi = (distance / this.totalDistance) * 100;
+        //var position = Cesium.Cartesian3.fromDegrees(POI.lon, POI.lat, POI.alt, this.scene.globe.ellipsoid, new Cesium.Cartesian3());
 
-      $('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto(' + POI.startLatLng.lat() + ', ' + POI.startLatLng.lng() + ', ' + POI.alt + ', cesiumExplorer.physics.vehicle.speedKmh, ' + POI.heading + ');" id="' + POI.id + '" class="poi"><p>' + POI.label + '</p><div><img class="not-visited" src="' + window.SITE_URL + "/img/placemark_outline.png" + '"/></div></a>');
+        //var distance = Cesium.Cartesian3.distance(position, currentPosition);
+        //POI.widthPerPoi = (distance / this.totalDistance) * 100;
 
-      //$('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto('+POI.startLatLng.lat()+', '+POI.startLatLng.lng()+', '+POI.alt+', cesiumExplorer.physics.vehicle.speedKmh, '+POI.heading+');" id="'+POI.id+'" class="poi" style="width: '+this.widthPerPoi+'%"><p>'+POI.label+'</p><div><img class="not-visited" src="'+window.SITE_URL+"/img/placemark_outline.png"+'"/></div></a>');
+        $('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto(' + POI.startLatLng.lat() + ', ' + POI.startLatLng.lng() + ', ' + POI.alt + ', cesiumExplorer.physics.vehicle.speedKmh, ' + POI.heading + ');" id="' + POI.id + '" class="poi"><p>' + POI.label + '</p><div><img class="not-visited" src="' + window.SITE_URL + "/img/placemark_outline.png" + '"/></div></a>');
+
+        //$('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto('+POI.startLatLng.lat()+', '+POI.startLatLng.lng()+', '+POI.alt+', cesiumExplorer.physics.vehicle.speedKmh, '+POI.heading+');" id="'+POI.id+'" class="poi" style="width: '+this.widthPerPoi+'%"><p>'+POI.label+'</p><div><img class="not-visited" src="'+window.SITE_URL+"/img/placemark_outline.png"+'"/></div></a>');
+
+      }//if
 
     } //for
 
@@ -1482,7 +1492,7 @@ DrivingSimulator = function() {
 
       var POI = window.SUBPOIS[i];
       POI.latLng = new LatLng(POI.lat, POI.lon);
-      POI.placemark = new Placemark(this.scene, POI.lat, POI.lon, POI.label, POI.showPlacemark ? window.SITE_URL + "/img/placemark_small.png" : false);
+      POI.placemark = new Placemark(this.scene, POI.lat, POI.lon, POI.label, POI.showPlacemark ? window.SITE_URL + "/img/placemark_small.png" : false, POI.font);
       POI.placemark.setVisibility(true);
 
     } //for
@@ -1604,8 +1614,11 @@ DrivingSimulator = function() {
       var distance = POI.latLng.distance(myLatLng);
 
       POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100, distance/40);
-      if(parseInt(distance-POI.radius) > 0) POI.placemark.setName(POI.label+" "+parseInt(distance-POI.radius)+"m");
-      else POI.placemark.setName(POI.label);
+
+      if(POI.label) {
+        if (parseInt(distance - POI.radius) > 0) POI.placemark.setName(POI.label + " " + parseInt(distance - POI.radius) + "m");
+        else POI.placemark.setName(POI.label);
+      }//if
 
       //console.log('distance', distance, 'height', height);
 
