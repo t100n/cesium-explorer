@@ -91,50 +91,31 @@ var format = (new Audio().canPlayType('audio/ogg') !== '' ? 'ogg' : 'mp3');
 window.POIS = [
     { id: 'start_game', lat: -22.983772, lon: -43.238004, startLat: -22.983772, startLon: -43.238004, alt: 400, altOffset: 10, heading: 0, radius: 3700, label: false, showPlacemark: false,
         area: new Math3D.geometry.Polygon2([
-            new Math3D.geometry.Vector2(-22.9694598, -43.2252359),
-            new Math3D.geometry.Vector2(-22.969457300000002, -43.251457200000004),
-            new Math3D.geometry.Vector2(-22.9971134, -43.2526589),
-            new Math3D.geometry.Vector2(-22.9971134, -43.2143784),
-            new Math3D.geometry.Vector2(-22.9694598, -43.2252359)
-        ])/*[
-            { lat: -22.9694598, lon: -43.2252359 },
-            { lat: -22.969457300000002, lon: -43.251457200000004 },
-            { lat: -22.9971134, lon: -43.2526589 },
-            { lat: -22.9971134, lon: -43.2143784 },
-            { lat: -22.9694598, lon: -43.2252359 }
-        ]*/
+            new Math3D.geometry.Vector2(-22.9693018, -43.2283258),
+            new Math3D.geometry.Vector2(-22.9692993, -43.2526588),
+            new Math3D.geometry.Vector2(-22.9969554, -43.2538605),
+            new Math3D.geometry.Vector2(-22.996836800000004, -43.2179404),
+            new Math3D.geometry.Vector2(-22.9693018, -43.2283258)
+        ])
     },
     { id: 'copacabana', lat: -22.971414, lon: -43.183009, startLat: -22.979869, startLon: -43.217513, alt: 400, altOffset: 10, heading: 0, radius: 3700, label: 'Copacabana', showPlacemark: true,
         area: new Math3D.geometry.Polygon2([
-            new Math3D.geometry.Vector2(-22.969459799999996, -43.22516890000001),
-            new Math3D.geometry.Vector2(-22.9971035, -43.2142925),
+            new Math3D.geometry.Vector2(-22.9674446, -43.2234094),
+            new Math3D.geometry.Vector2(-22.996906, -43.2116317),
             new Math3D.geometry.Vector2(-22.9972714, -43.129921),
             new Math3D.geometry.Vector2(-22.9008459, -43.1292343),
-            new Math3D.geometry.Vector2(-22.9013203, -43.1692314),
-            new Math3D.geometry.Vector2(-22.969459799999996, -43.22516890000001)
-        ])/*[
-            { lat: -22.969459799999996, lon: -43.22516890000001 },
-            { lat: -22.9971035, lon: -43.2142925 },
-            { lat: -22.9972714, lon: -43.129921 },
-            { lat: -22.9008459, lon: -43.1292343 },
-            { lat: -22.9013203, lon: -43.1692314 },
-            { lat: -22.969459799999996, lon: -43.22516890000001 }
-        ]*/
+            new Math3D.geometry.Vector2(-22.9014784, -43.1665706),
+            new Math3D.geometry.Vector2(-22.9674446, -43.2234094)
+        ])
     },
     { id: 'maracana', lat: -22.912134, lon: -43.230128, startLat: -22.912584, startLon: -43.191695, alt: 400, altOffset: 0, heading: 0, radius: 3700, label: 'Estádio do Maracanã', text: 'Maracanã', showPlacemark: false,
         area: new Math3D.geometry.Polygon2([
-            new Math3D.geometry.Vector2(-22.9012956, -43.1696767),
+            new Math3D.geometry.Vector2(-22.9002677, -43.1747407),
             new Math3D.geometry.Vector2(-22.8691369, -43.3014965),
-            new Math3D.geometry.Vector2(-22.8941251, -43.308706300000004),
-            new Math3D.geometry.Vector2(-22.9354721, -43.19764140000001),
-            new Math3D.geometry.Vector2(-22.9012956, -43.1696767)
-        ])/*[
-            { lat: -22.9012956, lon: -43.1696767 },
-            { lat: -22.8691369, lon: -43.3014965 },
-            { lat: -22.8941251, lon: -43.308706300000004 },
-            { lat: -22.9354721, lon: -43.19764140000001 },
-            { lat: -22.9012956, lon: -43.1696767 }
-        ]*/
+            new Math3D.geometry.Vector2(-22.8966553, -43.318490999999995),
+            new Math3D.geometry.Vector2(-22.9346026, -43.20459369999999),
+            new Math3D.geometry.Vector2(-22.9002677, -43.1747407)
+        ])
     },
     { id: 'deodoro', lat: -22.853387, lon: -43.405504, startLat: -22.845967, startLon: -43.384060, alt: 400, altOffset: 10, heading: 0, radius: 2700, label: 'Deodoro', showPlacemark: true },
     { id: 'barra-da-tijuca', lat: -22.979135, lon: -43.393849, startLat: -23.003253, startLon: -43.359519, alt: 400, altOffset: 10, heading: 0, radius: 3000, label: 'Barra da Tijuca', showPlacemark: true,
@@ -150,19 +131,7 @@ window.POIS = [
             new Math3D.geometry.Vector2(-23.0165483, -43.3558273),
             new Math3D.geometry.Vector2(-23.0070682, -43.3520508),
             new Math3D.geometry.Vector2(-22.968192900000002, -43.3491326)
-        ])/*[
-            { lat: -22.968192900000002, lon: -43.3491326 },
-            { lat: -22.9676397, lon: -43.4095574 },
-            { lat: -22.999799700000004, lon: -43.4409714 },
-            { lat: -23.0171803, lon: -43.4914398 },
-            { lat: -23.043089, lon: -43.4912682 },
-            { lat: -23.0484596, lon: -43.47049710000001 },
-            { lat: -23.0392977, lon: -43.4608841 },
-            { lat: -23.0263437, lon: -43.45676420000001 },
-            { lat: -23.0165483, lon: -43.3558273 },
-            { lat: -23.0070682, lon: -43.3520508 },
-            { lat: -22.968192900000002, lon: -43.3491326 }
-        ]*/
+        ])
     }
 ];
 

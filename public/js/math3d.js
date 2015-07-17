@@ -339,6 +339,54 @@ Math3D.geometry.Polygon2 = function (vertices) {
 
     };
 
+    this.linePointDistance = function(A, B, C, isSegement) {
+
+        //Compute the dot product AB ⋅ BC
+        var dot = function(A, B, C) {
+            var AB = { x: 0, y: 0 };
+            var BC = { x: 0, y: 0 };
+            AB.x = B.x- A.x;
+            AB.y = B.y- A.y;
+            BC.x = C.x- B.x;
+            BC.y = C.y- B.y;
+            var dot = AB.x * BC.x + AB.y * BC.y;
+            return dot;
+        }
+
+        //Compute the cross product AB x AC
+        var cross = function(A, B, C) {
+            var AB = { x: 0, y: 0 };
+            var AC = { x: 0, y: 0 };
+            AB.x = B.x- A.x;
+            AB.y = B.y- A.y;
+            AC.x = C.x- A.x;
+            AC.y = C.y- A.y;
+            var cross = AB.x * AC.y - AB.y * AC.x;
+            return cross;
+        }
+
+        //Compute the distance from A to B
+        var distance = function(A, B) {
+            var d1 = A.x - B.x;
+            var d2 = A.y - B.y;
+            return Math.sqrt(d1*d1+d2*d2);
+        }
+
+        //Compute the distance from AB to C
+        //if isSegment is true, AB is a segment, not a line.
+        var dist = cross(A,B,C) / distance(A,B);
+
+        if(isSegement) {
+            var dot1 = dot(A,B,C);
+            if(dot1 > 0) return distance(B,C);
+            var dot2 = dot(B,A,C);
+            if(dot2 > 0) return distance(A,C);
+        }//if
+
+        return Math.abs(dist);
+
+    };
+
     /**
      *
      * Get the distance between a point to itself
@@ -351,7 +399,7 @@ Math3D.geometry.Polygon2 = function (vertices) {
             i,
             n;
 
-        for (i = 0, n = this.vertices.length-1; i < n; i++) {
+        for (i = 0, n = this.vertices.length; i < n; i++) {
 
             var previousIndex = i - 1;
             if(previousIndex < 0){
@@ -362,6 +410,7 @@ Math3D.geometry.Polygon2 = function (vertices) {
             var previousPoint = this.vertices[previousIndex];
 
             var segmentDistance = this.distanceFromLine({ x: x, y: y }, previousPoint, currentPoint);
+            //var segmentDistance = this.linePointDistance(previousPoint, currentPoint, { x: x, y: y }, true);
 
             if(segmentDistance < result){
                 result = segmentDistance;
