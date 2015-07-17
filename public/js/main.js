@@ -89,7 +89,7 @@ $('#accel-multiplier').on('change', function(e) {
 var format = (new Audio().canPlayType('audio/ogg') !== '' ? 'ogg' : 'mp3');
 
 window.POIS = [
-    { id: 'start', lat: -22.983772, lon: -43.238004, startLat: -22.983772, startLon: -43.238004, alt: 400, altOffset: 10, heading: 0, radius: 3700, label: false, showPlacemark: false,
+    { id: 'start_game', lat: -22.983772, lon: -43.238004, startLat: -22.983772, startLon: -43.238004, alt: 400, altOffset: 10, heading: 0, radius: 3700, label: false, showPlacemark: false,
         area: new Math3D.geometry.Polygon2([
             new Math3D.geometry.Vector2(-22.9694598, -43.2252359),
             new Math3D.geometry.Vector2(-22.969457300000002, -43.251457200000004),
@@ -186,21 +186,21 @@ window.SUBPOIS = [
 ];
 
 window.POISPOLYLINE = [
-    { id: 'start', lat: -22.983772, lon: -43.238004, alt: 400, heading: 0, label: '' },
-    { id: 'start_copacabana_1', lat: -22.979869, lon: -43.217513, alt: 400, heading: 0, label: '' },
-    { id: 'start_copacabana_2', lat: -22.973226, lon: -43.202312, alt: 400, heading: 0, label: '' },
-    { id: 'copacabana', lat: -22.960310, lon: -43.190569, alt: 450, heading: 0, label: 'Copacabana' },
+    { id: 'start_game', lat: -22.983772, lon: -43.238004, alt: 400, heading: 0, label: '' },
+    { id: 'copacabana', lat: -22.979869, lon: -43.217513, alt: 400, heading: 0, label: '' },
+    { id: 'start_game_copacabana_1', lat: -22.973226, lon: -43.202312, alt: 400, heading: 0, label: '' },
+    { id: 'start_game_copacabana_2', lat: -22.960310, lon: -43.190569, alt: 450, heading: 0, label: 'Copacabana' },
     { id: 'copacabana_maracana_1', lat: -22.943564, lon: -43.185581, alt: 550, heading: 0, label: '' },
     { id: 'copacabana_maracana_2', lat: -22.925170, lon: -43.183540, alt: 600, heading: 0, label: '' },
-    { id: 'copacabana_maracana_3', lat: -22.912584, lon: -43.191695, alt: 700, heading: 0, label: '' },
-    { id: 'copacabana_maracana_4', lat: -22.906469, lon: -43.209593, alt: 800, heading: 0, label: '' },
-    { id: 'maracana', lat: -22.903986, lon: -43.228818, alt: 800, heading: 0, label: '' },
+    { id: 'maracana', lat: -22.912584, lon: -43.191695, alt: 700, heading: 0, label: '' },
+    { id: 'copacabana_maracana_3', lat: -22.906469, lon: -43.209593, alt: 800, heading: 0, label: '' },
+    { id: 'copacabana_maracana_4', lat: -22.903986, lon: -43.228818, alt: 800, heading: 0, label: '' },
     { id: 'maracana_deodoro_1', lat: -22.901007, lon: -43.248223, alt: 800, heading: 0, label: '' },
     { id: 'maracana_deodoro_2', lat: -22.885896, lon: -43.291846, alt: 800, heading: 0, label: '' },
     { id: 'maracana_deodoro_3', lat: -22.864475, lon: -43.333393, alt: 800, heading: 0, label: '' },
     { id: 'maracana_deodoro_4', lat: -22.852523, lon: -43.353655, alt: 800, heading: 0, label: '' },
-    { id: 'maracana_deodoro_5', lat: -22.845967, lon: -43.384060, alt: 800, heading: 0, label: '' },
-    { id: 'deodoro', lat: -22.853387, lon: -43.405504, alt: 100, heading: 0, label: 'Deodoro' },
+    { id: 'deodoro', lat: -22.845967, lon: -43.384060, alt: 800, heading: 0, label: '' },
+    { id: 'maracana_deodoro_5', lat: -22.853387, lon: -43.405504, alt: 100, heading: 0, label: 'Deodoro' },
     { id: 'deodoro-barra-da-tijuca_1', lat: -22.863374, lon: -43.413788, alt: 400, heading: 0, label: '' },
     { id: 'deodoro-barra-da-tijuca_2', lat: -22.871595, lon: -43.414145, alt: 450, heading: 0, label: '' },
     { id: 'deodoro-barra-da-tijuca_3', lat: -22.899870, lon: -43.397193, alt: 550, heading: 0, label: '' },
@@ -395,7 +395,7 @@ try {
     window.audioMonkey.add("maracana", { ogg: '/sounds/maracana.ogg', mp3: '/sounds/maracana.mp3' });
     */
 
-    window.audioMonkey.add("start", { ogg: '/sounds/test/Exploding_Hearts.ogg', mp3: '/sounds/test/Exploding_Hearts.mp3' });
+    window.audioMonkey.add("start_game", { ogg: '/sounds/test/Exploding_Hearts.ogg', mp3: '/sounds/test/Exploding_Hearts.mp3' });
     window.audioMonkey.add("copacabana", { ogg: '/sounds/test/Hawk_Land.ogg', mp3: '/sounds/test/Hawk_Land.mp3' });
     window.audioMonkey.add("maracana", { ogg: '/sounds/test/Welcomed_Death.ogg', mp3: '/sounds/test/Welcomed_Death.mp3' });
     window.audioMonkey.add("deodoro", { ogg: '/sounds/test/The_End_is_Nigh.ogg', mp3: '/sounds/test/The_End_is_Nigh.mp3' });

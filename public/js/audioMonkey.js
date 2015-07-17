@@ -34,6 +34,11 @@ function AudioMonkey() {
     AudioBufferSourceNode.prototype.SCHEDULED_STATE = 1;
     AudioBufferSourceNode.prototype.UNSCHEDULED_STATE = 0;
 
+    this.FINISHED_STATE = 3;
+    this.PLAYING_STATE = 2;
+    this.SCHEDULED_STATE = 1;
+    this.UNSCHEDULED_STATE = 0;
+
     this.FADE_TIME = 1;
     this.FREQ_MUL = 7000;
     this.QUAL_MUL = 30;
@@ -189,7 +194,7 @@ function AudioMonkey() {
             try {
                 this.sounds[id].pausedAt = Date.now();
 
-                if(typeof this.sounds[id] == "undefined" || !this.sounds[id].loaded || !this.sounds[id].sound || (this.sounds[id].sound && this.sounds[id].sound.playbackState && this.sounds[id].sound.playbackState == AudioBufferSourceNode.FINISHED_STATE)) continue;
+                if(typeof this.sounds[id] == "undefined" || !this.sounds[id].loaded || !this.sounds[id].sound || (this.playbackState(id) == this.FINISHED_STATE)) continue;
 
                 if (!this.sounds[id].sound.stop)
                     this.sounds[id].sound.stop = this.sounds[id].sound.noteOff;
@@ -200,7 +205,7 @@ function AudioMonkey() {
                     //log("error", this.class, id, err);
                 }// catch
 
-                if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = AudioBufferSourceNode.FINISHED_STATE;
+                //if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = this.FINISHED_STATE;
             } catch(err) {
                 log("error", err);
             }
@@ -285,13 +290,14 @@ function AudioMonkey() {
 
     this.playbackState = function(id) {
 
-        if(this.sounds[id] && this.sounds[id].sound && this.sounds[id].sound.playbackState) {
+        if(this.sounds[id] && this.sounds[id].sound) {
 
-            return this.sounds[id].sound.playbackState;
+            if(this.sounds[id].sound.playbackState) return this.sounds[id].sound.playbackState;
+            if(this.sounds[id].sound.context.state == "running") return this.PLAYING_STATE;
 
         }//if
 
-        return AudioBufferSourceNode.FINISHED_STATE;
+        return this.FINISHED_STATE;
 
     };
 
@@ -315,7 +321,7 @@ function AudioMonkey() {
             else if(window.globalVolume == 0) return;
 
             if(this.sounds[id].reversed && rate>0) return this.stop(id);
-            if((this.sounds[id].sound && this.sounds[id].sound.playbackState == AudioBufferSourceNode.PLAYING_STATE && !this.sounds[id].reversed)) {
+            if((this.sounds[id].sound && this.playbackState(id) == this.PLAYING_STATE && !this.sounds[id].reversed)) {
                 if(loop) return;
                 else this.stop(id);
             }//if
@@ -411,9 +417,14 @@ function AudioMonkey() {
         } catch(err) {
             log("error", err);
         }
-        
+
         try {
-            if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = AudioBufferSourceNode.PLAYING_STATE;
+            if(typeof this.sounds[id].sound.playbackState == "undefined") this.sounds[id].sound.playbackState = this.PLAYING_STATE;
+
+            var that = this;
+            this.sounds[id].sound.onended = function() {
+                this.playbackState = that.FINISHED_STATE;
+            };
 
             //this.fadeIn(id);
         } catch(err) {
@@ -446,7 +457,7 @@ function AudioMonkey() {
         try {
             if(typeof this.sounds[id] == "undefined" || !this.sounds[id].loaded || !this.sounds[id].sound || this.sounds[id].reversed) return;
 
-            if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = AudioBufferSourceNode.PLAYING_STATE;
+            //if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = this.PLAYING_STATE;
 
             //if(this.sounds[id].gain.gain.value < 0.01) rate = 0.01;
 
@@ -460,7 +471,7 @@ function AudioMonkey() {
         try {
             if(typeof this.sounds[id] == "undefined" || !this.sounds[id].loaded || !this.sounds[id].sound || this.sounds[id].reversed) return;
 
-            if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = AudioBufferSourceNode.PLAYING_STATE;
+            //if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = this.PLAYING_STATE;
 
             if(typeof this.sounds[id].gain.gain != "undefined") {
                 //this.sounds[id].gain.gain.value = Math.max(volume*window.globalVolume, 0.01);
@@ -499,7 +510,7 @@ function AudioMonkey() {
 
     this.stop = function(id) {
         try {
-            if(typeof this.sounds[id] == "undefined" || !this.sounds[id].loaded || !this.sounds[id].sound || (this.sounds[id].sound && this.sounds[id].sound.playbackState && this.sounds[id].sound.playbackState == AudioBufferSourceNode.FINISHED_STATE)) return;
+            if(typeof this.sounds[id] == "undefined" || !this.sounds[id].loaded || !this.sounds[id].sound || (this.playbackState(id) == this.FINISHED_STATE)) return;
 
             if (!this.sounds[id].sound.stop)
                 this.sounds[id].sound.stop = this.sounds[id].sound.noteOff;
@@ -512,7 +523,7 @@ function AudioMonkey() {
                 log("error", err);
             }
 
-            if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = AudioBufferSourceNode.FINISHED_STATE;
+            //if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = this.FINISHED_STATE;
             //this.fadeOut(id);
         } catch(err) {
             log("error", err);
@@ -521,7 +532,7 @@ function AudioMonkey() {
 
     this.fadeOut = function(id) {
         try {
-            if(typeof this.sounds[id] == "undefined" || !this.sounds[id].loaded || !this.sounds[id].sound || (this.sounds[id].sound && this.sounds[id].sound.playbackState == AudioBufferSourceNode.FINISHED_STATE)) return;
+            if(typeof this.sounds[id] == "undefined" || !this.sounds[id].loaded || !this.sounds[id].sound || (this.playbackState(id) == this.FINISHED_STATE)) return;
 
             var that = this;
             var delay = 500/10;
@@ -546,7 +557,7 @@ function AudioMonkey() {
 
     this.fadeIn = function(id) {
         try {
-            if(typeof this.sounds[id] == "undefined" || !this.sounds[id].loaded || !this.sounds[id].sound || (this.sounds[id].sound && this.sounds[id].sound.playbackState == AudioBufferSourceNode.FINISHED_STATE)) return;
+            if(typeof this.sounds[id] == "undefined" || !this.sounds[id].loaded || !this.sounds[id].sound || (this.playbackState(id) == this.FINISHED_STATE)) return;
 
             this.sounds[id].fadding = true;
 

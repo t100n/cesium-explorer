@@ -313,6 +313,32 @@ Math3D.geometry.Polygon2 = function (vertices) {
         return crossCount != 0
     };
 
+    this.distanceFromLine = function(p, l1, l2) {
+
+        var xDelta = l2.x - l1.x;
+        var yDelta = l2.y - l1.y;
+
+        //	final double u = ((p3.getX() - p1.getX()) * xDelta + (p3.getY() - p1.getY()) * yDelta) / (xDelta * xDelta + yDelta * yDelta);
+        var u = ((p.x - l1.x) * xDelta + (p.y - l1.y)*yDelta) / (xDelta * xDelta + yDelta * yDelta);
+        if(isNaN(u)) u = 0;
+
+        var closestPointOnLine;
+        if (u < 0) {
+            closestPointOnLine = l1;
+        } else if (u > 1) {
+            closestPointOnLine = l2;
+        } else {
+            closestPointOnLine = { x: l1.x + u * xDelta, y: l1.y + u * yDelta };
+        }
+
+        //ofPoint d = p - closestPointOnLine;
+
+        var d = { x: p.x - closestPointOnLine.x, y: p.y - closestPointOnLine.y };
+
+        return Math.sqrt(d.x * d.x + d.y * d.y);
+
+    };
+
     /**
      *
      * Get the distance between a point to itself
@@ -325,32 +351,6 @@ Math3D.geometry.Polygon2 = function (vertices) {
             i,
             n;
 
-        var distanceFromLine = function(p, l1, l2) {
-
-            var xDelta = l2.x - l1.x;
-            var yDelta = l2.y - l1.y;
-
-            //	final double u = ((p3.getX() - p1.getX()) * xDelta + (p3.getY() - p1.getY()) * yDelta) / (xDelta * xDelta + yDelta * yDelta);
-            var u = ((p.x - l1.x) * xDelta + (p.y - l1.y)*yDelta) / (xDelta * xDelta + yDelta * yDelta);
-            if(isNaN(u)) u = 0;
-
-            var closestPointOnLine;
-            if (u < 0) {
-                closestPointOnLine = l1;
-            } else if (u > 1) {
-                closestPointOnLine = l2;
-            } else {
-                closestPointOnLine = { x: l1.x + u * xDelta, y: l1.y + u * yDelta };
-            }
-
-            //ofPoint d = p - closestPointOnLine;
-
-            var d = { x: p.x - closestPointOnLine.x, y: p.y - closestPointOnLine.y };
-
-            return Math.sqrt(d.x * d.x + d.y * d.y);
-
-        };
-
         for (i = 0, n = this.vertices.length-1; i < n; i++) {
 
             var previousIndex = i - 1;
@@ -361,7 +361,7 @@ Math3D.geometry.Polygon2 = function (vertices) {
             var currentPoint = this.vertices[i];
             var previousPoint = this.vertices[previousIndex];
 
-            var segmentDistance = distanceFromLine({ x: x, y: y }, previousPoint, currentPoint);
+            var segmentDistance = this.distanceFromLine({ x: x, y: y }, previousPoint, currentPoint);
 
             if(segmentDistance < result){
                 result = segmentDistance;

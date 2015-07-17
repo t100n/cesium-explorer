@@ -1649,7 +1649,7 @@ DrivingSimulator = function() {
 
       var distanceOffset = 400;
 
-      if (distance < 0 && distance > -distanceOffset && this.currentPOI == i) {
+      if (distance < distanceOffset && distance > 0 && this.currentPOI == i) {
       //if (distance < POI.radius*1.3 && distance >= POI.radius && this.currentPOI == i) {
 
         //console.log(POI.id, 'leaving', distance);
@@ -1745,7 +1745,7 @@ DrivingSimulator = function() {
 
       }//if
 
-      if(window.audioMonkey.playbackState(POIId) == AudioBufferSourceNode.PLAYING_STATE) {
+      if(window.audioMonkey.playbackState(POIId) == window.audioMonkey.PLAYING_STATE) {
 
         $('#sound-notification').html('<div style="float: left; width: 44px; height: 44px; background: url(\'/img/radio_small.png\'); background-size: contain; background-position: 50%; background-repeat: no-repeat;"></div>');
 
@@ -1754,13 +1754,17 @@ DrivingSimulator = function() {
       this.alertType = ARRIVED_AREA;
 
       if (this.currentPOI >= 0 && this.currentPOI != POII) window.audioMonkey.stop(window.POIS[this.currentPOI].id);
-      if (this.currentPOI != POII) window.audioMonkey.play(POIId, 0, 0, 1, false);
+      if (this.currentPOI != POII || window.audioMonkey.playbackState(POIId) != window.audioMonkey.PLAYING_STATE) {
+
+        window.audioMonkey.play(POIId, 0, 0, 1, false);
+
+        window.audioMonkey.volume(POIId, 1);
+
+        $('#' + POIId).addClass('visited');
+        $('#' + POIId).html('<p>' + POILabel + '</p><div><img class="visited" src="' + window.SITE_URL + "/img/placemark.png" + '"/></div>');
+
+      }//if
       this.currentPOI = POII;
-
-      window.audioMonkey.volume(POIId, 1);
-
-      $('#' + POIId).addClass('visited');
-      $('#' + POIId).html('<p>' + POILabel + '</p><div><img class="visited" src="' + window.SITE_URL + "/img/placemark.png" + '"/></div>');
 
       //progress += POI.widthPerPoi;
       updateProgress = true;
