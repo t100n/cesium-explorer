@@ -318,7 +318,7 @@ var LatLng = function (_lat, _lng) {
         var heading = this.fixAngle(Math.atan2(
             Math.sin(lon2 - lon1) * Math.cos(lat2),
             Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) *
-                Math.cos(lon2 - lon1)).toDeg());
+            Math.cos(lon2 - lon1)).toDeg());
 
         return heading.toRad();
     };
@@ -427,7 +427,7 @@ var LatLngAlt = function (_lat, _lng, _alt) {
         var heading = this.fixAngle(Math.atan2(
             Math.sin(lon2 - lon1) * Math.cos(lat2),
             Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) *
-                Math.cos(lon2 - lon1)).toDeg());
+            Math.cos(lon2 - lon1)).toDeg());
 
         return heading.toRad();
     };
@@ -525,26 +525,192 @@ function log() {
 
 var cesiumExplorer = function () {};
 
-window.myVehicle = {"__v":10,"_id":"533d9853bcf8e598037b601d","crashsoundtime":1,"description":"Good for exploring the city from above.<br/>Cruise Speed: 140mph","fastsoundtime":1,"modelheight":1.5,"name":"4seat Aircraft","soundtime":16000,"createdAt":"2014-04-03T17:20:19.000Z","showRPM":false,"showAltitude":true,"showSpeed":true,"keys":{"fa-minus":"Zoom Out","fa-plus":"Zoom In","fa-arrow-right":"Steer Right","fa-arrow-left":"Steer Left","fa-arrow-down":"Brake / Reverse","fa-arrow-up":"Accelerate"},"location":{"lat":37.2321326,"lon":-115.790874},"fourWheelDrive":false,"absoluteCeiling":4100,"maxGear":5,"sixthGearRatioTopSpeed":1.2,"fifthGearRatioTopSpeed":1,"fourthGearRatioTopSpeed":0.8,"thirdGearRatioTopSpeed":0.6,"secondGearRatioTopSpeed":0.4,"firstGearRatioTopSpeed":0.2,"reverseGearRatioTopSpeed":0.2,
-	"sixthGearRatio":0.1,"fifthGearRatio":0.1,"fourthGearRatio":0.1,"thirdGearRatio":0.1,"secondGearRatio":0.1,"firstGearRatio":0.1,"reverseGearRatio":-0.275,"brakeRatio":0.01,
-	"liftOffMinSpeed":20,"slipFactor":0,"slipMinimumRate":0.8,"slipLoopEnd":0.6,"slipLoopStart":0.2,
-    "crashSound":{
-        "mp3":{"filename":"crashSound3.mp3","path":"public/uploads","size":12185,"filetype":"audio/mp3","url":"/sounds/crashSound3.mp3"},
-        "ogg":{"filename":"crashSound3.ogg","path":"public/uploads","size":12185,"filetype":"audio/ogg","url":"/sounds/crashSound3.ogg"}
+window.myVehicle = {
+    "_id": "533d9853bcf8e598037b601d",
+    "crashsoundtime": 1,
+    "description": "",
+    "fastsoundtime": 1,
+    "modelheight": 1.5,
+    "name": "Airglider",
+    "soundtime": 16000,
+    "showRPM": false,
+    "showAltitude": true,
+    "showSpeed": true,
+    "fourWheelDrive": false,
+    "absoluteCeiling": 4100,
+    "maxGear": 5,
+    "sixthGearRatioTopSpeed": 1.2,
+    "fifthGearRatioTopSpeed": 1,
+    "fourthGearRatioTopSpeed": 0.8,
+    "thirdGearRatioTopSpeed": 0.6,
+    "secondGearRatioTopSpeed": 0.4,
+    "firstGearRatioTopSpeed": 0.2,
+    "reverseGearRatioTopSpeed": 0.2,
+    "sixthGearRatio": 0.1,
+    "fifthGearRatio": 0.1,
+    "fourthGearRatio": 0.1,
+    "thirdGearRatio": 0.1,
+    "secondGearRatio": 0.1,
+    "firstGearRatio": 0.1,
+    "reverseGearRatio": -0.275,
+    "brakeRatio": 0.01,
+    "liftOffMinSpeed": 20,
+    "slipFactor": 0,
+    "slipMinimumRate": 0.8,
+    "slipLoopEnd": 0.6,
+    "slipLoopStart": 0.2,
+    "crashSound": {
+        "mp3": {
+            "filename": "crashSound3.mp3",
+            "path": "public/uploads",
+            "size": 12185,
+            "filetype": "audio/mp3",
+            "url": "/sounds/crashSound3.mp3"
+        },
+        "ogg": {
+            "filename": "crashSound3.ogg",
+            "path": "public/uploads",
+            "size": 12185,
+            "filetype": "audio/ogg",
+            "url": "/sounds/crashSound3.ogg"
+        }
     },
-    "slip":{
-        "mp3":{"filename":"Tires Squealing-SoundBible.com-1814115127.mp3","path":"public/uploads","size":12185,"filetype":"audio/mp3","url":"/uploads/Tires Squealing-SoundBible.com-1814115127.mp3"},
-        "ogg":{"filename":"Tires Squealing-SoundBible.com-1814115127.ogg","path":"public/uploads","size":12185,"filetype":"audio/ogg","url":"/uploads/Tires Squealing-SoundBible.com-1814115127.ogg"}
+    "slip": {
+        "mp3": {
+            "filename": "Tires Squealing-SoundBible.com-1814115127.mp3",
+            "path": "public/uploads",
+            "size": 12185,
+            "filetype": "audio/mp3",
+            "url": "/uploads/Tires Squealing-SoundBible.com-1814115127.mp3"
+        },
+        "ogg": {
+            "filename": "Tires Squealing-SoundBible.com-1814115127.ogg",
+            "path": "public/uploads",
+            "size": 12185,
+            "filetype": "audio/ogg",
+            "url": "/uploads/Tires Squealing-SoundBible.com-1814115127.ogg"
+        }
     },
-    "soundMinimumRate":0.1,"soundLoopEnd":2,"soundLoopStart":0,
-    "sound":{
-        "duration":5,
-        "mp3":{"filename":"glider_sound.mp3","path":"public/uploads","size":20000,"filetype":"audio/mp3","url":"/uploads/glider_sound.mp3"},
-        "ogg":{"filename":"glider_sound.ogg","path":"public/uploads","size":20000,"filetype":"audio/ogg","url":"/uploads/glider_sound.ogg"}
-    },"tireMarkDelay":1000,"tireMarkSizeY":0.5,"tireMarkSizeX":0.5,"tireMarkPosOffset":0,"tireMarkDirOffset":0,"shadowY":7,"shadowX":7,"shadowPosOffset":0,"shadowDirOffset":0,"shadow":{"body":{"filename":"4seat Aircraft shadow.png","path":"public/uploads","size":22287,"filetype":"image/png","url":"/uploads/4seat Aircraft shadow.png"}},"wheelsoffset":-0.2,"wheelsheight":1.5,"wheelsdistance":2,"axisdistance":1.5,"minGroundAlt":69.52291361316318,"minVolume":20,"maxVolume":50,"tiltFactor":0.35,"traction":5,"vehicleagility":0.00005,"massI":31000,"mass":1200,"traildistance":15,"camtilt":0,"camheight":3.5,"gravity":2.8,"decel":50,"maxrevspeed":50,"minaccelstep":5,"accelstep":50,"accel":5,"maxspeed":280,"rudderAngleScale":5,"maxSteeringAngle":3,"suspensionDamper":8000,"suspensionSpring":10000,"suspensionMass":5000,"suspensionrestlength":1,"rollDamper":500,"rollSpring":500,"rollMass":375,"rollclamp":68,"steerroll":1,"tiltDamper":8000,"tiltSpring":10000,"tiltMass":375,"tiltclamp":360,"steertilt":-5,"bodyWidth":2.8,"bodyLength":4.14,"rearY":1,"wheelBase":0.65,"tread":1.4,"wheelRadius":0.35,"upOffset":0,"vehiclealt":2.72,"modelzscale":1,"modelyscale":1,"modelxscale":1,
-	//"chassi":{"filename":"4seat.gltf","path":"public/uploads","size":2610509,"filetype":"application/octet-stream","url":"/uploads/4seat.gltf"},
-	"chassi":{"filename":"T2C_Red_Hang_glider.gltf","path":"public/uploads","size":2610509,"filetype":"application/octet-stream","url":"/uploads/T2C_Red_Hang_glider.gltf"},
-	"chassimodel":{"filename":"4seat_body.kmz","path":"public/uploads","size":656853,"filetype":"application/vnd.google-earth.kmz","url":"/uploads/4seat_body.kmz"},"logo":{"filename":"plane_cab_profile_small.png","path":"public/uploads","size":16232,"filetype":"image/png","url":"/uploads/plane_cab_profile_small.png"},"order":-1,"vehicleCameras":[{"__v":0,"_id":"54071dd5da1b111a265ca6f7","description":"4seat Aircraft wing left","name":"4seat Aircraft wing left","createdAt":"2014-09-03T13:55:33.000Z","heading":-50,"tilt":90,"dir":-30,"offset":0,"altitude":2,"type":"normal"},{"__v":0,"_id":"54071ddbe6176d1f2661eb2d","description":"4seat Aircraft wing right","name":"4seat Aircraft wing right","createdAt":"2014-09-03T13:55:39.000Z","heading":50,"tilt":90,"dir":30,"offset":0,"altitude":2,"type":"normal"}],"vehicleComponents":[{"__v":0,"_id":"53878aa3ad5e20915fdf143c","description":"4seat_green","dirOffset":-0.88,"name":"4seat_green","posOffset":5.5,"upOffset":2.4,"damper":5000,"spring":80000,"mass":375,"sacalable":false,"maxComponentsZScale":1,"maxComponentsYScale":1,"maxComponentsXScale":1,"minComponentsZScale":1,"minComponentsYScale":1,"minComponentsXScale":1,"componentsZScale":3,"componentsYScale":3,"componentsXScale":3,"speed":1000,"maxAltitude":-1,"maxAlt":0,"maxTilt":0,"maxRoll":0,"maxRotation":0,"tilt":0,"roll":0,"rotation":0,"createdAt":"2014-05-29T19:29:39.000Z","modelGl":{"filename":"4seat_green_plane.gltf","path":"public/uploads","size":42388,"filetype":"application/octet-stream","url":"/uploads/4seat_green_plane.gltf"},"model":{"filename":"4seat_green_plane.kmz","path":"public/uploads","size":25692,"filetype":"application/vnd.google-earth.kmz","url":"/uploads/4seat_green_plane.kmz"},"order":-1,"joints":[],"siblings":[],"specialBehaviour":"blink","type":"other"},{"__v":0,"_id":"53878a9aa920379e5f531a77","description":"4seat_red","dirOffset":-0.88,"name":"4seat_red","posOffset":-5.5,"upOffset":2.4,"damper":5000,"spring":80000,"mass":375,"sacalable":false,"maxComponentsZScale":1,"maxComponentsYScale":1,"maxComponentsXScale":1,"minComponentsZScale":1,"minComponentsYScale":1,"minComponentsXScale":1,"componentsZScale":3,"componentsYScale":3,"componentsXScale":3,"speed":1250,"maxAltitude":-1,"maxAlt":0,"maxTilt":0,"maxRoll":0,"maxRotation":0,"tilt":0,"roll":0,"rotation":0,"createdAt":"2014-05-29T19:29:30.000Z","modelGl":{"filename":"4seat_red_plane.gltf","path":"public/uploads","size":40328,"filetype":"application/octet-stream","url":"/uploads/4seat_red_plane.gltf"},"model":{"filename":"4seat_red_plane.kmz","path":"public/uploads","size":24144,"filetype":"application/vnd.google-earth.kmz","url":"/uploads/4seat_red_plane.kmz"},"order":-1,"joints":[],"siblings":[],"specialBehaviour":"blink","type":"other"},{"__v":0,"_id":"53878aabcf7dce965f349937","description":"4seat_white","dirOffset":-6.45,"name":"4seat_white","posOffset":0,"upOffset":3.28,"damper":5000,"spring":80000,"mass":375,"sacalable":false,"maxComponentsZScale":1,"maxComponentsYScale":1,"maxComponentsXScale":1,"minComponentsZScale":1,"minComponentsYScale":1,"minComponentsXScale":1,"componentsZScale":2,"componentsYScale":2,"componentsXScale":2,"speed":750,"maxAltitude":-1,"maxAlt":0,"maxTilt":0,"maxRoll":0,"maxRotation":0,"tilt":0,"roll":0,"rotation":0,"createdAt":"2014-05-29T19:29:47.000Z","modelGl":{"filename":"4seat_white_plane.gltf","path":"public/uploads","size":34528,"filetype":"application/octet-stream","url":"/uploads/4seat_white_plane.gltf"},"model":{"filename":"4seat_white_plane.kmz","path":"public/uploads","size":19797,"filetype":"application/vnd.google-earth.kmz","url":"/uploads/4seat_white_plane.kmz"},"order":-1,"joints":[],"siblings":[],"specialBehaviour":"blink","type":"other"},{"__v":0,"_id":"539b1a244c99042b318e5f10","description":"4seat_aileron_left","dirOffset":-0.9,"name":"4seat_aileron_left","posOffset":-4,"upOffset":2.4,"damper":5000,"spring":80000,"mass":375,"sacalable":false,"maxComponentsZScale":1,"maxComponentsYScale":1,"maxComponentsXScale":1,"minComponentsZScale":1,"minComponentsYScale":1,"minComponentsXScale":1,"componentsZScale":1,"componentsYScale":1,"componentsXScale":1,"speed":0,"maxAltitude":-1,"maxAlt":0,"maxTilt":45,"maxRoll":0,"maxRotation":0,"tilt":0,"roll":0,"rotation":0.001,"createdAt":"2014-06-13T15:35:00.000Z","modelGl":{"filename":"4seat_aileron_left.gltf","path":"public/uploads","size":20805,"filetype":"application/octet-stream","url":"/uploads/4seat_aileron_left.gltf"},"model":{"filename":"4seat_aileron_left.kmz","path":"public/uploads","size":3187,"filetype":"application/vnd.google-earth.kmz","url":"/uploads/4seat_aileron_left.kmz"},"order":-1,"joints":[],"siblings":[],"specialBehaviour":"other","type":"aileron"},{"__v":0,"_id":"539b1a334c99042b318e5f11","description":"4seat_aileron_right","dirOffset":-0.9,"name":"4seat_aileron_right","posOffset":3.7,"upOffset":2.4,"damper":5000,"spring":80000,"mass":375,"sacalable":false,"maxComponentsZScale":1,"maxComponentsYScale":1,"maxComponentsXScale":1,"minComponentsZScale":1,"minComponentsYScale":1,"minComponentsXScale":1,"componentsZScale":1,"componentsYScale":1,"componentsXScale":1,"speed":0,"maxAltitude":-1,"maxAlt":0,"maxTilt":45,"maxRoll":0,"maxRotation":0,"tilt":0,"roll":0,"rotation":0.001,"createdAt":"2014-06-13T15:35:15.000Z","modelGl":{"filename":"4seat_aileron_right.gltf","path":"public/uploads","size":20817,"filetype":"application/octet-stream","url":"/uploads/4seat_aileron_right.gltf"},"model":{"filename":"4seat_aileron_right.kmz","path":"public/uploads","size":3183,"filetype":"application/vnd.google-earth.kmz","url":"/uploads/4seat_aileron_right.kmz"},"order":-1,"joints":[],"siblings":[],"specialBehaviour":"other","type":"aileron"},{"__v":0,"_id":"539b1ad570931c1e31c9f09e","description":"4seat_elevator","dirOffset":-5.6,"name":"4seat_elevator","posOffset":0,"upOffset":1.4,"damper":5000,"spring":80000,"mass":375,"sacalable":false,"maxComponentsZScale":1,"maxComponentsYScale":1,"maxComponentsXScale":1,"minComponentsZScale":1,"minComponentsYScale":1,"minComponentsXScale":1,"componentsZScale":1,"componentsYScale":1,"componentsXScale":1,"speed":0,"maxAltitude":-1,"maxAlt":0,"maxTilt":25,"maxRoll":0,"maxRotation":0,"tilt":0,"roll":0,"rotation":0.001,"createdAt":"2014-06-13T15:37:57.000Z","modelGl":{"filename":"4seat_elevator.gltf","path":"public/uploads","size":25156,"filetype":"application/octet-stream","url":"/uploads/4seat_elevator.gltf"},"model":{"filename":"4seat_elevator.kmz","path":"public/uploads","size":4797,"filetype":"application/vnd.google-earth.kmz","url":"/uploads/4seat_elevator.kmz"},"order":-1,"joints":[],"siblings":[],"specialBehaviour":"other","type":"elevator"},{"__v":0,"_id":"539b1aa04c99042b318e5f12","description":"4seat_flap","dirOffset":-1,"name":"4seat_flap","posOffset":0,"upOffset":2.35,"damper":5000,"spring":80000,"mass":375,"sacalable":false,"maxComponentsZScale":1,"maxComponentsYScale":1,"maxComponentsXScale":1,"minComponentsZScale":1,"minComponentsYScale":1,"minComponentsXScale":1,"componentsZScale":1,"componentsYScale":1,"componentsXScale":1,"speed":0,"maxAltitude":-1,"maxAlt":0,"maxTilt":45,"maxRoll":0,"maxRotation":0,"tilt":0,"roll":0,"rotation":0.001,"createdAt":"2014-06-13T15:37:04.000Z","modelGl":{"filename":"4seat_flap.gltf","path":"public/uploads","size":20803,"filetype":"application/octet-stream","url":"/uploads/4seat_flap.gltf"},"model":{"filename":"4seat_flap.kmz","path":"public/uploads","size":2586,"filetype":"application/vnd.google-earth.kmz","url":"/uploads/4seat_flap.kmz"},"order":-1,"joints":[],"siblings":[],"specialBehaviour":"other","type":"flap"},{"__v":0,"_id":"539b1a1036c04a2231ff67d4","description":"4seat_rudder","dirOffset":-6.05,"name":"4seat_rudder","posOffset":0,"upOffset":1.63,"damper":5000,"spring":80000,"mass":375,"sacalable":false,"maxComponentsZScale":1,"maxComponentsYScale":1,"maxComponentsXScale":1,"minComponentsZScale":1,"minComponentsYScale":1,"minComponentsXScale":1,"componentsZScale":1,"componentsYScale":1,"componentsXScale":1,"speed":0,"maxAltitude":-1,"maxAlt":0,"maxTilt":0,"maxRoll":0,"maxRotation":45,"tilt":0,"roll":0,"rotation":0.001,"createdAt":"2014-06-13T15:34:40.000Z","modelGl":{"filename":"4seat_rudder.gltf","path":"public/uploads","size":31103,"filetype":"application/octet-stream","url":"/uploads/4seat_rudder.gltf"},"model":{"filename":"4seat_rudder.kmz","path":"public/uploads","size":4872,"filetype":"application/vnd.google-earth.kmz","url":"/uploads/4seat_rudder.kmz"},"order":-1,"joints":[],"siblings":[],"specialBehaviour":"other","type":"rudder"}],"locations":[{"__v":0,"_id":"544a52416774c8467be4a7d7","description":"Courchevel altiport","name":"Courchevel altiport Approach","limits":[],"requiredMeters":7000,"createdAt":"2014-10-24T13:21:05.000Z","circuits":[],"speed":300,"altitude":400,"heading":220,"longitude":6.665685539917,"latitude":45.420382308847,"order":-1,"published":true},{"__v":0,"_id":"544a524398a3b6407b809bd4","description":"Mountain Air, Burnsville","name":"Mountain Air, Burnsville Approach","limits":[],"requiredMeters":30000,"createdAt":"2014-10-24T13:21:07.000Z","circuits":[],"speed":290,"altitude":600,"heading":315,"longitude":-82.30944318642,"latitude":35.840297246449,"order":-1,"published":true},{"__v":0,"_id":"544a524324f21e3a7b80725d","description":"Meribel Airport","name":"Meribel Airport Approach","limits":[],"requiredMeters":40000,"createdAt":"2014-10-24T13:21:07.000Z","circuits":[],"speed":300,"altitude":350,"heading":155,"longitude":6.566325957581,"latitude":45.423507926387,"order":-1,"published":true},{"__v":0,"_id":"544a5244a430b4397b49ba54","description":"Megeve Airport","name":"Megeve Airport Approach","limits":[],"requiredMeters":50000,"createdAt":"2014-10-24T13:21:08.000Z","circuits":[],"speed":310,"altitude":300,"heading":160,"longitude":6.631325724731,"latitude":45.851279259839,"order":-1,"published":true},{"__v":0,"_id":"544a524498a3b6407b809bd6","description":"Alpe d'Huez Airport","name":"Alpe d'Huez Airport Approach","limits":[],"requiredMeters":60000,"createdAt":"2014-10-24T13:21:08.000Z","circuits":[],"speed":240,"altitude":800,"heading":60,"longitude":6.045012560547,"latitude":45.073217154411,"order":-1,"published":true},{"__v":0,"_id":"544a524698a3b6407b809bd7","description":"Chagual Airport, Peru","name":"Chagual Airport Approach","limits":[],"requiredMeters":70000,"createdAt":"2014-10-24T13:21:10.000Z","circuits":[],"speed":230,"altitude":50,"heading":135,"longitude":-77.68174409051,"latitude":-7.766151419473,"order":-1,"published":true},{"__v":0,"_id":"534d58a5f30c9a1b2bc2eca0","description":"Tenzing-Hillary Airport","name":"Tenzing-Hillary Airport","limits":[],"requiredMeters":125000,"createdAt":"2014-04-15T16:04:53.000Z","circuits":[],"speed":0,"altitude":-1,"heading":240,"longitude":86.731700136246,"latitude":27.687901503917,"order":-1,"published":true},{"__v":0,"_id":"544e9a8d1b85536739c2f675","description":"Chaves Airport","name":"Chaves Airport","limits":[],"requiredMeters":175000,"createdAt":"2014-10-27T19:18:37.000Z","circuits":[],"speed":0,"altitude":0,"heading":153,"longitude":-7.46498465538,"latitude":41.725301596205,"order":-1,"published":true},{"__v":0,"_id":"534d5f6486ff665e2eb83a17","description":"Prague Airport","name":"Prague Airport","limits":[],"requiredMeters":200000,"createdAt":"2014-04-15T16:33:40.000Z","circuits":[],"speed":0,"altitude":-1,"heading":247,"longitude":14.272836952454,"latitude":50.115796755453,"order":-1,"published":true},{"__v":0,"_id":"534d5e7707b608f62d92558c","description":"Albrook Airport","name":"Albrook Airport","limits":[],"requiredMeters":225000,"createdAt":"2014-04-15T16:29:43.000Z","circuits":[],"speed":0,"altitude":-1,"heading":0,"longitude":-79.555950164795,"latitude":8.969126019414,"order":-1,"published":true},{"__v":0,"_id":"534d5fed86ff665e2eb83a22","description":"Salzburg Airport","name":"Salzburg Airport","limits":[],"requiredMeters":250000,"createdAt":"2014-04-15T16:35:57.000Z","circuits":[],"speed":0,"altitude":-1,"heading":160,"longitude":12.996371681168,"latitude":47.805259119204,"order":-1,"published":true},{"__v":0,"_id":"534d6625dc38fca33009ac0b","description":"Oporto Airport","name":"Oporto Airport","limits":[],"requiredMeters":275000,"createdAt":"2014-04-15T17:02:29.000Z","circuits":[],"speed":0,"altitude":-1,"heading":350,"longitude":-8.677305579185,"latitude":41.233153301246,"order":-1,"published":true}],"hidden":false,"requiredShares":15,"requiredMeters":300000,"requiredPoints":0,"type":"plane","category":"plane","mainCategory":"air","published":true};
+    "soundMinimumRate": 0.1,
+    "soundLoopEnd": 2,
+    "soundLoopStart": 0,
+    "sound": {
+        "duration": 5,
+        "mp3": {
+            "filename": "glider_sound.mp3",
+            "path": "public/uploads",
+            "size": 20000,
+            "filetype": "audio/mp3",
+            "url": "/uploads/glider_sound.mp3"
+        },
+        "ogg": {
+            "filename": "glider_sound.ogg",
+            "path": "public/uploads",
+            "size": 20000,
+            "filetype": "audio/ogg",
+            "url": "/uploads/glider_sound.ogg"
+        }
+    },
+    "tireMarkDelay": 1000,
+    "tireMarkSizeY": 0.5,
+    "tireMarkSizeX": 0.5,
+    "tireMarkPosOffset": 0,
+    "tireMarkDirOffset": 0,
+    "shadowY": 7,
+    "shadowX": 7,
+    "shadowPosOffset": 0,
+    "shadowDirOffset": 0,
+    "wheelsoffset": -0.2,
+    "wheelsheight": 1.5,
+    "wheelsdistance": 2,
+    "axisdistance": 1.5,
+    "minGroundAlt": 69.52291361316318,
+    "minVolume": 20,
+    "maxVolume": 50,
+    "tiltFactor": 0.35,
+    "traction": 5,
+    "vehicleagility": 0.00005,
+    "massI": 31000,
+    "mass": 1200,
+    "traildistance": 15,
+    "camtilt": 0,
+    "camheight": 3.5,
+    "gravity": 2.8,
+    "decel": 50,
+    "maxrevspeed": 50,
+    "minaccelstep": 5,
+    "accelstep": 50,
+    "accel": 5,
+    "maxspeed": 280,
+    "rudderAngleScale": 3,
+    "maxSteeringAngle": 2,
+    "suspensionDamper": 8000,
+    "suspensionSpring": 10000,
+    "suspensionMass": 5000,
+    "suspensionrestlength": 1,
+    "rollDamper": 500,
+    "rollSpring": 500,
+    "rollMass": 375,
+    "rollclamp": 68,
+    "steerroll": 1,
+    "tiltDamper": 8000,
+    "tiltSpring": 10000,
+    "tiltMass": 375,
+    "tiltclamp": 360,
+    "steertilt": -5,
+    "bodyWidth": 2.8,
+    "bodyLength": 4.14,
+    "rearY": 1,
+    "wheelBase": 0.65,
+    "tread": 1.4,
+    "wheelRadius": 0.35,
+    "upOffset": 0,
+    "vehiclealt": 2.72,
+    "modelzscale": 1,
+    "modelyscale": 1,
+    "modelxscale": 1,
+    "chassi": {
+        "filename": "T2C_Red_Hang_glider.gltf",
+        "path": "public/uploads",
+        "size": 2610509,
+        "filetype": "application/octet-stream",
+        "url": "/uploads/T2C_Red_Hang_glider.gltf"
+    },
+    "order": -1,
+    "vehicleCameras": [{
+        "__v": 0,
+        "_id": "54071dd5da1b111a265ca6f7",
+        "description": "4seat Aircraft wing left",
+        "name": "4seat Aircraft wing left",
+        "createdAt": "2014-09-03T13:55:33.000Z",
+        "heading": -50,
+        "tilt": 90,
+        "dir": -30,
+        "offset": 0,
+        "altitude": 2,
+        "type": "normal"
+    }, {
+        "__v": 0,
+        "_id": "54071ddbe6176d1f2661eb2d",
+        "description": "4seat Aircraft wing right",
+        "name": "4seat Aircraft wing right",
+        "createdAt": "2014-09-03T13:55:39.000Z",
+        "heading": 50,
+        "tilt": 90,
+        "dir": 30,
+        "offset": 0,
+        "altitude": 2,
+        "type": "normal"
+    }],
+    "hidden": false,
+    "requiredShares": 15,
+    "requiredMeters": 300000,
+    "requiredPoints": 0,
+    "type": "plane",
+    "category": "plane",
+    "mainCategory": "air",
+    "published": true
+};
 window.vehicles = {};
 window.vehicles[window.myVehicle._id] = window.myVehicle;
 
@@ -567,7 +733,7 @@ window.keybindings = {
         "brake":{"key":6,"type":"button"},
         "throttle":{"key":7,"type":"button"}
     },
-	"keyboard":{
+    "keyboard":{
         "autopilot":"v",
         "labels":"l",
         "pause":"p",
@@ -585,5 +751,5 @@ window.keybindings = {
         "left":"left",
         "brake":"s",
         "throttle":"w"
-	}
+    }
 };
