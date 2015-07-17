@@ -957,6 +957,84 @@ b {
   }
 }
 
+@media(max-width: 946px) {
+  #placemarks .poi > p {
+    max-width: 100%;
+    overflow: hidden;
+    height: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media(max-width: 820px) {
+  #placemarks .poi > p {
+    max-width: 72px;
+    overflow: hidden;
+    height: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media(max-width: 732px) {
+  #placemarks .poi > p {
+    max-width: 42px;
+    overflow: hidden;
+    height: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  #sound-notification {
+    display: block;
+    text-align: center;
+    margin-right: 0px;
+  }
+  
+  #sound-notification img, #sound-notification div {
+    height: 24px !important;
+    width: 24px !important;
+    float: none !important;
+    margin: auto;
+  }
+  
+  #area-notification {
+    font-size: 12px;
+  }
+}
+
+@media(max-width: 548px) {
+  #placemarks .poi > p {
+    display: block;
+    opacity: 0;
+  }
+  
+  #path {
+    left: 64px;
+    right: 204px;
+  }
+  
+  #notifications {
+    left: 64px;
+    right: 204px;
+  }
+  
+  #controls button {
+    padding: 2px;
+    width: 88px;
+  }
+  
+  #map3d .cesium-viewer-bottom {
+    display: none;
+  }
+
+  #controls {
+    bottom: 5px;
+  }
+  
+}
+
 @media(max-width: 420px) {
   
       #map3d .cesium-viewer-bottom {

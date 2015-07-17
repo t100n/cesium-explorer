@@ -1717,7 +1717,10 @@ DrivingSimulator = function() {
       this.lastPOIDistance = POIDistance;
 
       var volume = ((distanceOffset*2-Math.abs(POIDistance)) / distanceOffset*2);
-      if (POIDistance > distanceOffset) volume = 0;
+      
+      volume = Math3D.MyMath.linearMap(volume, 0, 4, 0, 1);
+      
+      if (POIDistance > distanceOffset*2) volume = 0;
       window.audioMonkey.volume(POIId, volume > 1 ? 1 : (volume < 0 ? 0 : volume));
 
       //console.log('POI leaving', POI.id, (volume > 1 ? 1 : (volume < 0 ? 0 : volume)));
