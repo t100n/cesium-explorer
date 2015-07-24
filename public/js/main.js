@@ -364,11 +364,11 @@ try {
     window.audioMonkey.add("maracana", { ogg: '/sounds/maracana.ogg', mp3: '/sounds/maracana.mp3' });
     */
 
-    window.audioMonkey.add("start_game", { ogg: '/sounds/test/Exploding_Hearts.ogg', mp3: '/sounds/test/Exploding_Hearts.mp3' });
-    window.audioMonkey.add("copacabana", { ogg: '/sounds/test/Hawk_Land.ogg', mp3: '/sounds/test/Hawk_Land.mp3' });
-    window.audioMonkey.add("maracana", { ogg: '/sounds/test/Welcomed_Death.ogg', mp3: '/sounds/test/Welcomed_Death.mp3' });
-    window.audioMonkey.add("deodoro", { ogg: '/sounds/test/The_End_is_Nigh.ogg', mp3: '/sounds/test/The_End_is_Nigh.mp3' });
-    window.audioMonkey.add("barra-da-tijuca", { ogg: '/sounds/test/Air_Raid.ogg', mp3: '/sounds/test/Air_Raid.mp3' });
+    window.audioMonkey.add("start_game", { ogg: '/sounds/intro.ogg', mp3: '/sounds/intro.mp3' });
+    window.audioMonkey.add("copacabana", { ogg: '/sounds/copa.ogg', mp3: '/sounds/copa.mp3' });
+    window.audioMonkey.add("maracana", { ogg: '/sounds/maraca.ogg', mp3: '/sounds/maraca.mp3' });
+    window.audioMonkey.add("deodoro", { ogg: '/sounds/deodoro.ogg', mp3: '/sounds/deodoro.mp3' });
+    window.audioMonkey.add("barra-da-tijuca", { ogg: '/sounds/barra.ogg', mp3: '/sounds/barra.mp3' });
 
     window.audioMonkey.add("forward", { ogg: v.sound.ogg.url, mp3: v.sound.mp3.url });
     window.audioMonkey.add("slip", { ogg: v.slip.ogg.url, mp3: v.slip.mp3.url });
