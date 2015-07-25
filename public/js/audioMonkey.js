@@ -29,11 +29,6 @@ function log() {
 function AudioMonkey() {
     this.class = "AudioMonkey";
 
-    AudioBufferSourceNode.prototype.FINISHED_STATE = 3;
-    AudioBufferSourceNode.prototype.PLAYING_STATE = 2;
-    AudioBufferSourceNode.prototype.SCHEDULED_STATE = 1;
-    AudioBufferSourceNode.prototype.UNSCHEDULED_STATE = 0;
-
     this.FINISHED_STATE = 3;
     this.PLAYING_STATE = 2;
     this.SCHEDULED_STATE = 1;

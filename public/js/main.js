@@ -108,7 +108,7 @@ window.POIS = [
             new Math3D.geometry.Vector2(-22.9674446, -43.2234094)
         ])
     },
-    { id: 'maracana', lat: -22.912134, lon: -43.230128, startLat: -22.912584, startLon: -43.191695, alt: 400, altOffset: 0, heading: 0, radius: 3700, label: 'Estádio do Maracanã', text: 'Maracanã', showPlacemark: false,
+    { id: 'maracana', lat: -22.912134, lon: -43.230128, startLat: -22.912584, startLon: -43.191695, alt: 400, altOffset: 0, heading: 0, radius: 3700, label: 'Maracanã', text: 'Maracanã', showPlacemark: false,
         area: new Math3D.geometry.Polygon2([
             new Math3D.geometry.Vector2(-22.9002677, -43.1747407),
             new Math3D.geometry.Vector2(-22.8691369, -43.3014965),
@@ -140,7 +140,6 @@ window.SUBPOIS = [
     { id: 'campo_golfe_olimpico', lat: -23.0047376, lon: -43.4074545, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Campo de Golfe Olímpico', showPlacemark: true, font: "14px sans-serif" },
     { id: 'complexo_desportivo_deodoro', lat: -22.8582625, lon: -43.410244, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Complexo Esportivo Deodoro', showPlacemark: true, font: "14px sans-serif" },
     { id: 'riocentro', lat: -22.9779029, lon: -43.4114778, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Riocentro', showPlacemark: true, font: "14px sans-serif" },
-    { id: 'area_campo_golfe', lat: -23.004545, lon: -43.406640, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Área do campo de golfe', showPlacemark: true, font: "14px sans-serif" },
     { id: 'sambodromo', lat: -22.911452, lon: -43.196804, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Sambódromo', showPlacemark: true, font: "14px sans-serif" },
     //{ id: 'estadio_maracana', lat: -22.9121122, lon: -43.2301497, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Estádio do Maracanã', showPlacemark: false, font: "14px sans-serif" },
     { id: 'engenhao', lat: -22.8935716, lon: -43.292141, alt: 0, altOffset: 0, heading: 0, radius: 0, label: 'Engenhão', showPlacemark: false, font: "14px sans-serif" },
