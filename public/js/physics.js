@@ -1831,7 +1831,10 @@ DrivingSimulator = function() {
 
       }//if
 
-      if(window.POIS[this.currentPOI]) window.audioMonkey.stop(window.POIS[this.currentPOI].id);
+      if(window.POIS[this.currentPOI]) {
+        //window.audioMonkey.stop(window.POIS[this.currentPOI].id);
+        window.audioMonkey.stopAll();
+      }//if
 
       this.alertType = NO_AREA;
       //this.currentPOI = -1;
