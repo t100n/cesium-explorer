@@ -1785,11 +1785,15 @@ DrivingSimulator = function() {
       }//if
 
       if(window.audioMonkey.playbackState(POIId) == window.audioMonkey.PLAYING_STATE) {
-
-        $('#sound-notification').html('<div style="float: left; width: 44px; height: 44px; background: url(\'/img/radio_small.png\'); background-size: contain; background-position: 50%; background-repeat: no-repeat;"></div>');
+        
+        if (this.alertType != ARRIVED_AREA) {
+          $('#sound-notification').html('<div style="float: left; width: 44px; height: 44px; background: url(\'/img/radio_small.png\'); background-size: contain; background-position: 50%; background-repeat: no-repeat;"></div>');
+          
+          this.soundNotification = true;
+        }//if
 
       }//if
-      else {
+      else if(this.soundNotification) {
         
         $('#sound-notification').html('');
         if(Platform.isFirefox() && this.lameCounter > 100) {
@@ -1798,6 +1802,8 @@ DrivingSimulator = function() {
         }//if
         
         this.lameCounter++;
+        
+        this.soundNotification = false;
         
       }//else
 
