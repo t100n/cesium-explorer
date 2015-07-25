@@ -1791,6 +1791,7 @@ DrivingSimulator = function() {
       else {
         
         $('#sound-notification').html('');
+        if(Platform.isFirefox()) window.audioMonkey.stopAll();
         
       }//else
 
@@ -1832,8 +1833,8 @@ DrivingSimulator = function() {
       }//if
 
       if(window.POIS[this.currentPOI]) {
-        //window.audioMonkey.stop(window.POIS[this.currentPOI].id);
-        window.audioMonkey.stopAll();
+        if(Platform.isFirefox()) window.audioMonkey.stopAll();
+        else window.audioMonkey.stop(window.POIS[this.currentPOI].id);
       }//if
 
       this.alertType = NO_AREA;
