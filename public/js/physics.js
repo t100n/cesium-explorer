@@ -1792,7 +1792,7 @@ DrivingSimulator = function() {
       else {
         
         $('#sound-notification').html('');
-        if(Platform.isFirefox() && this.lameCounter > 10) {
+        if(Platform.isFirefox() && this.lameCounter > 50) {
           window.audioMonkey.stopAll();
           this.lameCounter = 0;
         }//if
