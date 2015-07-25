@@ -77,7 +77,7 @@ $('#restart').click(function(e) {
     $('#sound-notification').html('');
     $('#area-notification').html('');
 
-    $('#placemarks .poi img').attr('src', window.SITE_URL+"/img/placemark_outline.png");
+    $('#placemarks .poi img').attr('src', window.SITE_URL+"img/placemark_outline.png");
     */
 });
 
@@ -108,7 +108,7 @@ window.POIS = [
             new Math3D.geometry.Vector2(-22.9674446, -43.2234094)
         ])
     },
-    { id: 'maracana', lat: -22.912134, lon: -43.230128, startLat: -22.912584, startLon: -43.191695, alt: 400, altOffset: 0, heading: 0, radius: 3700, label: 'Maracanã', text: 'Maracanã', showPlacemark: false,
+    { id: 'maracana', lat: -22.912134, lon: -43.230128, startLat: -22.914867, startLon: -43.186163, alt: 400, altOffset: 0, heading: 0, radius: 3700, label: 'Maracanã', text: 'Maracanã', showPlacemark: false,
         area: new Math3D.geometry.Polygon2([
             new Math3D.geometry.Vector2(-22.9002677, -43.1747407),
             new Math3D.geometry.Vector2(-22.8691369, -43.3014965),
@@ -186,7 +186,7 @@ window.POISPOLYLINE = [
 window.models = [
     {
         name: "Maracana",
-        url: location.protocol+'//'+document.domain+"/models/maracana/gltf/Maracana_1.gltf",
+        url: window.SITE_URL+"models/maracana/gltf/Maracana_1.gltf",
         lat: -22.91221,
         lng: -43.23046,
         alt: 15,
@@ -199,7 +199,7 @@ window.models = [
     },
     {
         name: "Engenhao",
-        url: location.protocol+'//'+document.domain+"/models/engenhao/gltf/estadioengenhao.gltf",
+        url: window.SITE_URL+"models/engenhao/gltf/estadioengenhao.gltf",
         lat: -22.893334,
         lng: -43.2919855,
         alt: 27,
@@ -212,7 +212,7 @@ window.models = [
     },
     {
         name: "Christ the Redeemer",
-        url: location.protocol+'//'+document.domain+"/models/christ_redeemer/gltf/Cristo_Redentor_1.gltf",
+        url: window.SITE_URL+"models/christ_redeemer/gltf/Cristo_Redentor_1.gltf",
         lat: -22.9518,
         lng: -43.2118,
         alt: 637,
@@ -225,7 +225,7 @@ window.models = [
     },
     {
         name: "River Niteroi bridge",
-        url: location.protocol+'//'+document.domain+"/models/niteroi/gltf/niteroi_1.gltf",
+        url: window.SITE_URL+"models/niteroi/gltf/niteroi_1.gltf",
         lat: -22.8683,
         lng: -43.1980,
         alt: 0,
@@ -238,7 +238,7 @@ window.models = [
     },
     {
         name: "Catedral",
-        url: location.protocol+'//'+document.domain+"/models/catedral/gltf/catedral_1.gltf",
+        url: window.SITE_URL+"models/catedral/gltf/catedral_1.gltf",
         lat: -22.910786,
         lng: -43.180679,
         alt: 0,
@@ -251,7 +251,7 @@ window.models = [
     },
     {
         name: "Camara Municipal",
-        url: location.protocol+'//'+document.domain+"/models/camara_municipal/gltf/camara_municipal_1.gltf",
+        url: window.SITE_URL+"models/camara_municipal/gltf/camara_municipal_1.gltf",
         lat: -22.910076,
         lng: -43.176663,
         alt: 7,
@@ -263,8 +263,6 @@ window.models = [
         z: 1
     }
 ];
-
-window.SITE_URL = location.protocol+'//'+document.domain;
 
 window.userId = "folhasaopaulo";
 window.isExploring = true;
@@ -353,14 +351,6 @@ try {
     window.audioMonkey.add("up", { ogg: '/sounds/wind_up.ogg', mp3: '/sounds/wind_up.mp3' });
     window.audioMonkey.add("down", { ogg: '/sounds/wind_down.ogg', mp3: '/sounds/wind_down.mp3' });
     window.audioMonkey.add("altitude", { ogg: '/sounds/altitude_warning.ogg', mp3: '/sounds/altitude_warning.mp3' });
-
-    /*
-    window.audioMonkey.add("barra-da-tijuca", { ogg: '/sounds/barra_da_tijuca.ogg', mp3: '/sounds/barra_da_tijuca.mp3' });
-    window.audioMonkey.add("centro", { ogg: '/sounds/centro.ogg', mp3: '/sounds/centro.mp3' });
-    window.audioMonkey.add("copacabana", { ogg: '/sounds/copacabana.ogg', mp3: '/sounds/copacabana.mp3' });
-    window.audioMonkey.add("deodoro", { ogg: '/sounds/deodoro.ogg', mp3: '/sounds/deodoro.mp3' });
-    window.audioMonkey.add("maracana", { ogg: '/sounds/maracana.ogg', mp3: '/sounds/maracana.mp3' });
-    */
 
     window.audioMonkey.add("start_game", { ogg: '/sounds/intro.ogg', mp3: '/sounds/intro.mp3' });
     window.audioMonkey.add("copacabana", { ogg: '/sounds/copa.ogg', mp3: '/sounds/copa.mp3' });

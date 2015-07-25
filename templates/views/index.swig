@@ -176,6 +176,11 @@
 
 		</div>
 		
+		<script>
+			
+			window.SITE_URL = location.protocol+'//'+document.domain+location.pathname.replace(/[a-zA-Z\.]+$/, '');
+			
+		</script>
 		<script type="text/javascript" src="/js/jquery.min.js"></script>
 		<script type="text/javascript" src="/js/mousetrap.min.js"></script>
 		<script type="text/javascript" src="/js/EventEmitter.min.js"></script>

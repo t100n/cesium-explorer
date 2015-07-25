@@ -1225,7 +1225,7 @@ DrivingSimulator = function() {
       if (this.vehicleData.showAltitude) {
         if (!this.altitudeOverlay || resetRight) {
           if (this.altitudeOverlay) this.altitudeOverlay.remove();
-          //this.altitudeOverlay = new SpriteNumber(this.ge, window.SITE_URL+"/img/units_mph.png");
+          //this.altitudeOverlay = new SpriteNumber(this.ge, window.SITE_URL+"img/units_mph.png");
 
           var counter = 10;
 
@@ -1265,13 +1265,13 @@ DrivingSimulator = function() {
           var counter = 5;
 
           if (!this.vehicleData.showAltitude && !this.vehicleData.showSpeed) {
-            this.rpmOverlay = new SpriteRPM(this.scene, false, 15, false, 55, 6, 19, counter, window.SITE_URL + "/img/bar_v2_");
+            this.rpmOverlay = new SpriteRPM(this.scene, false, 15, false, 55, 6, 19, counter, window.SITE_URL + "img/bar_v2_");
           } //if
           else if (!this.vehicleData.showAltitude) {
-            this.rpmOverlay = new SpriteRPM(this.scene, false, 15, false, 80, 6, 19, counter, window.SITE_URL + "/img/bar_v2_");
+            this.rpmOverlay = new SpriteRPM(this.scene, false, 15, false, 80, 6, 19, counter, window.SITE_URL + "img/bar_v2_");
           } //else if
           else {
-            this.rpmOverlay = new SpriteRPM(this.scene, false, 15, false, 105, 6, 19, counter, window.SITE_URL + "/img/bar_v2_");
+            this.rpmOverlay = new SpriteRPM(this.scene, false, 15, false, 105, 6, 19, counter, window.SITE_URL + "img/bar_v2_");
           } //else
         } //if
       } //if
@@ -1288,7 +1288,7 @@ DrivingSimulator = function() {
           if (this.compassOverlay) this.compassOverlay.remove();
           if (this.compassNeedleOverlay) this.compassNeedleOverlay.remove();
 
-          this.compassOverlay = new Sprite(this.scene, window.SITE_URL + "/img/compass_gauge_v2.png?" + window.version);
+          this.compassOverlay = new Sprite(this.scene, window.SITE_URL + "img/compass_gauge_v2.png?" + window.version);
           //this.compassOverlay = new Sprite(this.ge, "http://i315.photobucket.com/albums/ll450/Zamagames/compass2.png");
           this.compassOverlay.load();
 
@@ -1297,7 +1297,7 @@ DrivingSimulator = function() {
           this.compassOverlay.setOpacity(0.6);
           this.compassOverlay.setDrawOrder(100);
 
-          this.compassNeedleOverlay = new Sprite(this.scene, window.SITE_URL + "/img/compass_needle_v2.png?" + window.version);
+          this.compassNeedleOverlay = new Sprite(this.scene, window.SITE_URL + "img/compass_needle_v2.png?" + window.version);
           this.compassNeedleOverlay.load();
 
           //this.compassNeedleOverlay.setSize(120, 120);
@@ -1443,7 +1443,7 @@ DrivingSimulator = function() {
     var availableWidth = $('#placemarks').width();
     this.widthPerPoi = 100 / window.POIS.length;
 
-    this.minimapPlacemark = new Placemark(this.minimap.scene, window.lat, window.lon, false, window.SITE_URL + "/img/handglider.png");
+    this.minimapPlacemark = new Placemark(this.minimap.scene, window.lat, window.lon, false, window.SITE_URL + "img/handglider.png");
     this.minimapPlacemark.setVisibility(true);
 
     var times = [];
@@ -1472,13 +1472,13 @@ DrivingSimulator = function() {
       POI.playAudio = true;
 
       POI.lastDistance = false;
-      POI.placemark = new Placemark(this.scene, POI.lat, POI.lon, POI.label, POI.showPlacemark ? window.SITE_URL + "/img/placemark_big.png" : false, POI.font);
+      POI.placemark = new Placemark(this.scene, POI.lat, POI.lon, POI.label, POI.showPlacemark ? window.SITE_URL + "img/placemark_big.png" : false, POI.font);
       POI.heading = POI.startLatLng.heading(POI.latLng) * 180 / Math.PI;
 
       if(POI.label) {
         POI.placemark.setVisibility(true);
 
-        POI.placemarkMinimap = new Placemark(this.minimap.scene, POI.lat, POI.lon, POI.label, window.SITE_URL + "/img/placemark.png", POI.font);
+        POI.placemarkMinimap = new Placemark(this.minimap.scene, POI.lat, POI.lon, POI.label, window.SITE_URL + "img/placemark.png", POI.font);
         POI.placemarkMinimap.setVisibility(true);
 
         //var position = Cesium.Cartesian3.fromDegrees(POI.lon, POI.lat, POI.alt, this.scene.globe.ellipsoid, new Cesium.Cartesian3());
@@ -1486,9 +1486,9 @@ DrivingSimulator = function() {
         //var distance = Cesium.Cartesian3.distance(position, currentPosition);
         //POI.widthPerPoi = (distance / this.totalDistance) * 100;
 
-        $('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto(' + POI.startLatLng.lat() + ', ' + POI.startLatLng.lng() + ', ' + POI.alt + ', cesiumExplorer.physics.vehicle.speedKmh, ' + POI.heading + ', ' + i + ');" id="' + POI.id + '" class="poi"><p>' + POI.label + '</p><div><img class="not-visited" src="' + window.SITE_URL + "/img/placemark_outline.png" + '"/></div></a>');
+        $('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto(' + POI.startLatLng.lat() + ', ' + POI.startLatLng.lng() + ', ' + POI.alt + ', cesiumExplorer.physics.vehicle.speedKmh, ' + POI.heading + ', ' + i + ');" id="' + POI.id + '" class="poi"><p>' + POI.label + '</p><div><img class="not-visited" src="' + window.SITE_URL + "img/placemark_outline.png" + '"/></div></a>');
 
-        //$('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto('+POI.startLatLng.lat()+', '+POI.startLatLng.lng()+', '+POI.alt+', cesiumExplorer.physics.vehicle.speedKmh, '+POI.heading+');" id="'+POI.id+'" class="poi" style="width: '+this.widthPerPoi+'%"><p>'+POI.label+'</p><div><img class="not-visited" src="'+window.SITE_URL+"/img/placemark_outline.png"+'"/></div></a>');
+        //$('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto('+POI.startLatLng.lat()+', '+POI.startLatLng.lng()+', '+POI.alt+', cesiumExplorer.physics.vehicle.speedKmh, '+POI.heading+');" id="'+POI.id+'" class="poi" style="width: '+this.widthPerPoi+'%"><p>'+POI.label+'</p><div><img class="not-visited" src="'+window.SITE_URL+"img/placemark_outline.png"+'"/></div></a>');
 
       }//if
 
@@ -1498,7 +1498,7 @@ DrivingSimulator = function() {
 
       var POI = window.SUBPOIS[i];
       POI.latLng = new LatLng(POI.lat, POI.lon);
-      POI.placemark = new Placemark(this.scene, POI.lat, POI.lon, POI.label, POI.showPlacemark ? window.SITE_URL + "/img/placemark_small.png" : false, POI.font);
+      POI.placemark = new Placemark(this.scene, POI.lat, POI.lon, POI.label, POI.showPlacemark ? window.SITE_URL + "img/placemark_small.png" : false, POI.font);
       POI.placemark.setVisibility(true);
 
     } //for
@@ -1792,12 +1792,12 @@ DrivingSimulator = function() {
       else {
         
         $('#sound-notification').html('');
-        /*if(Platform.isFirefox() && this.lameCounter > 50) {
+        if(Platform.isFirefox() && this.lameCounter > 100) {
           window.audioMonkey.stopAll();
           this.lameCounter = 0;
         }//if
         
-        this.lameCounter++;*/
+        this.lameCounter++;
         
       }//else
 
@@ -1819,7 +1819,7 @@ DrivingSimulator = function() {
         window.audioMonkey.volume(POIId, 1);
 
         $('#' + POIId).addClass('visited');
-        $('#' + POIId).html('<p>' + POILabel + '</p><div><img class="visited" src="' + window.SITE_URL + "/img/placemark.png" + '"/></div>');
+        $('#' + POIId).html('<p>' + POILabel + '</p><div><img class="visited" src="' + window.SITE_URL + "img/placemark.png" + '"/></div>');
 
       }//if
       this.currentPOI = POII;
@@ -2088,7 +2088,7 @@ DrivingSimulator = function() {
             this.currentPositionPlacemark.setLatLngAlt(cPosition.latitude*57.2957795, cPosition.longitude*57.2957795, this.vehicleAltitude.position);
         }//if
         else {
-            this.currentPositionPlacemark = new Placemark(this.scene, cPosition.latitude*57.2957795, cPosition.longitude*57.2957795, "Current Target", window.SITE_URL+"/img/my_marker.png");
+            this.currentPositionPlacemark = new Placemark(this.scene, cPosition.latitude*57.2957795, cPosition.longitude*57.2957795, "Current Target", window.SITE_URL+"img/my_marker.png");
             this.currentPositionPlacemark.setVisibility(true);
         }//else
         */
@@ -2420,19 +2420,19 @@ DrivingSimulator = function() {
 
   this.setupDebug = function() {
     if (this.vehicleBackPlacemark) this.vehicleBackPlacemark.remove();
-    this.vehicleBackPlacemark = new Placemark(this.scene, window.lat, window.lon, "vehicle back", window.SITE_URL + "/img/my_marker.png");
+    this.vehicleBackPlacemark = new Placemark(this.scene, window.lat, window.lon, "vehicle back", window.SITE_URL + "img/my_marker.png");
     this.vehicleBackPlacemark.setVisibility(true);
 
     if (this.vehicleFrontPlacemark) this.vehicleFrontPlacemark.remove();
-    this.vehicleFrontPlacemark = new Placemark(this.scene, window.lat, window.lon, "vehicle front", window.SITE_URL + "/img/my_marker.png");
+    this.vehicleFrontPlacemark = new Placemark(this.scene, window.lat, window.lon, "vehicle front", window.SITE_URL + "img/my_marker.png");
     this.vehicleFrontPlacemark.setVisibility(true);
 
     if (this.vehicleLeftPlacemark) this.vehicleLeftPlacemark.remove();
-    this.vehicleLeftPlacemark = new Placemark(this.scene, window.lat, window.lon, "vehicle left", window.SITE_URL + "/img/my_marker.png");
+    this.vehicleLeftPlacemark = new Placemark(this.scene, window.lat, window.lon, "vehicle left", window.SITE_URL + "img/my_marker.png");
     this.vehicleLeftPlacemark.setVisibility(true);
 
     if (this.vehicleRightPlacemark) this.vehicleRightPlacemark.remove();
-    this.vehicleRightPlacemark = new Placemark(this.scene, window.lat, window.lon, "vehicle right", window.SITE_URL + "/img/my_marker.png");
+    this.vehicleRightPlacemark = new Placemark(this.scene, window.lat, window.lon, "vehicle right", window.SITE_URL + "img/my_marker.png");
     this.vehicleRightPlacemark.setVisibility(true);
   };
 
@@ -4019,10 +4019,10 @@ cesiumExplorer.goto = window.cesiumExplorer.goto = function(lat, lng, altOffset,
   for(var i=0;i<window.POIS.length;i++) {
     
     if(i <= cesiumExplorer.physics.currentPOI) {
-      $('#placemarks #'+window.POIS[i].id+' img').attr('src', window.SITE_URL+"/img/placemark.png");
+      $('#placemarks #'+window.POIS[i].id+' img').attr('src', window.SITE_URL+"img/placemark.png");
     }//if
     else {
-      $('#placemarks #'+window.POIS[i].id+' img').attr('src', window.SITE_URL+"/img/placemark_outline.png");
+      $('#placemarks #'+window.POIS[i].id+' img').attr('src', window.SITE_URL+"img/placemark_outline.png");
     }//else
     
     window.POIS[i].lastDistance = false;
