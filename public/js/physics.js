@@ -1595,7 +1595,8 @@ DrivingSimulator = function() {
   var ARRIVED_AREA = 1;
   var LEAVING_AREA = 2;
   var IN_AREA = 3;
-
+  
+  this.lameCounter = 0;
   this.alertType = -1;
   this.currentPOI = -1;
   this.currentProgress = 0;
@@ -1791,7 +1792,12 @@ DrivingSimulator = function() {
       else {
         
         $('#sound-notification').html('');
-        if(Platform.isFirefox()) window.audioMonkey.stopAll();
+        if(Platform.isFirefox() && this.lameCounter > 10) {
+          window.audioMonkey.stopAll();
+          this.lameCounter = 0;
+        }//if
+        
+        this.lameCounter++;
         
       }//else
 
