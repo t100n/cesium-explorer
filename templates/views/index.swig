@@ -193,7 +193,7 @@
 		<script type="text/javascript" src="/js/math3d.min.js"></script>
 		<script type="text/javascript" src="/js/vehicle.min.js"></script>
 		<script type="text/javascript" src="/js/physics.min.js"></script>
-		<script type="text/javascript" src="/js/Cesium/Cesium.js"></script>
+		<script type="text/javascript" src="/js/CesiumUnminified/Cesium.js"></script>
 		<script type="text/javascript" src="/js/main.min.js"></script>
 	</body>
 </html>
