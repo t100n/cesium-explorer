@@ -1792,12 +1792,12 @@ DrivingSimulator = function() {
       else {
         
         $('#sound-notification').html('');
-        if(Platform.isFirefox() && this.lameCounter > 50) {
+        /*if(Platform.isFirefox() && this.lameCounter > 50) {
           window.audioMonkey.stopAll();
           this.lameCounter = 0;
         }//if
         
-        this.lameCounter++;
+        this.lameCounter++;*/
         
       }//else
 
@@ -1838,7 +1838,7 @@ DrivingSimulator = function() {
 
       }//if
 
-      if(window.POIS[this.currentPOI]) {
+      if(window.POIS[this.currentPOI] && window.audioMonkey.playbackState(window.POIS[this.currentPOI].id) == window.audioMonkey.PLAYING_STATE) {
         if(Platform.isFirefox()) window.audioMonkey.stopAll();
         else window.audioMonkey.stop(window.POIS[this.currentPOI].id);
       }//if
