@@ -329,8 +329,8 @@ function Model(scene, url, name, icon, scaleX, scaleY, scaleZ, spec) {
         //minimumPixelSize : 128,
         //scale: new Cesium.Cartesian3(this.scaleX, this.scaleY, this.scaleZ)
     }));
-
-    this.model.readyToRender.addEventListener(function(modelObj) {
+    
+    Cesium.when(this.model.readyPromise).then(function(modelObj) {
       // Play and loop all animations at half-spead
       /*modelObj.activeAnimations.addAll({
           speedup : 1,
@@ -1469,7 +1469,8 @@ DrivingSimulator = function() {
       var POI = window.POIS[i];
       POI.latLng = new LatLng(POI.lat, POI.lon);
       POI.startLatLng = new LatLng(POI.startLat, POI.startLon);
-      
+      POI.playAudio = true;
+
       POI.lastDistance = false;
       POI.placemark = new Placemark(this.scene, POI.lat, POI.lon, POI.label, POI.showPlacemark ? window.SITE_URL + "/img/placemark_big.png" : false, POI.font);
       POI.heading = POI.startLatLng.heading(POI.latLng) * 180 / Math.PI;
@@ -1485,7 +1486,7 @@ DrivingSimulator = function() {
         //var distance = Cesium.Cartesian3.distance(position, currentPosition);
         //POI.widthPerPoi = (distance / this.totalDistance) * 100;
 
-        $('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto(' + POI.startLatLng.lat() + ', ' + POI.startLatLng.lng() + ', ' + POI.alt + ', cesiumExplorer.physics.vehicle.speedKmh, ' + POI.heading + ');" id="' + POI.id + '" class="poi"><p>' + POI.label + '</p><div><img class="not-visited" src="' + window.SITE_URL + "/img/placemark_outline.png" + '"/></div></a>');
+        $('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto(' + POI.startLatLng.lat() + ', ' + POI.startLatLng.lng() + ', ' + POI.alt + ', cesiumExplorer.physics.vehicle.speedKmh, ' + POI.heading + ', ' + i + ');" id="' + POI.id + '" class="poi"><p>' + POI.label + '</p><div><img class="not-visited" src="' + window.SITE_URL + "/img/placemark_outline.png" + '"/></div></a>');
 
         //$('#placemarks').append('<a href="#" onclick="javascript:cesiumExplorer.goto('+POI.startLatLng.lat()+', '+POI.startLatLng.lng()+', '+POI.alt+', cesiumExplorer.physics.vehicle.speedKmh, '+POI.heading+');" id="'+POI.id+'" class="poi" style="width: '+this.widthPerPoi+'%"><p>'+POI.label+'</p><div><img class="not-visited" src="'+window.SITE_URL+"/img/placemark_outline.png"+'"/></div></a>');
 
@@ -1600,7 +1601,9 @@ DrivingSimulator = function() {
   this.currentProgress = 0;
   this.lastPOIDistance = false;
   this.updateProgress = function() {
-
+    
+    if (this.isSpawning) return;
+    
     var currentPosition = Cesium.Cartesian3.fromDegrees(this.vehiclePosition.lng(), this.vehiclePosition.lat(), this.vehicleAltitude.position, this.scene.globe.ellipsoid, new Cesium.Cartesian3());
 
     var myLatLng = new LatLng(window.lat, window.lon);
@@ -1625,7 +1628,7 @@ DrivingSimulator = function() {
       var distance = POI.latLng.distance(myLatLng);
 
       POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100, distance/40);
-
+      
       if(POI.area) {
         distance = (POI.area.distance(window.lat, window.lon)*100000);
 
@@ -1640,6 +1643,7 @@ DrivingSimulator = function() {
       }//else
 
       if(POI.label) {
+        
         if (parseInt(distance) > 0) POI.placemark.setName(POI.label + " " + parseInt(distance) + "m");
         else POI.placemark.setName(POI.label);
       }//if
@@ -1649,10 +1653,10 @@ DrivingSimulator = function() {
       if (distance < distanceOffset*2 && distance > 0 && this.currentPOI == i) {
       //if (distance < POI.radius*1.3 && distance >= POI.radius && this.currentPOI == i) {
 
-        //console.log(POI.id, 'leaving', distance);
-
         if(actionType == ARRIVED_AREA && (POIDistance && POIDistance < distance)) continue;
         //if(!POI.entered) continue;
+
+        //console.log(POI.id, 'leaving', distance);
 
         POI.lastDistance = distance;
         POI.entered = false;
@@ -1667,9 +1671,9 @@ DrivingSimulator = function() {
       else if (distance < distanceOffset && distance > 0) {
       //else if (distance < POI.radius*1.2 && distance >= POI.radius) {
 
-        //console.log(POI.id, 'near', distance);
-
         if(actionType == ARRIVED_AREA && (POIDistance && POIDistance < distance)) continue;
+
+        //console.log(POI.id, 'near', distance);
 
         POI.lastDistance = distance;
         POI.entered = false;
@@ -1684,12 +1688,12 @@ DrivingSimulator = function() {
       //else if (distance < POI.radius) {
       else if (distance <= 0) {
 
-        //console.log(POI.id, 'inside', distance);
-
         //console.log(POI.id, distance, '<', POI.radius);
 
         if((POIDistance && POIDistance < distance)) continue;
-        
+
+        //console.log(POI.id, 'inside', distance);
+
         POI.lastDistance = distance;
         actionType = ARRIVED_AREA;
         POIId = POI.id;
@@ -1703,7 +1707,7 @@ DrivingSimulator = function() {
     } //for
 
     if(actionType == LEAVING_AREA) {
-      
+
       //console.log(POII, POIId, 'LEAVING_AREA', this.lastPOIDistance, '<', POIDistance, (this.lastPOIDistance < POIDistance));
 
       if (this.alertType != LEAVING_AREA) {
@@ -1712,14 +1716,16 @@ DrivingSimulator = function() {
 
       }//if
 
+      if(window.POIS[POII]) window.POIS[POII].playAudio = true;
+      
       this.alertType = LEAVING_AREA;
 
       this.lastPOIDistance = POIDistance;
 
       var volume = ((distanceOffset*2-Math.abs(POIDistance)) / distanceOffset*2);
-      
+
       volume = Math3D.MyMath.linearMap(volume, 0, 4, 0, 1);
-      
+
       if (POIDistance > distanceOffset*2) volume = 0;
       window.audioMonkey.volume(POIId, volume > 1 ? 1 : (volume < 0 ? 0 : volume));
 
@@ -1737,7 +1743,9 @@ DrivingSimulator = function() {
           if(POILabel) $('#area-notification').html('Voçê está se aproximando de '+POILabel);
 
         }//if
-
+        
+        if(window.POIS[POII]) window.POIS[POII].playAudio = true;
+        
         this.alertType = NEAR_AREA;
 
         this.lastPOIDistance = POIDistance;
@@ -1750,7 +1758,7 @@ DrivingSimulator = function() {
     else if(actionType == ARRIVED_AREA) {
 
       //console.log(POII, POIId, 'ARRIVED_AREA', this.lastPOIDistance, '<', POIDistance, (this.lastPOIDistance < POIDistance));
-      
+
       /*
       if(window.POIS[POIId] && window.POIS[POIId].entered && (!this.lastPOIDistance || (this.lastPOIDistance < POIDistance && POIDistance < 0 && POIDistance > -distanceOffset))) {
 
@@ -1762,6 +1770,8 @@ DrivingSimulator = function() {
 
       }//if
       */
+      
+      //console.log(this.currentPOI, POII, this.alertType, ARRIVED_AREA, POILabel);
 
       if (this.currentPOI != POII) {
 
@@ -1778,15 +1788,26 @@ DrivingSimulator = function() {
         $('#sound-notification').html('<div style="float: left; width: 44px; height: 44px; background: url(\'/img/radio_small.png\'); background-size: contain; background-position: 50%; background-repeat: no-repeat;"></div>');
 
       }//if
+      else {
+        
+        $('#sound-notification').html('');
+        
+      }//else
 
       this.lastPOIDistance = POIDistance;
 
       this.alertType = ARRIVED_AREA;
 
-      if (this.currentPOI >= 0 && this.currentPOI != POII) window.audioMonkey.stop(window.POIS[this.currentPOI].id);
+      if (this.currentPOI >= 0 && this.currentPOI != POII) {
+        window.audioMonkey.stop(window.POIS[this.currentPOI].id);
+        window.POIS[this.currentPOI].playAudio = true;
+      }//if
       if (this.currentPOI != POII || window.audioMonkey.playbackState(POIId) != window.audioMonkey.PLAYING_STATE) {
 
-        window.audioMonkey.play(POIId, 0, 0, 1, false);
+        if(window.POIS[POII].playAudio) {
+          window.audioMonkey.play(POIId, 0, 0, 1, false);
+          if(window.audioMonkey.playbackState(POIId) == window.audioMonkey.PLAYING_STATE) window.POIS[POII].playAudio = false;
+        }//if
 
         window.audioMonkey.volume(POIId, 1);
 
@@ -1813,7 +1834,7 @@ DrivingSimulator = function() {
       if(window.POIS[this.currentPOI]) window.audioMonkey.stop(window.POIS[this.currentPOI].id);
 
       this.alertType = NO_AREA;
-      this.currentPOI = -1;
+      //this.currentPOI = -1;
 
     }//if
 
@@ -1827,7 +1848,7 @@ DrivingSimulator = function() {
       var distance = POI.latLng.distance(myLatLng);
 
       POI.placemark.setLatLngAlt(POI.lat, POI.lon, height+POI.altOffset+distance/100, distance/80);
-
+      
     } //for
 
     //if(updateProgress) $('#progress').css('width', ($('.poi.visited').length*this.widthPerPoi)+'%');
@@ -3968,7 +3989,7 @@ cesiumExplorer.captureVideo = function() {
 
   // Send to server
 };
-cesiumExplorer.goto = window.cesiumExplorer.goto = function(lat, lng, altOffset, speed, heading) {
+cesiumExplorer.goto = window.cesiumExplorer.goto = function(lat, lng, altOffset, speed, heading, currentPOI) {
   var alt = altOffset;
   var cAlt = cesiumExplorer.physics.getAltitude(new LatLng(lat, lng), "goto") + (alt ? alt : 0);
 
@@ -3977,14 +3998,29 @@ cesiumExplorer.goto = window.cesiumExplorer.goto = function(lat, lng, altOffset,
   alt = cAlt;
 
   //window.audioMonkey.stop(window.POIS[cesiumExplorer.physics.currentPOI].id);
-  //cesiumExplorer.physics.currentPOI = false;
+  if(currentPOI) cesiumExplorer.physics.currentPOI = currentPOI-1;
+  else cesiumExplorer.physics.currentPOI = -1;
+  cesiumExplorer.physics.alertType = -1;
   cesiumExplorer.physics.lastIndex = false;
   $('#progress').css('width', '0%');
   $('#progress_glider').css('left', '0%');
   $('#sound-notification').html('');
   $('#area-notification').html('');
-  $('#placemarks .poi img').attr('src', window.SITE_URL+"/img/placemark_outline.png");
-
+  for(var i=0;i<window.POIS.length;i++) {
+    
+    if(i <= cesiumExplorer.physics.currentPOI) {
+      $('#placemarks #'+window.POIS[i].id+' img').attr('src', window.SITE_URL+"/img/placemark.png");
+    }//if
+    else {
+      $('#placemarks #'+window.POIS[i].id+' img').attr('src', window.SITE_URL+"/img/placemark_outline.png");
+    }//else
+    
+    window.POIS[i].lastDistance = false;
+    window.POIS[i].entered = false;
+    window.POIS[i].playAudio = true;
+    
+  }//for
+  
   cesiumExplorer.physics.teleported = true;
   cesiumExplorer.physics.bodyModel.initialModelMatrix = false;
 

@@ -187,7 +187,7 @@ window.POISPOLYLINE = [
 window.models = [
     {
         name: "Maracana",
-        url: "http://andresantos.cloudapp.net/models/maracana/gltf/Maracana_1.gltf",
+        url: location.protocol+'//'+document.domain+"/models/maracana/gltf/Maracana_1.gltf",
         lat: -22.91221,
         lng: -43.23046,
         alt: 15,
@@ -200,7 +200,7 @@ window.models = [
     },
     {
         name: "Engenhao",
-        url: "http://andresantos.cloudapp.net/models/engenhao/gltf/estadioengenhao.gltf",
+        url: location.protocol+'//'+document.domain+"/models/engenhao/gltf/estadioengenhao.gltf",
         lat: -22.893334,
         lng: -43.2919855,
         alt: 27,
@@ -213,7 +213,7 @@ window.models = [
     },
     {
         name: "Christ the Redeemer",
-        url: "http://andresantos.cloudapp.net/models/christ_redeemer/gltf/Cristo_Redentor_1.gltf",
+        url: location.protocol+'//'+document.domain+"/models/christ_redeemer/gltf/Cristo_Redentor_1.gltf",
         lat: -22.9518,
         lng: -43.2118,
         alt: 637,
@@ -226,7 +226,7 @@ window.models = [
     },
     {
         name: "River Niteroi bridge",
-        url: "http://andresantos.cloudapp.net/models/niteroi/gltf/niteroi_1.gltf",
+        url: location.protocol+'//'+document.domain+"/models/niteroi/gltf/niteroi_1.gltf",
         lat: -22.8683,
         lng: -43.1980,
         alt: 0,
@@ -239,7 +239,7 @@ window.models = [
     },
     {
         name: "Catedral",
-        url: "http://andresantos.cloudapp.net/models/catedral/gltf/catedral_1.gltf",
+        url: location.protocol+'//'+document.domain+"/models/catedral/gltf/catedral_1.gltf",
         lat: -22.910786,
         lng: -43.180679,
         alt: 0,
@@ -252,7 +252,7 @@ window.models = [
     },
     {
         name: "Camara Municipal",
-        url: "http://andresantos.cloudapp.net/models/camara_municipal/gltf/camara_municipal_1.gltf",
+        url: location.protocol+'//'+document.domain+"/models/camara_municipal/gltf/camara_municipal_1.gltf",
         lat: -22.910076,
         lng: -43.176663,
         alt: 7,
@@ -265,10 +265,9 @@ window.models = [
     }
 ];
 
-window.SITE_URL = 'http://andresantos.cloudapp.net';
-//window.SITE_URL = 'http://localhost:3000';
+window.SITE_URL = location.protocol+'//'+document.domain;
 
-window.userId = "ojogador";
+window.userId = "folhasaopaulo";
 window.isExploring = true;
 window.masterVolume = 1;
 window.globalVolume = 1;
