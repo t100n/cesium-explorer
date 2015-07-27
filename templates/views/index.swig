@@ -58,7 +58,7 @@
 				</div>
 				<div class="row">
 					<button id="left">Esquerda</button>
-					<button id="options">Comandos</button>
+					<button id="options" class="black-button">Comandos</button>
 					<button id="right">Direita</button>
 				</div>
 				<div class="row">

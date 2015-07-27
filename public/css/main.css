@@ -451,6 +451,10 @@ header {
 				color: #fff;
 				border: 1px solid #fff;
 			}
+      
+      #controls button.black-button {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
 			
 			#controls .row {
 				text-align: center;
