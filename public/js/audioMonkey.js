@@ -52,6 +52,20 @@ function AudioMonkey() {
          loaded: false*/
     };
 
+    if(!Platform.isChrome() && createjs && createjs.Sound) {
+        
+        var that = this;
+        
+        this.handleLoad = function(event) {
+            
+            that.sounds[event.id].loaded = true;
+
+        };
+        
+        createjs.Sound.on("fileload", this.handleLoad);
+        
+    }//if
+
     this.init = function() {
         try {
             this.stopAll();
@@ -65,7 +79,9 @@ function AudioMonkey() {
             //log("info", this.class, "init:", this.manifest);
 
             for(var i in this.manifest) {
+                
                 this.load(i, this.manifest[i]);
+                
             }//for
         }//try
         catch(e) {
@@ -190,17 +206,27 @@ function AudioMonkey() {
                 this.sounds[id].pausedAt = Date.now();
 
                 if(typeof this.sounds[id] == "undefined" || !this.sounds[id].loaded || !this.sounds[id].sound || (this.playbackState(id) == this.FINISHED_STATE)) continue;
-
-                if (!this.sounds[id].sound.stop)
-                    this.sounds[id].sound.stop = this.sounds[id].sound.noteOff;
-
-                try {
-                    this.sounds[id].sound.stop(0);
-                } catch(err) {
-                    //log("error", this.class, id, err);
-                }// catch
-
-                //if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = this.FINISHED_STATE;
+                
+                if(!Platform.isChrome() && createjs && createjs.Sound) {
+                    
+                    this.sounds[id].sound.pause();
+                    
+                }//if
+                else {
+                    
+                    if (!this.sounds[id].sound.stop)
+                        this.sounds[id].sound.stop = this.sounds[id].sound.noteOff;
+    
+                    try {
+                        this.sounds[id].sound.stop(0);
+                    } catch(err) {
+                        //log("error", this.class, id, err);
+                    }// catch
+    
+                    //if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = this.FINISHED_STATE;
+                    
+                }//else
+                
             } catch(err) {
                 log("error", err);
             }
@@ -211,7 +237,18 @@ function AudioMonkey() {
         //log("info", this.class,"resumeAll");
 
         for(var id in this.sounds) {
-            this.play(id);
+            
+            if(!Platform.isChrome() && createjs && createjs.Sound) {
+                
+                this.sounds[id].sound.resume();
+                
+            }//if
+            else {
+                
+                this.play(id);
+                
+            }//else
+            
         }//for
     };
 
@@ -231,6 +268,13 @@ function AudioMonkey() {
                 this.sounds[id].buffer = null;
 
                 delete this.sounds[id];
+                
+                if(!Platform.isChrome() && createjs && createjs.Sound) {
+                    
+                    createjs.Sound.removeSound(id);
+                    
+                }//if
+                
             }//if
         } catch(err) {
             log("error", err);
@@ -254,9 +298,6 @@ function AudioMonkey() {
                 url = sound.mp3;
             }//else
     	    
-            request.open('GET', url, true);
-            request.responseType = 'arraybuffer';
-
             this.sounds[id] = {
                 sound: false,
                 buffer: false,
@@ -269,15 +310,29 @@ function AudioMonkey() {
                 pausedAt: false
             };
 
-            // Decode asynchronously
-            request.onload = function() {
-                request.buf=request.response;
-                request.sync=0;
-                request.retry=0;
-
-                that.decode(id, request);
-            }
-            request.send();
+            if(!Platform.isChrome() && createjs && createjs.Sound) {
+                
+                createjs.Sound.registerSound(url, id);
+                this.sounds[id].loaded = true;
+                
+            }//if
+            else {
+                
+                request.open('GET', url, true);
+                request.responseType = 'arraybuffer';
+    
+                // Decode asynchronously
+                request.onload = function() {
+                    request.buf=request.response;
+                    request.sync=0;
+                    request.retry=0;
+    
+                    that.decode(id, request);
+                }
+                request.send();
+                
+            }//else
+            
         } catch(err) {
             log("error", err);
         }
@@ -286,10 +341,20 @@ function AudioMonkey() {
     this.playbackState = function(id) {
 
         if(this.sounds[id] && this.sounds[id].sound) {
-
-            if(this.sounds[id].sound.playbackState) return this.sounds[id].sound.playbackState;
-            if(this.sounds[id].sound.context.state == "running") return this.PLAYING_STATE;
-
+            
+            if(!Platform.isChrome() && createjs && createjs.Sound) {
+                
+                if(this.sounds[id].sound.playState == "playFinished") return this.FINISHED_STATE;
+                else if(this.sounds[id].sound.playState == "playSucceeded") return this.PLAYING_STATE;
+                
+            }//if
+            else {
+                
+                if(this.sounds[id].sound.playbackState) return this.sounds[id].sound.playbackState;
+                if(this.sounds[id].sound.context.state == "running") return this.PLAYING_STATE;
+                
+            }//else
+            
         }//if
 
         return this.FINISHED_STATE;
@@ -324,107 +389,128 @@ function AudioMonkey() {
             log("error", err);
         }
         
-        try {
-            //if(typeof this.sounds[id].sound != "undefined") this.stop(id);
-
-            sound = this.context.createBufferSource();  // creates a sound source
-            this.sounds[id].sound = sound;
-            this.sounds[id].reversed = false;
-
-            buffer = this.sounds[id].buffer;
-
-            if(rate < 0) {
-                buffer = this.cloneAudioBuffer(this.sounds[id].buffer);
-    	        
-                if(buffer.numberOfChannels > 0) Array.prototype.reverse.call( buffer.getChannelData(0) );
-                if(buffer.numberOfChannels > 1) Array.prototype.reverse.call( buffer.getChannelData(1) );
-            }//if
-
-            sound.buffer = buffer;                          // tell the source which sound to play
-            //sound.connect(this.context.destination);        // connect the source to the context's destination (the speakers)
-
-            // Create the filter.
-            /*this.sounds[id].filter = this.context.createBiquadFilter();
-            this.sounds[id].filter.type = 0; // LOWPASS
-            this.sounds[id].filter.frequency.value = 5000;
-            // Connect source to filter, filter to destination.
-            sound.connect(this.sounds[id].filter);
-            this.sounds[id].filter.connect(this.context.destination);*/
-
-            if(rate) sound.playbackRate.value = Math.abs(parseFloat(rate));
+        if(!Platform.isChrome() && createjs && createjs.Sound) {
+            
+            //this.sounds[id].sound = createjs.Sound.play(id, "none", 0, throttle*rate+timeOffset, loop, volume, 0);
+            this.sounds[id].sound = createjs.Sound.play(id, "none", 0, throttle*rate+timeOffset, 0, volume, 0);
+            if(rate && this.sounds[id].sound.sourceNode) this.sounds[id].sound.sourceNode.playbackRate.value = parseFloat(rate);
 
             if(loop) {
-                sound.loop = true;
-                sound.loopStart = 0;
-                sound.loopEnd = this.sounds[id].buffer.duration;
+                this.sounds[id].loop = true;
+                this.sounds[id].loopStart = 0;
+                //this.sounds[id].loopEnd = this.sounds[id].buffer.duration;
             }//if
 
-            if(loop && loopStart) sound.loopStart = loopStart;
-            if(loop && loopEnd) sound.loopEnd = loopEnd;
-        } catch(err) {
-            log("error", err);
-        }
+            if(loop && loopStart) this.sounds[id].loopStart = loopStart;
+            if(loop && loopEnd) this.sounds[id].loopEnd = loopEnd;
+            
+        }//if
+        else {
+    
+            try {
+                //if(typeof this.sounds[id].sound != "undefined") this.stop(id);
+                
+                sound = this.context.createBufferSource();  // creates a sound source
+                this.sounds[id].sound = sound;
+                this.sounds[id].reversed = false;
+    
+                buffer = this.sounds[id].buffer;
+    
+                if(rate < 0) {
+                    buffer = this.cloneAudioBuffer(this.sounds[id].buffer);
+        	        
+                    if(buffer.numberOfChannels > 0) Array.prototype.reverse.call( buffer.getChannelData(0) );
+                    if(buffer.numberOfChannels > 1) Array.prototype.reverse.call( buffer.getChannelData(1) );
+                }//if
+    
+                sound.buffer = buffer;                          // tell the source which sound to play
+                //sound.connect(this.context.destination);        // connect the source to the context's destination (the speakers)
+    
+                // Create the filter.
+                /*this.sounds[id].filter = this.context.createBiquadFilter();
+                this.sounds[id].filter.type = 0; // LOWPASS
+                this.sounds[id].filter.frequency.value = 5000;
+                // Connect source to filter, filter to destination.
+                sound.connect(this.sounds[id].filter);
+                this.sounds[id].filter.connect(this.context.destination);*/
+    
+                if(rate) sound.playbackRate.value = Math.abs(parseFloat(rate));
+    
+                if(loop) {
+                    sound.loop = true;
+                    sound.loopStart = 0;
+                    sound.loopEnd = this.sounds[id].buffer.duration;
+                }//if
+    
+                if(loop && loopStart) sound.loopStart = loopStart;
+                if(loop && loopEnd) sound.loopEnd = loopEnd;
+            } catch(err) {
+                log("error", err);
+            }
+            
+            try {
+                //log("info", "play: "+id+", "+throttle+"*"+this.sounds[id].buffer.duration+"+"+timeOffset);
+    
+                if (!sound.start)
+                    sound.start = sound.noteOn;
+    
+                if(rate > 0) {
+                    sound.start(this.context.currentTime, (throttle*this.sounds[id].buffer.duration*rate)+timeOffset);                            // play the source now
+                }//if
+                else {
+                    sound.start(this.context.currentTime, (throttle*this.sounds[id].buffer.duration)+timeOffset);                            // play the source now
+                }//else
+                // note: on older systems, may have to use deprecated noteOn(time);
+            } catch(err) {
+                log("error", err);
+            }
+            
+            this.sounds[id].sound = sound;
+            
+            try {
+                // Create a gain node.
+                gain = this.context.createGain();
+    
+                this.sounds[id].gain = gain;
+    
+                // Connect the source to the gain node.
+                sound.connect(gain);
+    
+                // Connect the gain node to the destination.
+                gain.connect(this.context.destination);
+            } catch(err) {
+                log("error", err);
+            }
+            
+            try {
+                if(typeof this.sounds[id].gain.gain != "undefined") this.sounds[id].gain.gain.value = volume*window.globalVolume;
+            } catch(err) {
+                log("error", err);
+            }
+            
+            try {
+                this.sounds[id].startTime = this.context.currentTime;
+    
+                this.sounds[id].startedAt = Date.now();
+            } catch(err) {
+                log("error", err);
+            }
+    
+            try {
+                if(typeof this.sounds[id].sound.playbackState == "undefined") this.sounds[id].sound.playbackState = this.PLAYING_STATE;
+    
+                var that = this;
+                this.sounds[id].sound.onended = function() {
+                    this.playbackState = that.FINISHED_STATE;
+                };
+    
+                //this.fadeIn(id);
+            } catch(err) {
+                log("error", err);
+            }
+            
+        }//else
         
-        try {
-            //log("info", "play: "+id+", "+throttle+"*"+this.sounds[id].buffer.duration+"+"+timeOffset);
-
-            if (!sound.start)
-                sound.start = sound.noteOn;
-
-            if(rate > 0) {
-                sound.start(this.context.currentTime, (throttle*this.sounds[id].buffer.duration*rate)+timeOffset);                            // play the source now
-            }//if
-            else {
-                sound.start(this.context.currentTime, (throttle*this.sounds[id].buffer.duration)+timeOffset);                            // play the source now
-            }//else
-            // note: on older systems, may have to use deprecated noteOn(time);
-        } catch(err) {
-            log("error", err);
-        }
-        
-        this.sounds[id].sound = sound;
-        
-        try {
-            // Create a gain node.
-            gain = this.context.createGain();
-
-            this.sounds[id].gain = gain;
-
-            // Connect the source to the gain node.
-            sound.connect(gain);
-
-            // Connect the gain node to the destination.
-            gain.connect(this.context.destination);
-        } catch(err) {
-            log("error", err);
-        }
-        
-        try {
-            if(typeof this.sounds[id].gain.gain != "undefined") this.sounds[id].gain.gain.value = volume*window.globalVolume;
-        } catch(err) {
-            log("error", err);
-        }
-        
-        try {
-            this.sounds[id].startTime = this.context.currentTime;
-
-            this.sounds[id].startedAt = Date.now();
-        } catch(err) {
-            log("error", err);
-        }
-
-        try {
-            if(typeof this.sounds[id].sound.playbackState == "undefined") this.sounds[id].sound.playbackState = this.PLAYING_STATE;
-
-            var that = this;
-            this.sounds[id].sound.onended = function() {
-                this.playbackState = that.FINISHED_STATE;
-            };
-
-            //this.fadeIn(id);
-        } catch(err) {
-            log("error", err);
-        }
     };
 
     this.reverse = function(id) {
@@ -449,33 +535,65 @@ function AudioMonkey() {
     };
 
     this.rate = function(id, rate) {
+        
         try {
+            
             if(typeof this.sounds[id] == "undefined" || !this.sounds[id].loaded || !this.sounds[id].sound || this.sounds[id].reversed) return;
 
             //if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = this.PLAYING_STATE;
 
             //if(this.sounds[id].gain.gain.value < 0.01) rate = 0.01;
 
-            if(rate) this.sounds[id].sound.playbackRate.value = Math.abs(parseFloat(rate));
+            if(rate) {
+                
+                if(!Platform.isChrome() && createjs && createjs.Sound) {
+                    
+                    this.sounds[id].sound.sourceNode.playbackRate.value = parseFloat(rate);
+                    
+                }//if
+                else {
+                    
+                    this.sounds[id].sound.playbackRate.value = Math.abs(parseFloat(rate));
+                    
+                }//else
+                
+            }//if
+            
         } catch(err) {
             log("error", err);
         }
+        
     };
 
     this.volume = function(id, volume) {
+        
         try {
+            
             if(typeof this.sounds[id] == "undefined" || !this.sounds[id].loaded || !this.sounds[id].sound || this.sounds[id].reversed) return;
 
             //if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = this.PLAYING_STATE;
-
-            if(typeof this.sounds[id].gain.gain != "undefined") {
-                //this.sounds[id].gain.gain.value = Math.max(volume*window.globalVolume, 0.01);
-                this.sounds[id].gain.gain.cancelScheduledValues(this.context.currentTime);
-                this.sounds[id].gain.gain.setValueAtTime(volume*window.globalVolume, this.context.currentTime);
-            }
+            
+            if(!Platform.isChrome() && createjs && createjs.Sound) {
+                
+                this.sounds[id].sound.volume = volume*window.globalVolume;
+                
+            }//if
+            else {
+                
+                if(typeof this.sounds[id].gain.gain != "undefined") {
+                    //this.sounds[id].gain.gain.value = Math.max(volume*window.globalVolume, 0.01);
+                    this.sounds[id].gain.gain.cancelScheduledValues(this.context.currentTime);
+                    this.sounds[id].gain.gain.setValueAtTime(volume*window.globalVolume, this.context.currentTime);
+                }
+                
+            }//else
+            
         } catch(err) {
+            
             log("error", err);
+            
         }
+        
     };
 
     this.changeFrequency = function(id, frequency) {
@@ -504,25 +622,40 @@ function AudioMonkey() {
     };
 
     this.stop = function(id) {
+        
         try {
+            
             if(typeof this.sounds[id] == "undefined" || !this.sounds[id].loaded || !this.sounds[id].sound || (this.playbackState(id) == this.FINISHED_STATE)) return;
-
-            if (!this.sounds[id].sound.stop)
-                this.sounds[id].sound.stop = this.sounds[id].sound.noteOff;
-
-            try {
-                this.sounds[id].sound.stop(0);
-
+            
+            if(!Platform.isChrome() && createjs && createjs.Sound) {
+                
+                this.sounds[id].sound.stop();
                 this.sounds[id].sound = false;
-            } catch(err) {
-                log("error", err);
-            }
-
-            //if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = this.FINISHED_STATE;
-            //this.fadeOut(id);
+                
+            }//if
+            else {
+                
+                if (!this.sounds[id].sound.stop)
+                    this.sounds[id].sound.stop = this.sounds[id].sound.noteOff;
+    
+                try {
+                    this.sounds[id].sound.stop(0);
+                    this.sounds[id].sound = false;
+                } catch(err) {
+                    log("error", err);
+                }
+    
+                //if(typeof this.sounds[id].playbackState == "undefined") this.sounds[id].playbackState = this.FINISHED_STATE;
+                //this.fadeOut(id);
+                
+            }//else
+            
         } catch(err) {
+            
             log("error", err);
+            
         }
+        
     };
 
     this.fadeOut = function(id) {

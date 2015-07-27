@@ -178,7 +178,7 @@
 		
 		<script>
 			
-			window.SITE_URL = location.protocol+'//'+document.domain+location.pathname.replace(/[a-zA-Z\.]+$/, '');
+			window.SITE_URL = location.protocol+'//'+document.domain+(location.port != "80" ? ":"+location.port : "")+location.pathname.replace(/[a-zA-Z\.]+$/, '');
 			
 		</script>
 		<script type="text/javascript" src="/js/jquery.min.js"></script>
@@ -188,6 +188,8 @@
 		<script type="text/javascript" src="/js/variables.min.js"></script>
 		<script type="text/javascript" src="/js/latlon_v1.min.js"></script>
 		<script type="text/javascript" src="/js/gamepad.min.js"></script>
+		<script type="text/javascript" src="/js/soundjs-0.6.1.min.js"></script>
+		<script type="text/javascript" src="/js/flashaudioplugin-0.6.1.min.js"></script>
 		<script type="text/javascript" src="/js/audioMonkey.min.js"></script>
 		<script type="text/javascript" src="/js/box2d.min.js"></script>
 		<script type="text/javascript" src="/js/math3d.min.js"></script>

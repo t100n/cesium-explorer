@@ -1596,7 +1596,6 @@ DrivingSimulator = function() {
   var LEAVING_AREA = 2;
   var IN_AREA = 3;
   
-  this.lameCounter = 0;
   this.alertType = -1;
   this.currentPOI = -1;
   this.currentProgress = 0;
@@ -1786,7 +1785,7 @@ DrivingSimulator = function() {
 
       if(window.audioMonkey.playbackState(POIId) == window.audioMonkey.PLAYING_STATE) {
         
-        if (this.alertType != ARRIVED_AREA) {
+        if (!this.soundNotification) {
           $('#sound-notification').html('<div style="float: left; width: 44px; height: 44px; background: url(\'/img/radio_small.png\'); background-size: contain; background-position: 50%; background-repeat: no-repeat;"></div>');
           
           this.soundNotification = true;
@@ -1796,13 +1795,6 @@ DrivingSimulator = function() {
       else if(this.soundNotification) {
         
         $('#sound-notification').html('');
-        if(Platform.isFirefox() && this.lameCounter > 100) {
-          window.audioMonkey.stopAll();
-          this.lameCounter = 0;
-        }//if
-        
-        this.lameCounter++;
-        
         this.soundNotification = false;
         
       }//else
@@ -1815,6 +1807,9 @@ DrivingSimulator = function() {
         window.audioMonkey.stop(window.POIS[this.currentPOI].id);
         window.POIS[this.currentPOI].playAudio = true;
       }//if
+      
+      //console.log(POIId, this.currentPOI, POII, window.audioMonkey.playbackState(POIId), window.audioMonkey.PLAYING_STATE, window.POIS[POII].playAudio);
+      
       if (this.currentPOI != POII || window.audioMonkey.playbackState(POIId) != window.audioMonkey.PLAYING_STATE) {
 
         if(window.POIS[POII].playAudio) {
@@ -1845,8 +1840,7 @@ DrivingSimulator = function() {
       }//if
 
       if(window.POIS[this.currentPOI] && window.audioMonkey.playbackState(window.POIS[this.currentPOI].id) == window.audioMonkey.PLAYING_STATE) {
-        if(Platform.isFirefox()) window.audioMonkey.stopAll();
-        else window.audioMonkey.stop(window.POIS[this.currentPOI].id);
+        window.audioMonkey.stop(window.POIS[this.currentPOI].id);
       }//if
 
       this.alertType = NO_AREA;
@@ -2059,18 +2053,24 @@ DrivingSimulator = function() {
       var closestAngle = false;
 
       while (i <= window.POISPOLYLINE.length) {
-
-        var position = this.spline.evaluate(i);
-
-        var distance = Cesium.Cartesian3.distance(position, currentPosition);
-        var angle = Cesium.Cartesian3.angleBetween(position, currentPosition);
-
-        if ((!closestPosition || distance < closestDistance) && distance > 300) {
-          closestPosition = position;
-          closestDistance = distance;
-          closestAngle = angle;
-          this.lastIndex = i;
-        } //if
+        
+        try {
+          
+          var position = this.spline.evaluate(i);
+  
+          var distance = Cesium.Cartesian3.distance(position, currentPosition);
+          var angle = Cesium.Cartesian3.angleBetween(position, currentPosition);
+  
+          if ((!closestPosition || distance < closestDistance) && distance > 300) {
+            closestPosition = position;
+            closestDistance = distance;
+            closestAngle = angle;
+            this.lastIndex = i;
+          } //if
+          
+        } catch(err) {
+          
+        }
 
         i += 0.1;
 

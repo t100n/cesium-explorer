@@ -346,8 +346,15 @@ cesiumExplorer.main(window.myVehicle);
 window.defaultMinVolume = window.minVolume = v.minVolume ? v.minVolume : 0;
 window.defaultMaxVolume = window.maxVolume = v.maxVolume ? v.maxVolume : 80;
 
-try {
+createjs.FlashAudioPlugin.swfPath = "/js/flashaudio";
+createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashAudioPlugin]); // Adds FlashAudioPlugin as a fallback if WebAudio and HTMLAudio do not work.
+createjs.Sound.alternateExtensions = ["mp3"];
 
+// begin loading content (only sounds to load)
+var assetsPath = "/sounds/";
+
+try {
+    
     window.audioMonkey.add("up", { ogg: '/sounds/wind_up.ogg', mp3: '/sounds/wind_up.mp3' });
     window.audioMonkey.add("down", { ogg: '/sounds/wind_down.ogg', mp3: '/sounds/wind_down.mp3' });
     window.audioMonkey.add("altitude", { ogg: '/sounds/altitude_warning.ogg', mp3: '/sounds/altitude_warning.mp3' });
